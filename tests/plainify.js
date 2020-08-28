@@ -42,4 +42,19 @@ QUnit.module('Тестируем функцию plainify', function () {
 
 		assert.deepEqual(plainify(nested2), plain2);
 	});
+
+	QUnit.test('Функция принимает на вход только Object', function (assert) {
+		assert.deepEqual(plainify({}), {});
+		assert.deepEqual(plainify(undefined), {});
+		assert.deepEqual(plainify(null), {});
+		assert.deepEqual(plainify(NaN), {});
+		assert.deepEqual(plainify(new Date()), {});
+		assert.deepEqual(plainify('string'), {});
+		assert.deepEqual(plainify(1), {});
+	});
+
+	QUnit.test('Функция нормально работает с нестандартными данными', function (assert) {
+		assert.deepEqual(plainify({ id: undefined }), { id: undefined });
+		assert.deepEqual(plainify({ pk: null }), { pk: null });
+	});
 });
