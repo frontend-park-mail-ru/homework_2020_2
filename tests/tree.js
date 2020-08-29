@@ -53,4 +53,15 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree(8), expected);
 		assert.strictEqual(tree('8'), expected);
 	});
+
+	QUnit.test('Невалидный тип аргумента функции', function (assert) {
+		assert.strictEqual(tree(Array(1, 2, 3)), null);
+		assert.strictEqual(tree({data: 'data',}), null);
+		assert.strictEqual(tree(null), null);
+	});
+
+	QUnit.test('Аргументом функции является строка некорректного формата', function (assert) {
+		assert.strictEqual(tree('1 2 345 -2 3.14'), null);
+		assert.strictEqual(tree('abc'), null);
+	});
 });
