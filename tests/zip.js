@@ -74,4 +74,39 @@ QUnit.module('Тестируем функцию zip', function () {
 		};
 		assert.deepEqual(zip({name: 'age'}, {value: 42}, {name: 'cost'}, {value: -6}), obj);
 	});
+
+	QUnit.test('Мой тест#1', function(assert) {
+		const obj1 = {
+			name: 'Hello World',
+			last_name: 'How are you, Hello World?',
+			age: 2002,
+			ip: "192.168.1000.1000",
+		};
+		assert.deepEqual(zip(obj1), obj1);
+
+		const obj2 = {
+			name: 'Ne Hello World',
+			last_name: 'How are you, Hello World?',
+			age: 2002,
+			ip: "192.168.1000.1000",
+		};
+		assert.deepEqual(zip({name: "Ne Hello World"}, obj1), obj2);
+		assert.deepEqual(zip(obj1, {name: "Ne Hello World"}), obj1);
+	})
+
+	QUnit.test('Проверка корректности работы с перечисленными и не перечисляемые свойствами', function(assert) {
+		var obj1 = {};
+		Object.defineProperty(obj1, 'name', {
+			value: 'Hello World',
+			enumerable: false
+		});
+		assert.deepEqual(zip(obj1), {}, 'Должен вернуться пустой объект т.к. копируются только перечисляемые свойства.');
+
+		var obj2 = {};
+		Object.defineProperty(obj2, 'name', {
+			value: 'Hello World',
+			enumerable: true
+		});
+		assert.deepEqual(zip(obj2), obj2, 'Должен вернуться не пустой объект т.к. копируются только перечисляемые свойства.');
+	})
 });
