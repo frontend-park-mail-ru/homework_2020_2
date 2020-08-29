@@ -94,15 +94,15 @@ QUnit.module('Тестируем функцию zip', function () {
 		assert.deepEqual(zip(obj1, {name: "Ne Hello World"}), obj1);
 	})
 
-	QUnit.test('Проверка корректности работы с перечисленными и не перечисляемые свойствами', function(assert) {
-		var obj1 = {};
+	QUnit.test('Проверка корректности работы с перечисляемыми и не перечисляемыми свойствами.', function(assert) {
+		const obj1 = {};
 		Object.defineProperty(obj1, 'name', {
 			value: 'Hello World',
 			enumerable: false
 		});
 		assert.deepEqual(zip(obj1), {}, 'Должен вернуться пустой объект т.к. копируются только перечисляемые свойства.');
 
-		var obj2 = {};
+		const obj2 = {};
 		Object.defineProperty(obj2, 'name', {
 			value: 'Hello World',
 			enumerable: true
