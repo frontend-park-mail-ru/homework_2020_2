@@ -21,6 +21,8 @@ const checkImmovable = immovable => (
  * @param {Array} array - Массив, который нужно перевернуть.
  * @param {Number} immovable - Число непереставляемых элементов. Если immovable > 0, на месте остаются первые immovable элементы. Если immovable < 0, то immovable последние.
  *
+ * @throws {Error, TypeError}
+ *
  * @return {Array} Перевернутый массив, оставляя на месте указанные элементы
  */
 const inverse = (array, immovable) => {
