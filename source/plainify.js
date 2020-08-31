@@ -2,7 +2,7 @@
 
 /**
  * Функция превращает входной объект в plain-объект
- * @param {object} object – исходный бъект
+ * @param {object} object – исходный объект
  * @returns {object} plain-объект
  */
 const plainify = object => {
