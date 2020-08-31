@@ -41,4 +41,9 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], false), [ 5, 4, 3, 2, 1 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], true), [ 5, 4, 3, 2, 1 ]);
 	})
+
+        QUnit.test('Если в функцию подается не массив, то паника', function (assert) {
+                assert.throws(() => inverse(1), TypeError("Первый аргумент не массив"));
+                assert.throws(() => inverse(), Error("Первый аргумент обязателен"));
+        })
 });
