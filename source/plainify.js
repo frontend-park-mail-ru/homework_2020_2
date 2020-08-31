@@ -2,16 +2,18 @@
 
 /**
  * Функция превращает входной объект в plain-объект
- * @param {object} object
+ * @param {object} object – исходный бъект
  * @returns {object} plain-объект
  */
-const plainify = (object) => {
-    const reducer = (acc, obj) => ({
-        ...acc,
-        ...copyContent(acc, obj)
-    });
+const plainify = object => {
+    if (!isObject(object)) {
+        return {};
+    }
 
-    return isObject(object) ? Object.entries(object).reduce(reducer, {}) : {};
+    return Object.entries(object).reduce((acc, map) => ({
+        ...acc,
+        ...copyContent(map),
+    }), {});
 };
 
 /**
@@ -19,25 +21,24 @@ const plainify = (object) => {
  * @param {object} value
  * @returns {boolean}
  */
-const isObject = (value) => {
-    return value ? value instanceof Object : false;
+const isObject = value => {
+    return value ? value.constructor === Object : false;
 };
 
 /**
  * Функция добавляет [ключ, значение] в plain-объект
- * @param {object} globalAcc
- * @param {object} globalObj
+ * @param {object} map - пара [ключ, значение]
  * @returns {object}
  */
-const copyContent = (globalAcc, globalObj) => {
-    const [key, value] = globalObj;
+const copyContent = map => {
+    const [key, value] = map;
 
-    const reducer = (acc, obj, globalKey) => {
-        const [key, value] = obj;
-        return {...acc, [`${globalKey}.${key}`]: value };
-    };
+    if (!isObject(value)) {
+        return {[key]: value};
+    }
 
-    return isObject(value) ?
-        Object.entries(plainify(value)).reduce((acc, obj) => reducer(acc, obj, key), {})
-        : {...globalAcc, [key]: value};
+    return Object.entries(plainify(value)).reduce((acc, childMap) => {
+        const [childKey, childValue] = childMap;
+        return {...acc, [`${key}.${childKey}`]: childValue };
+    }, {})
 };
