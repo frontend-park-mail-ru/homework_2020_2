@@ -1,8 +1,8 @@
 'use strict';
 
 const euclid = (... args) => {
-    var res = args[0];
-    for(var i = 1 ; i < args.length; i++){
+    let res = args[0];
+    for(let i = 1 ; i < args.length; i++){
         while(res  && args[i]){
             res  > args[i] ? 
             res  %= args[i] :
