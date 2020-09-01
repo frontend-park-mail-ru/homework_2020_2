@@ -1,15 +1,15 @@
 'use strict';
 
-let set = (object, props, val) => {
+const set = (object, props, val) => {
 	let path = props.split(".")
 	path.shift()
-	let last = path.pop()
-	let result = path.reduce((obj, prop) => {
+	path.reduce((obj, prop, idx) => {
 		if (obj[prop] === undefined)
 			obj[prop] = {}
+		if (idx === path.length - 1) 
+			obj[prop] = val
 		return obj[prop]
 	}, object)
-	result[last] = val
 	return object
 }	
 
@@ -108,4 +108,49 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
 	});
+
+	QUnit.test('set работает правильно с объектами, содержащими вложенные массивы', function (assert) {
+		const object = {
+			deep: {
+				arr: [
+					[
+						0, 1, 2
+					]
+				]
+			}
+		};
+
+		const object1 = {
+			deep: {
+				arr: [
+					[
+						0, 1, 5
+					]
+				]
+			}
+		};
+
+		const object2 = {
+			deep: {
+				arr: [
+					[
+						0, 1, {foo: 56}
+					]
+				]
+			}
+		};
+
+		const object3 = {
+			deep: {
+				arr: [
+					[
+						0, 1, {foo: 72}
+					]
+				]
+			}
+		};
+
+		assert.deepEqual(set(object, '.deep.arr.0.2', 5), object1);
+		assert.deepEqual(set(object2, '.deep.arr.0.2.foo', 72), object3);
+	})
 });
