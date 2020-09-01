@@ -1,14 +1,30 @@
 'use strict';
 
 const euclid = (... args) => {
-    let res = args[0];
+    const validate = (arg) =>{
+       if(Number.isInteger(arg) && arg > 0 ){
+            return arg;
+       }
+       else throw new SyntaxError("validation error")
+    } 
+    try{
+    var res = validate(args[0]);
     for(let i = 1 ; i < args.length; i++){
-        while(res  && args[i]){
-            res  > args[i] ? 
-            res  %= args[i] :
-            args[i] %= res ;
+        let temp = validate(args[i])
+        while(res  && temp){
+            res  > temp ? 
+            res  %= temp :
+            temp %= res ;
         }
-        res  += args[i];
+        res  += temp;
+    }}
+    catch(err){ 
+        if(err.name == "SyntaxError"){
+            console.log("В веденных данных ошибка")
+        }
+        else
+            throw err;
     }
+
     return res ;
 }

@@ -19,6 +19,12 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.strictEqual(euclid(6006, 3738735, 51051), 3003, 'euclid(6006, 3738735, 51051) === 3003');
 	});
 
+	QUnit.test('Функция должна уведомить  о невалидных данных, введенных пользователем', function(assert){
+		assert.throws(euclid("dsf", 1, 1),/Error/, 'validation error');
+		assert.throws(euclid(-1, 1, 1), /Error/,'validation error');
+		assert.throws(euclid(2.3, 1, 2),/Error/,'validation error');
+	});
+
 	QUnit.test('Функция должна правильно работать с любым количеством аргументов', function (assert) {
 		assert.strictEqual(euclid(1, 1, 1, 1, 1, 1, 1), 1);
 
