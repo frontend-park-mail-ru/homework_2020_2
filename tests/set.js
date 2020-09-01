@@ -1,5 +1,18 @@
 'use strict';
 
+let set = (object, props, val) => {
+	let path = props.split(".")
+	path.shift()
+	let last = path.pop()
+	let result = path.reduce((obj, prop) => {
+		if (obj[prop] === undefined)
+			obj[prop] = {}
+		return obj[prop]
+	}, object)
+	result[last] = val
+	return object
+}	
+
 QUnit.module('Тестируем функцию set', function () {
 	QUnit.test('set работает правильно c объектами с существующими свойствами', function (assert) {
 		const object = {
