@@ -10,15 +10,27 @@
  */
 
 const sort = text => {
-    let arrayText = text.split(' ');
+    try {
+        if (typeof (text) != "string") {
+            throw new SyntaxError("wrong type");
+        }
 
-    const collator = new Intl.Collator();
+        let arrayText = text.split(' ');
 
-    arrayText = arrayText.map((word) => word.toLowerCase().split('').sort((a, b) =>collator.compare(a, b)).join(''));
+        const collator = new Intl.Collator();
 
-    arrayText.sort((a, b) => collator.compare(a, b))
+        arrayText = arrayText.map((word) => word.toLowerCase().split('').sort((a, b) => collator.compare(a, b)).join(''));
 
-    arrayText = arrayText.map((word) => word[0].toUpperCase() + word.substring(1));
+        arrayText.sort((a, b) => collator.compare(a, b))
 
-    return arrayText.join(' ');
+        arrayText = arrayText.map((word) => word[0].toUpperCase() + word.substring(1));
+
+        return arrayText.join(' ');
+    } catch (e) {
+        if(e.name == "SyntaxError") {
+            return "Error wrong type of passed value";
+        } else {
+            throw e;
+        }
+    }
 }
