@@ -15,6 +15,7 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('MCMIV'), 1904);
 		assert.strictEqual(roman('MCMXC'), 1990);
 		assert.strictEqual(roman('mmxvii'), 2017);
+		assert.strictEqual(roman('MMMCMXCIX'), 3999);
 	});
 
 	QUnit.test('roman правильно переводит из десятичной системы счисления', function (assert) {
@@ -30,11 +31,20 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman(1904), 'MCMIV');
 		assert.strictEqual(roman(1990), 'MCMXC');
 		assert.strictEqual(roman(2017), 'MMXVII');
+		assert.strictEqual(roman(3999), 'MMMCMXCIX');
 	});
 
 	QUnit.test('roman правильно определяет, что было передано на вход', function (assert) {
 		assert.strictEqual(roman('1904'), 'MCMIV');
 		assert.strictEqual(roman('1990'), 'MCMXC');
 		assert.strictEqual(roman('2017'), 'MMXVII');
+	});
+	
+	QUnit.test('roman правильно определяет, что значение некорректно', function (assert) {
+		assert.strictEqual(roman(4000), 'некорректное значение');
+		assert.strictEqual(roman('0'), 'некорректное значение');
+		assert.strictEqual(roman('qwerty'), 'некорректное значение');
+		assert.strictEqual(roman(-15), 'некорректное значение');
+		assert.strictEqual(roman(''), 'некорректное значение');
 	});
 });

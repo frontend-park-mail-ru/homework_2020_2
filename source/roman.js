@@ -1,41 +1,56 @@
-let roman_arabic = ([{char : 'M', value: 1000}, {char :'CM',value: 900},{char :'D',value: 500},{char :'CD',value: 400},
-                                    {char :'C',value: 100}, {char :'XC',value: 90}, {char :'L',value: 50}, {char :'XL',value: 40},
-                                    {char :'X',value: 10}, {char :'IX',value: 9}, {char :'V',value: 5}, {char :'IV',value: 4}, {char :'I',value: 1}]);
+const ROMAN_TO_ARABIC = {'M' : 1000,
+                        'CM': 900,
+                        'D': 500,
+                        'CD' : 400,
+                        'C': 100,
+                        'XC': 90,
+                        'L': 50,
+                        'XL': 40,
+                        'X': 10,
+                        'IX': 9,
+                        'V': 5,
+                        'IV': 4,
+                        'I' : 1};
 
 
 function convertToRoman(num) {
-   return roman_arabic.reduce((res, curValue) => {
-       while (num >= curValue.value) {
-           res += curValue.char;
-           num -= curValue.value;
-       }
-       return res;
-   }, '');
+    let res = '';
+
+    for (let entire of Object.entries(ROMAN_TO_ARABIC)) {
+        while (num >= entire[1]) {
+            res += entire[0];
+            num -= entire[1];
+        }
+    }
+
+    return res;
 }
 
-function convertToArabic(inputText) {
 
-    return inputText.toUpperCase().split('').reduce((res, a, i, aa) => {
-        let temp = roman_arabic.find(item => item.char === a).value;
-        let next = roman_arabic.find(item => item.char === aa[i+1]);
-        if (next)
-            next = next.value;
-        return res + (temp < next ? -temp: temp);
-        }, 0);
+function convertToArabic(inputText) {
+    return inputText.toUpperCase().split('').reduce( (res, a, i, aa) => {
+        let temp = ROMAN_TO_ARABIC[a];
+        let next;
+
+        if ( ROMAN_TO_ARABIC[ aa[i+1] ] ) {
+            next = ROMAN_TO_ARABIC[aa[i + 1]];
+        }
+
+        return res + (temp < next ? -temp : temp);
+    }, 0);
 }
 
 
 function roman(input)
 {
-    if (input.toUpperCase().match(/^[IVXLCDM]+$/))
-    {
-        return convertToArabic(input);
-    }
-    else if (Number.isInteger(+input) && +input > 0 && +input < 4000)
-    {
-        return convertToRoman(input);
-    }
-    else
-        return null;
-}
+    let intInput = +input;
+    input = '' + input;
 
+    if (input.toUpperCase().match(/^[IVXLCDM]+$/)) {
+        return convertToArabic(input);
+    } else if (Number.isInteger(intInput) && intInput > 0 && intInput < 4000) {
+        return convertToRoman(intInput);
+    } else {
+        return "некорректное значение";
+    }
+}
