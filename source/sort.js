@@ -1,27 +1,24 @@
 'use strict';
 
-const sort = function (text) {
-    let array_text = text.split(' ');
+/**
+ * Возвращает строку text, в которой сначала будут отсортированны буквы в словах по алфавиту,
+ * а позже отсортированны по алфивиту и сами слова.
+ * Первая буква каждого слова станет прописной, остальные строчными
+ *
+ * @param {string} text Подаваемая на вход строка.
+ * @return {string} text, Преобразованная строка.
+ */
 
-    let collator = new Intl.Collator();
+const sort = text => {
+    let arrayText = text.split(' ');
 
-    array_text.forEach(function(item, i, arr) {
-        item = item.toLowerCase();
-        item = item.split('').sort(function(a, b) {
-            return collator.compare(a, b);
-        }).join('');
-        arr[i]  = item;
-    });
+    const collator = new Intl.Collator();
 
-    array_text.sort(function(a, b) {
-        return collator.compare(a, b);
-    })
+    arrayText = arrayText.map((word) => word.toLowerCase().split('').sort((a, b) =>collator.compare(a, b)).join(''));
 
-    array_text.forEach(function(item, i, arr) {
-        item = item[0].toUpperCase() + item.substring(1);
-        arr[i]  = item;
-    });
+    arrayText.sort((a, b) => collator.compare(a, b))
 
-    let result_str = array_text.join(' ');
-    return result_str;
+    arrayText = arrayText.map((word) => word[0].toUpperCase() + word.substring(1));
+
+    return arrayText.join(' ');
 }
