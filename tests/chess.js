@@ -37,4 +37,70 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess('8'), expected);
 	});
 
+	QUnit.test('Шахматной доски отрицательного размера не бывает', function (assert) {
+		assert.strictEqual(chess(-1), null);
+		assert.strictEqual(chess('-1'), null);
+	});
+
+	QUnit.test('Шахматной доски нулевого размера не бывает', function (assert) {
+		assert.strictEqual(chess(0), null);
+		assert.strictEqual(chess('0'), null);
+	});
+
+	QUnit.test('Шахматной доски размера Inf на Inf не бывает', function (assert) {
+		const expected = null
+		assert.strictEqual(chess(Infinity), expected);
+		assert.strictEqual(chess('Infinity'), expected);
+	});
+
+	QUnit.test('Шахматной доски размера null на null не бывает', function (assert) {
+		const expected = null
+		assert.strictEqual(chess(null), expected);
+		assert.strictEqual(chess('null'), expected);
+	});
+
+	QUnit.test('Шахматной доски размера undefined на undefined не бывает', function (assert) {
+		const expected = null
+		assert.strictEqual(chess(undefined), expected);
+		assert.strictEqual(chess('undefined'), expected);
+	});
+
+	QUnit.test('Шахматной доски размера abc на abc не бывает', function (assert) {
+		const expected = null
+		assert.strictEqual(chess('abc'), expected);
+	});
+
+	QUnit.test('Шахматная доска 10 на 10', function (assert) {
+		const expected =
+			'* * * * * \n' +
+			' * * * * *\n' +
+			'* * * * * \n' +
+			' * * * * *\n' +
+			'* * * * * \n' +
+			' * * * * *\n' +
+			'* * * * * \n' +
+			' * * * * *\n' +
+			'* * * * * \n' +
+			' * * * * *\n';
+		assert.strictEqual(chess(10), expected);
+		assert.strictEqual(chess('10'), expected);
+	});
+
+	QUnit.test('Шахматная доска 11 на 11', function (assert) {
+		const expected =
+			'* * * * * *\n' +
+			' * * * * * \n' +
+			'* * * * * *\n' +
+			' * * * * * \n' +
+			'* * * * * *\n' +
+			' * * * * * \n' +
+			'* * * * * *\n' +
+			' * * * * * \n' +
+			'* * * * * *\n' +
+			' * * * * * \n' +
+			'* * * * * *\n';
+		assert.strictEqual(chess(11), expected);
+		assert.strictEqual(chess('11'), expected);
+	});
+
 });
