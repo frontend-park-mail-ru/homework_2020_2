@@ -5,6 +5,7 @@ QUnit.module('Тестируем функцию plain', function () {
 		assert.deepEqual(plain([]), [], 'Работает с пустым массивом');
 		assert.deepEqual(plain([ 42 ]), [ 42 ], 'Работает с массивом из одного элемента');
 		assert.deepEqual(plain([ 1, 2, 3, 4 ]), [ 1, 2, 3, 4 ], 'Сохраняет порядок элементов');
+		assert.deepEqual(plain([ 1, 1, 1, 1 ]), [ 1, 1, 1, 1 ], 'Работает с повторяющимися элементами');
 	});
 
 	QUnit.test('Работает с единственным массивом', function (assert) {
@@ -35,5 +36,27 @@ QUnit.module('Тестируем функцию plain', function () {
 
 	QUnit.test('Работает с элементами разных типов', function (assert) {
 		assert.deepEqual(plain([ [ 'abcde' ], [ [ 'f' ], [ null, false ], [ NaN, NaN ], NaN ], -Infinity ]), [ 'abcde', 'f', null, false, NaN, NaN, NaN, -Infinity ]);
+	});
+
+	QUnit.test('Работает с массивами отрицательных элементов', function (assert) {
+		assert.deepEqual(plain([ [], [ [], [], [] ] ]), [], 'Работает с пустыми массивами');
+		assert.deepEqual(plain([ [ -1 ], [ [ -2 ], [ -3, -4 ], [ -5, -6 ], -7 ], -8 ]), [ -1, -2, -3, -4, -5, -6, -7, -8]);
+		assert.deepEqual(plain([ [ NaN ], [ -Infinity, -NaN], [-10], [ -1, [ -2], Infinity]]), [ NaN, -Infinity, -NaN, -10, -1, -2, Infinity]);
+	});
+
+	QUnit.test('Работает с кастомными объектами', function (assert) {
+		class Test {
+			constructor(body) {
+				this.body = body;
+			}
+		}
+		
+		let stupidInstance = new Test("test");
+		assert.deepEqual(plain([ [ stupidInstance ], [ [ stupidInstance ], [ stupidInstance, stupidInstance ], [ stupidInstance, stupidInstance ], stupidInstance ], stupidInstance ]),
+		[ stupidInstance, stupidInstance, stupidInstance, stupidInstance, stupidInstance, stupidInstance, stupidInstance, stupidInstance]);
+		
+		let anotherInstance = new Test("test_2")
+		assert.deepEqual(plain([ [ anotherInstance ], [ -anotherInstance,  [ -stupidInstance ]], [-anotherInstance]]), [ anotherInstance, -anotherInstance, -stupidInstance, -anotherInstance], 
+		'Сохраняет порядок элементов');
 	});
 });
