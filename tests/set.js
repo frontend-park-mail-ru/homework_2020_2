@@ -93,6 +93,46 @@ QUnit.module('Тестируем функцию set', function () {
 			}
 		};
 
+		const object1 = {
+			deep: {
+				nested: {
+					field: undefined
+				}
+			}
+		};
+
+		const new1 = {
+			deep: {
+				nested: {
+					field: 70
+				}
+			}
+		};
+
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
+		assert.deepEqual(set(object1, '.deep.nested.field', 70), new1);
+
 	});
+
+	QUnit.test('set работает правильно с многомерными массивами', function (assert) {
+		const object1 = {
+			foo: [1, [[1, 2], [1, 2, 3]]]
+		}
+
+		const new1 = {
+			foo: 4
+		}
+
+		const object2 = {
+			foo: [1, [[1, 2], [1, 2, 3]]]
+		}
+
+		const new2 = {
+			foo: [1, [[1, 4], [1, 2, 3]]]
+		}
+
+		assert.deepEqual(set(object1, '.foo', 4), new1);
+		assert.deepEqual(set(object2, '.foo.1.0.1', 4), new2);
+	});
+
 });
