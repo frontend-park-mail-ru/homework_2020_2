@@ -36,4 +36,12 @@ QUnit.module('Тестируем функцию minmax', function () {
 	QUnit.test('minmax игнорирует перенос строки', function (assert) {
 		assert.deepEqual(minmax('молоко - 2 пакета\nхлеб - 1 батон\nпиво - 3 банки'), [ 1, 3 ]);
 	});
+
+	QUnit.test('minmax игнорирует не верные входные данные', function (assert) {
+		assert.deepEqual(minmax([ 1, 4, 2, 6 ]), [ undefined, undefined ]);
+		assert.deepEqual(minmax(5), [ undefined, undefined ]);
+		assert.deepEqual(minmax(true), [ undefined, undefined ]);
+		assert.deepEqual(minmax(undefined), [ undefined, undefined ]);
+		assert.deepEqual(minmax(null), [ undefined, undefined ]);
+	});
 });
