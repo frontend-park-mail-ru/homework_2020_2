@@ -9,7 +9,7 @@
  */
 
 const minmax = (string) => {
-    if (typeof(string) !== 'string' || !string) {
+    if (typeof string !== 'string' || !string) {
         return [undefined, undefined];
     }
     const arrayOfNumberWords = string.split(' ').filter((number) => !isNaN(number));
