@@ -37,4 +37,21 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess('8'), expected);
 	});
 
+	QUnit.test('Введем отрицательное число (такой доски не бывает)', function (assert) {
+		assert.strictEqual(chess(-6), null);
+		assert.strictEqual(chess('-6'), null);
+	});
+
+	QUnit.test('Введем бесконечность (такой доски не бывает)', function (assert) {
+		assert.strictEqual(chess(Infinity), null);
+		assert.strictEqual(chess(-Infinity), null);
+	});
+
+	QUnit.test('Введем массив и посмотрим, что получится', function (assert) {
+		assert.strictEqual(chess(["test1", "test2"]), null);
+	});
+
+	QUnit.test('Введем бред в строке и посмотрим, что получится', function (assert) {
+		assert.strictEqual(chess("foo"), null);
+	});
 });
