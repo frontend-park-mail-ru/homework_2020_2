@@ -11,7 +11,7 @@
 const sort = text => {
 
     if (typeof (text) !== "string") {
-        throw new SyntaxError("wrong type");
+        throw new SyntaxError("incorrect type entered");
     }
 
     const collator = new Intl.Collator();
