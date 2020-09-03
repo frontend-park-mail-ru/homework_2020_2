@@ -1,15 +1,18 @@
 'use strict';
 
-function minmax(stringOfNumbers) {
+const minmax = (stringOfNumbers) => {
     if (stringOfNumbers === "")
         return [undefined, undefined];
-    let arrayOfNumbers = stringOfNumbers.split(" ");
-    for (let i = 0; i < arrayOfNumbers.length; i++)
-        if (isNaN(arrayOfNumbers[i])) {
-            arrayOfNumbers.splice(i, 1);
-            i--;
-        } else
-            arrayOfNumbers[i] = Number(arrayOfNumbers[i]);
-    arrayOfNumbers.sort(function (a, b) { return a - b });
-    return [arrayOfNumbers[0], arrayOfNumbers[arrayOfNumbers.length - 1]];
+    const arrayOfWords = stringOfNumbers.split(" ");
+    const arrayOfNumberWords = arrayOfWords.filter(function (number) {
+        return !isNaN(number);
+    });
+    if (arrayOfNumberWords.length === 0)
+        return [undefined, undefined];
+    const arrayOfNumbers = arrayOfNumberWords.map(function (number) {
+        return Number(number);
+    });
+    const min = Math.min(...arrayOfNumbers);
+    const max = Math.max(...arrayOfNumbers);
+    return [min, max];
 }
