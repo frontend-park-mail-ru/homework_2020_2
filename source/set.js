@@ -9,10 +9,11 @@
  */
 const set = (object, props, val) => {
 	const path = props.split('.')
-	path.shift()
-	path.reduce((obj, prop, idx) => {
-		if (obj[prop] === undefined) {
-            obj[prop] = {}
+    path.shift()
+    let curObj = object
+	path.forEach((prop, idx) => {
+        if (curObj[prop] === undefined) {
+            curObj[prop] = {}
         }
         /**
          * здесь не нужен else, тк если последнего 
@@ -20,9 +21,9 @@ const set = (object, props, val) => {
          * он будет создан, но значение не записано
          */
 		if (idx === path.length - 1) {
-            obj[prop] = val
+            curObj[prop] = val
         }
-		return obj[prop]
-    }, object)
+        curObj = curObj[prop]
+    });
     return object
 }	
