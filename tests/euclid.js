@@ -28,4 +28,12 @@ QUnit.module('Тестируем функцию euclid', function () {
 		const temp = [ 80325, 55275, 8746650, 3000000, 45672375, 225, 54675 ];
 		assert.strictEqual(euclid(...[ ...temp, ...temp, ...temp, ...temp, ...temp ]), euclid(...temp));
 	});
+
+	QUnit.test('Функция должна корректно обрабатывать невалидный ввод', function (assert) {
+		assert.strictEqual(euclid(), null, 'euclid() === null');
+		assert.strictEqual(euclid('some string'), null, 'euclid(\'some string\') === null');
+		assert.strictEqual(euclid(10, 20, 30, 'some string'), null, 'euclid(10, 20, 30, \'some string\') === null');
+		assert.strictEqual(euclid(1, 2, -3, 5), null, 'euclid(1, 2, -3, 5) === null')
+	});
+
 });
