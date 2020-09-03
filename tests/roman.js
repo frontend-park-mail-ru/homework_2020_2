@@ -41,10 +41,13 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 	
 	QUnit.test('roman правильно определяет, что значение некорректно', function (assert) {
-		assert.strictEqual(roman(4000), 'некорректное значение');
-		assert.strictEqual(roman('0'), 'некорректное значение');
-		assert.strictEqual(roman('qwerty'), 'некорректное значение');
-		assert.strictEqual(roman(-15), 'некорректное значение');
-		assert.strictEqual(roman(''), 'некорректное значение');
+		assert.throws(roman(4000), Error === 'некорректное число');
+		assert.throws(roman(0), Error === 'некорректное число');
+		assert.throws(roman('-15'), Error === 'некорректное число');
+		assert.throws(roman(NaN), Error === 'некорректное число');
+		assert.throws(roman(), Error === 'некорректное число');
+		assert.throws(roman('i5'), Error === 'некорректное число');
+		assert.throws(roman('egefvd'), Error === 'некорректное число');
+		
 	});
 });
