@@ -20,9 +20,9 @@ QUnit.module('Тестируем функцию euclid', function () {
 	});
 
 	QUnit.test('Функция должна уведомить  о невалидных данных, введенных пользователем', function(assert){
-		assert.throws(euclid("dsf", 1, 1),/Error/, 'validation error');
-		assert.throws(euclid(-1, 1, 1), /Error/,'validation error');
-		assert.throws(euclid(2.3, 1, 2),/Error/,'validation error');
+		assert.throws(() => euclid("dsf", 1, 1),SyntaxError('validation error'));
+		assert.throws(() => euclid(-1, 1, 1), SyntaxError('validation error'));
+		assert.throws(() => euclid(2.3, 1, 2),SyntaxError('validation error'));
 	});
 
 	QUnit.test('Функция должна правильно работать с любым количеством аргументов', function (assert) {

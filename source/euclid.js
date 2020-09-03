@@ -1,30 +1,54 @@
 'use strict';
 
-const euclid = (... args) => {
-    const validate = (arg) =>{
-       if(Number.isInteger(arg) && arg > 0 ){
-            return arg;
-       }
-       else throw new SyntaxError("validation error")
-    } 
-    try{
-    var res = validate(args[0]);
-    for(let i = 1 ; i < args.length; i++){
-        let temp = validate(args[i])
-        while(res  && temp){
-            res  > temp ? 
-            res  %= temp :
-            temp %= res ;
-        }
-        res  += temp;
-    }}
-    catch(err){ 
-        if(err.name == "SyntaxError"){
-            console.log("В веденных данных ошибка")
-        }
-        else
-            throw err;
+ /**
+ * Validate input data.
+ * @function
+ * @param {number} arg - Input number.
+ * @throws {SyntaxError}
+ * @return {number} - Positive number
+ */
+
+const validate = (arg) => {
+    if(Number.isInteger(arg) && arg > 0 ){
+        return arg;
     }
 
-    return res ;
+    throw new SyntaxError('validation error')
+ } 
+
+ /**
+ * Finds NOD using euclid algorithm.
+ * @function
+ * @param {...numbers} args - Input numbers.
+ * @throws {SyntaxError}
+ * @return {number} - NOD
+ */
+
+const euclid = (... args) => {
+    let res;
+
+    try{
+        res = validate(args[0]);  
+
+        args.forEach(function(item,i,arr) {
+            let temp = validate(item);
+
+            while(res  && temp) {
+                if(res > temp) {
+                    res %= temp;
+                } else {
+                    temp %= res;
+                }
+            }   
+            res += temp;
+        });
+    }
+    catch(err) { 
+        if(err.name === 'SyntaxError') {
+            console.log('В ведённых данных ошибка');
+            throw err;
+        }
+    }
+    
+    return res;
 }
