@@ -40,8 +40,14 @@ QUnit.module('Тестируем функцию sort', function () {
 	});
 
 	QUnit.test('Функция работает правильно c ошибочными данными', function (assert) {
-		assert.strictEqual(sort(''), '', 'Работает с пустой строкой');
+		assert.strictEqual(sort('   '), '', 'Работает со строкой только с пробелами');
 		assert.strictEqual(sort('A  b c'), 'A B C', 'Работает с лишними пробелами');
 		assert.strictEqual(sort('Hello  world   it is me'), 'Dlorw Ehllo Em Is It');
+		assert.strictEqual(sort('  Hello  world '), 'Dlorw Ehllo', 'Работает с пробелами в начале и конце');
+	});
+
+	QUnit.test('Функция работает с разными языками в одном предложении', function (assert) {
+		assert.strictEqual(sort('Кинокомпания Warner Bros Pictures'), 'Аииккмнноопя Aenrrw Bors Ceiprstu');
+		assert.strictEqual(sort('Купить бумагу SvetoCopy CLASSIC'), 'Абгмуу Икптуь Accilss Ceoopstvy');
 	});
 });

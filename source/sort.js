@@ -2,22 +2,20 @@
 
 function sort(someString)
 {
-    const collator = new Intl.Collator();
+    someString = someString.trim();
 
     if (!someString)
         return someString;
 
-    let wordsOfString = someString.split(' ').filter(Boolean);
+    const collator = new Intl.Collator();
 
-    for (let i in wordsOfString) {
-        if (wordsOfString.hasOwnProperty(i)) {
-            wordsOfString[i] = wordsOfString[i].toLowerCase().split('')
-                .sort(function (a, b) {
-                    return collator.compare(a, b)
-                }).join('');
-            wordsOfString[i] = wordsOfString[i][0].toUpperCase() + wordsOfString[i].slice(1);
-        }
-    }
+    const wordsOfString = someString.split(/\s+/);
 
-    return wordsOfString.sort(function (a, b) {return collator.compare(a, b)}).join(' ');
+    let sortWords = wordsOfString.map((word) => {
+        word = word.toLowerCase().split('')
+            .sort((a, b) => collator.compare(a, b)).join('');
+        return word[0].toUpperCase() + word.slice(1);
+    })
+
+    return sortWords.sort((a, b) => collator.compare(a, b)).join(' ');
 }
