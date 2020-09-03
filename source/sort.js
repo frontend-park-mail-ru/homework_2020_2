@@ -8,29 +8,21 @@
  * @param {string} text Подаваемая на вход строка.
  * @return {string} text, Преобразованная строка.
  */
-
 const sort = text => {
-    try {
-        if (typeof (text) != "string") {
-            throw new SyntaxError("wrong type");
-        }
 
-        let arrayText = text.split(' ');
-
-        const collator = new Intl.Collator();
-
-        arrayText = arrayText.map((word) => word.toLowerCase().split('').sort((a, b) => collator.compare(a, b)).join(''));
-
-        arrayText.sort((a, b) => collator.compare(a, b))
-
-        arrayText = arrayText.map((word) => word[0].toUpperCase() + word.substring(1));
-
-        return arrayText.join(' ');
-    } catch (e) {
-        if(e.name == "SyntaxError") {
-            return "Error wrong type of passed value";
-        } else {
-            throw e;
-        }
+    if (typeof (text) !== "string") {
+        throw new SyntaxError("wrong type");
     }
+
+    const collator = new Intl.Collator();
+
+    let arrayText = text.split(' ');
+
+    arrayText = arrayText.map((word) => word.toLowerCase().split('').sort((a, b) => collator.compare(a, b)).join(''));
+
+    arrayText.sort((a, b) => collator.compare(a, b))
+
+    arrayText = arrayText.map((word) => word[0].toUpperCase() + word.substring(1));
+
+    return arrayText.join(' ');
 }

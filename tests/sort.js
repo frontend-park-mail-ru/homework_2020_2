@@ -51,8 +51,8 @@ QUnit.module('Тестируем функцию sort', function () {
 	});
 
 	QUnit.test('Функция фиксирует некорректные данные', function (assert) {
-		assert.strictEqual(sort(3), 'Error wrong type of passed value');
-		assert.strictEqual(sort([3,5,6]), 'Error wrong type of passed value');
+		assert.throws(sort(3), SyntaxError("dsa"));
+		assert.throws(sort([3,5,6]), SyntaxError("dsad"));
 	});
 
 });
