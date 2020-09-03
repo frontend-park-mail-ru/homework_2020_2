@@ -10,14 +10,14 @@ const plainify = object => {
         return {};
     }
 
-    return Object.entries(object).reduce((acc, map) => ({
+    return Object.entries(object).reduce((acc, currentValue) => ({
         ...acc,
-        ...copyContent(map),
+        ...plainifyInner(currentValue),
     }), {});
 };
 
 /**
- * Функция проверяет является ли значение объектом.
+ * Функция проверяет, является ли значение объектом.
  * @param {object} value
  * @returns {boolean}
  */
@@ -26,19 +26,20 @@ const isObject = value => {
 };
 
 /**
- * Функция добавляет [ключ, значение] в plain-объект
- * @param {object} map - пара [ключ, значение]
+ * Функция возвращает plain-объект
+ * @param {object} entry - пара [ключ, значение]
  * @returns {object}
  */
-const copyContent = map => {
-    const [key, value] = map;
+const plainifyInner = entry => {
+    const [key, value] = entry;
 
     if (!isObject(value)) {
         return {[key]: value};
     }
 
-    return Object.entries(plainify(value)).reduce((acc, childMap) => {
-        const [childKey, childValue] = childMap;
-        return {...acc, [`${key}.${childKey}`]: childValue };
+    return Object.entries(plainify(value)).reduce((acc, currentValue) => {
+        const [childKey, childValue] = currentValue;
+        const newKey = `${key}.${childKey}`;
+        return {...acc, [newKey]: childValue };
     }, {})
 };
