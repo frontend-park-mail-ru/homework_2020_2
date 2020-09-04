@@ -16,10 +16,13 @@ const createMapOfSymbols = (string) => {
 const letters = (string, flag) => {
 
     if (string === undefined) {
-        throw new SyntaxError("Не валидная строка");
+        throw new TypeError("Первый аргумент не валиден");
     }
     if (typeof string !== "string") {
-        throw new SyntaxError("Не валидная строка");
+        throw new TypeError("Первый аргумент должен быть строкой");
+    }
+    if (typeof flag !== "boolean" && flag !== undefined) {
+        throw new TypeError("Второй аргумент должен иметь тип bool или не должен быть передан");
     }
 
     string = string.split('');
@@ -35,8 +38,9 @@ const letters = (string, flag) => {
         for (let key of mapLetters.keys()) {
             result += key;
         }
-        if (flag === false)
+        if (flag === false) {
             result = result.split('').reverse().join('');
+        }
     } else {  // Случай если флаг не определен
         for (let key of mapLetters.keys()) {
             if (mapLetters.get(key) === 1) {
