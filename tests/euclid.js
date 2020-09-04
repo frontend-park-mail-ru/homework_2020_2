@@ -19,10 +19,10 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.strictEqual(euclid(6006, 3738735, 51051), 3003, 'euclid(6006, 3738735, 51051) === 3003');
 	});
 
-	QUnit.test('Функция должна уведомить  о невалидных данных, введенных пользователем', function(assert){
-		assert.throws(() => euclid("dsf", 1, 1),SyntaxError('validation error'));
-		assert.throws(() => euclid(-1, 1, 1), SyntaxError('validation error'));
-		assert.throws(() => euclid(2.3, 1, 2),SyntaxError('validation error'));
+	QUnit.test('Функция должна уведомить  о невалидных данных, введенных пользователем', function (assert) {
+		assert.throws(() => euclid("dsf", 1, 1), SyntaxError('validation error'), 'validation error');
+		assert.throws(() => euclid(-1, 1, 1), SyntaxError('validation error'), 'validation error');
+		assert.throws(() => euclid(2.3, 1, 2), SyntaxError('validation error'), 'validation error');
 	});
 
 	QUnit.test('Функция должна правильно работать с любым количеством аргументов', function (assert) {
@@ -31,8 +31,8 @@ QUnit.module('Тестируем функцию euclid', function () {
 		const n = 17;
 		assert.strictEqual(euclid(3 * n, 2 * n, 4 * n, 7 * n, n, 21 * n), n);
 
-		const temp = [ 80325, 55275, 8746650, 3000000, 45672375, 225, 54675 ];
-		assert.strictEqual(euclid(...[ ...temp, ...temp, ...temp, ...temp, ...temp ]), euclid(...temp));
+		const temp = [80325, 55275, 8746650, 3000000, 45672375, 225, 54675];
+		assert.strictEqual(euclid(...[...temp, ...temp, ...temp, ...temp, ...temp]), euclid(...temp));
 	});
 
 });

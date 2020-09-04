@@ -1,6 +1,6 @@
 'use strict';
 
- /**
+/**
  * Validate input data.
  * @function
  * @param {number} arg - Input number.
@@ -9,46 +9,48 @@
  */
 
 const validate = (arg) => {
-    if(Number.isInteger(arg) && arg > 0 ){
-        return arg;
+    if (!Number.isInteger(arg) || arg <= 0) {
+        throw new SyntaxError('validation error')
     }
+}
 
-    throw new SyntaxError('validation error')
- } 
-
- /**
+/**
  * Finds NOD using euclid algorithm.
  * @function
- * @param {...numbers} args - Input numbers.
+ * @param {...number} args - Input numbers.
  * @throws {SyntaxError}
  * @return {number} - NOD
  */
 
-const euclid = (... args) => {
+const euclid = (...args) => {
     let res;
 
-    try{
-        res = validate(args[0]);  
+    try {
+        validate(args[0]);
+        res = args[0];
 
-        args.forEach(function(item,i,arr) {
-            let temp = validate(item);
+        args.forEach(item => {
+            validate(item);
 
-            while(res  && temp) {
-                if(res > temp) {
-                    res %= temp;
+            while (res && item) {
+                if (res > item) {
+                    res %= item;
                 } else {
-                    temp %= res;
+                    item %= res;
                 }
-            }   
-            res += temp;
+            }
+            res += item;
         });
-    }
-    catch(err) { 
-        if(err.name === 'SyntaxError') {
-            console.log('В ведённых данных ошибка');
+    } catch (err) {
+        if (err.name === 'SyntaxError') {
+            console.log('Error in entered data');
             throw err;
         }
+
+        console.log('Undefined error')
+        throw err;
+
     }
-    
+
     return res;
 }
