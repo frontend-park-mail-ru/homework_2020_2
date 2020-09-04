@@ -40,11 +40,11 @@ const euclid = (...args) => {
         return res;
     } catch (err) {
         if (err.name === 'SyntaxError') {
-            console.log('Error in entered data');
+            console.error('Error in entered data');
             throw err;
         }
 
-        console.log('Undefined error')
+        console.error('Undefined error')
         throw err;
     }
 }
