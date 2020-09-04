@@ -2,7 +2,9 @@
 
 function zip(...args) {
     return args.reverse().reduce((acc, obj) => {
-        Object.keys(obj).forEach(key => acc[key] = obj[key]);
+        if (typeof obj === "object") {
+            Object.keys(obj).forEach(key => acc[key] = obj[key]);
+        }
         return acc;
     }, {});
 }
