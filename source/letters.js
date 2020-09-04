@@ -1,6 +1,19 @@
 'use strict';
 
-let letters = (string, flag) => {
+//Функция для получения мапы символов из строки
+const createMapOfSymbols = (string) => {
+    const mapLetters = new Map();
+    string.forEach(element => {
+        if (mapLetters.has(element) === false) {
+            mapLetters.set(element, 1);
+        } else {
+            mapLetters.set(element, mapLetters.get(element) + 1);
+        }
+    })
+    return mapLetters;
+}
+
+const letters = (string, flag) => {
 
     if (string === undefined) {
         throw new SyntaxError("Не валидная строка");
@@ -10,37 +23,26 @@ let letters = (string, flag) => {
     }
 
     string = string.split('');
-    if (flag === false)
+    if (flag === false) // Реверс строки для случая когда нужно оставлять последнюю букву
         string.reverse();
 
     //Получение мапы символов
-    const letters = new Map();
-    string.forEach(element => {
-        if (letters.has(element) === false) {
-            letters.set(element, 1);
-        } else {
-            letters.set(element, letters.get(element) + 1);
-        }
-    })
+    const mapLetters = createMapOfSymbols(string);
 
     let result = '';
 
-    if (flag === true) {
-        for (let key of letters.keys()) {
+    if (flag !== undefined) {
+        for (let key of mapLetters.keys()) {
             result += key;
         }
-    } else if (flag === false) {
-        for (let key of letters.keys()) {
-            result += key;
-        }
-        result = result.split('').reverse().join('');
-    } else {
-        for (let key of letters.keys()) {
-            if (letters.get(key) === 1) {
+        if (flag === false)
+            result = result.split('').reverse().join('');
+    } else {  // Случай если флаг не определен
+        for (let key of mapLetters.keys()) {
+            if (mapLetters.get(key) === 1) {
                 result += key;
             }
         }
     }
-
     return result;
 }
