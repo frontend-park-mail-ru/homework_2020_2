@@ -87,5 +87,12 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('аааааааааа ааааааааа аааа', false), ' а');
 		assert.strictEqual(letters('лодке собираются акулы', false), 'деобирются акулы');
 	});
+
+	QUnit.test( "Исключения", function( assert ) {
+		assert.throws(() => letters(undefined), TypeError("Первый аргумент не валиден"));
+		assert.throws(() => letters(5), TypeError("Первый аргумент должен быть строкой"));
+		assert.throws(() => letters('string','dfgd'), TypeError("Второй аргумент должен иметь тип bool или не должен быть передан"));
+		assert.throws(() => letters('string',5), TypeError("Второй аргумент должен иметь тип bool или не должен быть передан"));
+	});
 });
 
