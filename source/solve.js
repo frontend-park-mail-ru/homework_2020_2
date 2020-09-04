@@ -2,10 +2,10 @@
 
 const solve = (eq, x) => {
 	if (!/^[-+*x0-9() ]+$/.test(eq) || 
-		/(\*|\+|-){2,}/.test(eq) ||
-		/x *x/.test(eq) ||
-		/[x0-9] *[x0-9]/.test(eq)) {
-        throw new SyntaxError("Invalid expression");
+			/(\*|\+|-){2,}/.test(eq) ||
+			/x *x/.test(eq) ||
+			/[x0-9] *[x0-9]/.test(eq)) {
+        throw new SyntaxError("Invalid expression syntax");
     }
 	if (typeof eq !== "string" || typeof x !== "number" || !Number.isInteger(x)) {
         throw new TypeError("Invalid parameters");
