@@ -7,7 +7,6 @@
  * @throws {SyntaxError}
  * @return {number} - Positive number
  */
-
 const validate = (arg) => {
     if (!Number.isInteger(arg) || arg <= 0) {
         throw new SyntaxError('validation error')
@@ -21,7 +20,6 @@ const validate = (arg) => {
  * @throws {SyntaxError}
  * @return {number} - NOD
  */
-
 const euclid = (...args) => {
     let res;
 
@@ -31,16 +29,15 @@ const euclid = (...args) => {
 
         args.forEach(item => {
             validate(item);
-
             while (res && item) {
-                if (res > item) {
-                    res %= item;
-                } else {
+                res > item ?
+                    res %= item :
                     item %= res;
-                }
             }
             res += item;
         });
+
+        return res;
     } catch (err) {
         if (err.name === 'SyntaxError') {
             console.log('Error in entered data');
@@ -49,8 +46,5 @@ const euclid = (...args) => {
 
         console.log('Undefined error')
         throw err;
-
     }
-
-    return res;
 }
