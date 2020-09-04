@@ -56,6 +56,9 @@ QUnit.module('Тестируем функцию tree', function () {
 
 	QUnit.test('Неккоректный ввод', function (assert) {
 		assert.strictEqual(tree(''), null);
+		assert.strictEqual(tree({}), null);
+		assert.strictEqual(tree(Infinity), null);
+		assert.strictEqual(tree(true), null);
 		assert.strictEqual(tree('smth_strng'), null);
 		assert.strictEqual(tree('12%43'), null);
 		assert.strictEqual(tree(undefined), null);

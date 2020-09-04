@@ -1,14 +1,19 @@
 'use strict';
-const star = '*';
-const separator = ' ';
-const MIN_HEIGHT = 3;
-const trunc = '|';
+const STAR = '*';
+const SEPARATOR = ' ';
+const MINHEIGHT = 3;
+const TRUNC = '|';
 
+/**
+ * Creates a tree with height h
+ * @returns {String} Returns picture of our tree.
+ * @param h - number
+ */
 const tree = (h) => {
-    if (!Number(h)) {
+    if (!isFinite(h)) {
         return null;
     }
-    if (h < MIN_HEIGHT) {
+    if (h < MINHEIGHT) {
         return null;
     }
 
@@ -16,16 +21,16 @@ const tree = (h) => {
     let res = '';
 
     for (let i = 0; i < (h - 1); i++) {
-        const spaces = separator.repeat(h - 2 -i);
-        const stars = star.repeat(1 + 2 * i);
+        const spaces = SEPARATOR.repeat(h - 2 -i);
+        const stars = STAR.repeat(1 + 2 * i);
 
         res += `${spaces}${stars}${spaces}\n`;
     }
 
-    const trunc_spaces_number = (( 1 + 2 * (h - 2)) - 1) / 2;
-    const trunc_spaces = separator.repeat(trunc_spaces_number);
-    const tree_trunc = `${trunc_spaces}${trunc}${trunc_spaces}\n`;
-    res += tree_trunc;
+    const truncSpacesNumber = (( 1 + 2 * (h - 2)) - 1) / 2;
+    const truncSpaces = SEPARATOR.repeat(truncSpacesNumber);
+    const treeTrunc = `${truncSpaces}${TRUNC}${truncSpaces}\n`;
+    res += treeTrunc;
 
     return res;
 };
