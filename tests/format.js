@@ -51,4 +51,23 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.strictEqual(format(input, 2), expected2);
 		assert.strictEqual(format(input, 3), expected3);
 	});
+
+	QUnit.test('format обрабатывает неправильный ввод количества столбцов', function (assert) {
+		const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000 ];
+
+		assert.strictEqual(format(input, 0), undefined);
+		assert.strictEqual(format(input, -1), undefined);
+	});
+
+	QUnit.test('format работает правильно c пустыми строками', function (assert) {
+		const input = [, 1, 2, , 100, -100, 1000, , -10000 ];
+
+		const expected3 =
+			'       1      2\n' +
+			'     100   -100\n' +
+			'1000     -10000';
+
+		//assert.strictEqual(format(input, 2), expected2);
+		assert.strictEqual(format(input, 3), expected3);
+	});
 });
