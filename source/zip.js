@@ -5,7 +5,7 @@
 }*/
 
 function zip(...args) {
-    let new_obj = {};
+    const new_obj = {};
     for (let i = args.length - 1; i >= 0; i--) {
         let obj = args[i];
         if (typeof obj !== "object") {
@@ -20,3 +20,4 @@ function zip(...args) {
 
     return new_obj;
 }
+
