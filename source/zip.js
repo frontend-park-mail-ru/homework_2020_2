@@ -4,7 +4,7 @@
     return Object.assign(...args.reverse());
 }*/
 
-function zip(...args) {
+/*function zip(...args) {
     const new_obj = {};
     for (let i = args.length - 1; i >= 0; i--) {
         let obj = args[i];
@@ -19,5 +19,19 @@ function zip(...args) {
     }
 
     return new_obj;
+}*/
+
+function zip(...args) {
+    return args.reverse().reduce((acc, obj) => {
+        if (typeof obj !== "object") {
+            return acc;
+        }
+
+        Object.keys(obj).forEach(key => {
+            acc[key] = obj[key];
+        });
+
+        return acc;
+    }, {});
 }
 
