@@ -12,10 +12,14 @@ const minmax = (string) => {
     if (typeof string !== 'string' || !string) {
         return [undefined, undefined];
     }
-    const arrayOfNumberWords = string.split(' ').filter((number) => !isNaN(number));
-    if (!arrayOfNumberWords.length) {
+
+    const arrayOfNumbers = string.split(' ')
+        .filter((number) => !isNaN(number))
+        .map((number) => Number(number));
+
+    if (!arrayOfNumbers.length) {
         return [undefined, undefined];
     }
-    const arrayOfNumbers = arrayOfNumberWords.map((number) => Number(number));
+
     return [Math.min(...arrayOfNumbers), Math.max(...arrayOfNumbers)];
 }
