@@ -5,7 +5,6 @@
  * @function
  * @param {number} arg - Input number.
  * @throws {SyntaxError}
- * @return {number} - Positive number
  */
 const validate = (arg) => {
     if (!Number.isInteger(arg) || arg <= 0) {
@@ -27,7 +26,7 @@ const euclid = (...args) => {
         validate(args[0]);
         res = args[0];
 
-        args.forEach(item => {
+        args.forEach((item) => {
             validate(item);
             while (res && item) {
                 res > item ?
