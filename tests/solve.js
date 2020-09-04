@@ -17,12 +17,13 @@ QUnit.module('Тестируем функцию solve', function () {
 	});
 	QUnit.test('solve обрабатывает неверные входные данные', function (assert) {
 		assert.throws(() => solve(0, 0), TypeError);
+		assert.throws(() => solve("x + 1.5", 1), SyntaxError);
 		assert.throws(() => solve('x', ""), TypeError);
 		assert.throws(() => solve("x x + 1", 1), SyntaxError);
 		assert.throws(() => solve("xx + 1", 1), SyntaxError);
 		assert.throws(() => solve("(x + ((1)", 1), SyntaxError);
 		assert.throws(() => solve("()", 1), SyntaxError);
-		assert.throws(() => solve("1 1 + 1", 1), SyntaxError);
+		assert.throws(() => solve("x + 1", 1.5), TypeError);
 		assert.throws(() => solve("1 + 2 + y", 0), SyntaxError);
 	});
 });

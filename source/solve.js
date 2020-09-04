@@ -7,14 +7,14 @@ const solve = (eq, x) => {
 		/[x0-9] *[x0-9]/.test(eq)) {
         throw new SyntaxError("Invalid expression");
     }
-	if (typeof eq !== "string" || typeof x !== "number") {
+	if (typeof eq !== "string" || typeof x !== "number" || !Number.isInteger(x)) {
         throw new TypeError("Invalid parameters");
     }
     if (eq.split("(").length != eq.split(")").length) {
         throw new SyntaxError("Invalid braces placement");
     }
 	let res = new Function("x", `return ${eq}`)(x)
-	if (res === undefined) {
+	if (typeof res !== "number" || !Number.isInteger(res)) {
         throw new SyntaxError("Invalid expression");
 	}
 	return res;
