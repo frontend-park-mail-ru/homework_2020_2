@@ -13,9 +13,9 @@ QUnit.module('Тестируем функцию rle', function () {
         assert.strictEqual(rle(undefined), undefined);
         assert.deepEqual(rle(NaN), NaN);
         assert.deepEqual(rle({}), {});
-        const json = {
+        const test = {
             'hello': 'world'
         };
-        assert.strictEqual(rle(json), json);
+        assert.strictEqual(rle(test), test);
     });
 });
