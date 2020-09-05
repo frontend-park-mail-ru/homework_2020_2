@@ -2,28 +2,31 @@
 
 /**
  * @function
- * @return {string|null} - chess line drawing or null
  * @param number
+ * @return {string|null} - chess line drawing or null
  */
 const chess = (number) => {
     // проверка данных на вход
-    if (isNaN(number) || number <= 1 || number === Infinity) {
+    if (!isFinite(number) || number <= 1 || !Number.isInteger(Number(number))) {
         return null;
     }
 
-    let result = String();
-    let key = true;
+    let result = '';
+    let line = ''
+    let symbolSelection;
+    let odd = number % 2 == 1;
     for (let i = 0; i < number; ++i) {
-        key = i % 2 === 0;
-        for (let j = 0; j < number; ++j) {
-            if (key) {
-                result += '*';
-            } else {
-                result += ' ';
-            }
-            key = !key;
+        symbolSelection = i % 2 === 0;
+        if (symbolSelection) {
+            line = "* ".repeat(number / 2);
+        } else {
+            line = " *".repeat(number / 2);
         }
-        result += '\n';
+        if (odd) {
+            line += line.charAt(0);
+        }
+        symbolSelection = !symbolSelection;
+        result += (line + '\n');
     }
 
     return result;
