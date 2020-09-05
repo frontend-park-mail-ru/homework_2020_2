@@ -1,20 +1,19 @@
 'use strict';
 
-const get = function(object, property) {
-    if (property === '.') {
-        return object;
-    }
+const get = function (object, property) {
+    const properties = property.split('.').filter(str => str);
 
-    let property_levels = property.split(".").filter(str => str);
 
-    let current_property = object;
-    for (let level in property_levels) {
-        if (current_property.hasOwnProperty(property_levels[level])) {
-            current_property = current_property[property_levels[level]];
-        } else {
-            return undefined;
+
+    let result = object;
+
+    for (let level of properties) {
+        if (!result) {
+            break;
         }
+
+        result = (result.hasOwnProperty(level) ? result[level] : undefined);
     }
 
-    return current_property;
+    return result;
 };
