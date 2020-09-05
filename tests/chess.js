@@ -37,4 +37,16 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess('8'), expected);
 	});
 
+	QUnit.test('Шахматной доски -5 на -5 не существует', function (assert) {
+		assert.strictEqual(chess(-5), null);
+		assert.strictEqual(chess('-5'), null);
+	});
+
+	QUnit.test('Входной параметр не число', function (assert) {
+		assert.strictEqual(chess(true), null);
+		assert.strictEqual(chess('a'), null);
+		assert.strictEqual(chess(undefined), null);
+		assert.strictEqual(chess(null), null);
+	});
+
 });

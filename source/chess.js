@@ -1,22 +1,19 @@
 'use strict';
 
+
+/**
+ * Returns the chess board n by n in string
+ * @param {number} n, if n is not a number or n <= 1, functioon returns null
+ * @returns {(string|null)} String which contains the chess board or null
+ */
+
 const chess = function(n) {
-	if (n <= 1) {
+	if (isNaN(+n) || n <= 1) {
 		return null;
 	}
 
-	let field = "";
-	let evenLine = "";
-	let oddLine = "";
+	let evenLine = "* ".repeat(n / 2) + (n % 2 ? "*\n" : "\n");
+	let oddLine = " *".repeat(n / 2) + (n % 2 ? " \n" : "\n");
 
-	for (let i = 0; i < n; i++) {
-		evenLine += i % 2 ? " " : "*";
-		oddLine += i % 2 ? "*" : " ";
-	}
-
-	for (let i = 0; i < n; i++) {
-		field += i % 2 ? oddLine + "\n" : evenLine + "\n";
-	}	
-
-	return field;
+	return (evenLine + oddLine).repeat(n / 2)  + (n % 2 ? evenLine : "");
 };
