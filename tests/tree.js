@@ -53,4 +53,15 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree(8), expected);
 		assert.strictEqual(tree('8'), expected);
 	});
+
+	QUnit.test('Обработка невалидных входных данных', function (assert) {
+
+		[null, '', []].forEach((e) => {
+			assert.strictEqual(tree(e), null);
+		});
+
+		[undefined, {}, "abc", ",."].forEach((e) => {
+			assert.throws( () => tree(e), new TypeError("Argument height is not a number."));
+		});
+	});
 });
