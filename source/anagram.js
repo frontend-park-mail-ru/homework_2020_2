@@ -7,20 +7,18 @@
 const MIN_SIZE = 2;
 
 const anagram = words => {
-    let map = new Map([]);
-
-    for (let word of words) {
+    let map = words.reduce(function (keys, word) {
         let key = word.replace(/[^A-Za-zА-Яа-яЁё]/g, "").toLowerCase().split('').sort().join('');
 
-        if (map.has(key)) {
-            map.get(key).push(word);
-        } else {
-            map.set(key, [word]);
+        if (!keys.hasOwnProperty(key)) {
+            keys[key] = [];
         }
-    }
+        keys[key].push(word);
 
-    return [...map.values()].filter(anagramPairs => anagramPairs.length >= MIN_SIZE)
+        return keys;
+    }, {});
+
+    return [...Object.values(map)].filter(anagramPairs => anagramPairs.length >= MIN_SIZE)
         .sort(anagramPairs => anagramPairs.sort())
         .sort();
 }
-
