@@ -61,15 +61,22 @@ QUnit.module('Тестируем функцию get', function () {
 
 	QUnit.test('get работает правильно с типами объектов', function (assert) {
 		const object = {
-			foo: "string",
+			foo: 'string',
 			baz: 0,
 			deep: [],
 			foobar: {}
 		};
 
-		assert.strictEqual(typeof(get(object, '.foo')), typeof(object.foo));
-		assert.strictEqual(typeof(get(object, '.baz')), typeof(object.baz));
-		assert.strictEqual(typeof(get(object, '.deep')), typeof(object.deep));
-		assert.strictEqual(typeof(get(object, '.foobar')), typeof(object.foobar));
+		assert.strictEqual(typeof (get(object, '.foo')), typeof (object.foo));
+		assert.strictEqual(typeof (get(object, '.baz')), typeof (object.baz));
+		assert.strictEqual(typeof (get(object, '.deep')), typeof (object.deep));
+		assert.strictEqual(typeof (get(object, '.foobar')), typeof (object.foobar));
+	});
+
+	QUnit.test('get работает правильно с некоретными типами данных',
+	function (assert) {
+		assert.throws(function () {
+		get('hihello');
+		}, new Error('Некорректный тип входных данных'));
 	});
 });
