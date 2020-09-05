@@ -8,24 +8,26 @@
  * @param {boolean|undefined} flag - флаг, который определяет поведение
  *        программы.
  *        Ниже перечислены различные вариации поведения программы:
- *        1) flag = true - из строки удаляются все повторяющиеся
+ * @example flag = true - из строки удаляются все повторяющиеся
  *        символы исключая первый;
- *        2) flag = false - из строки удаляются повторяющиеся
+ * @example flag = false - из строки удаляются повторяющиеся
  *        символы исключая последний;
- *        3) Если flag не передаётся, то из строки удаляются
+ * @example Если flag не передаётся, то из строки удаляются
  *        все повоторяющиеся символы.
  * @returns {string} новая строка без повторяющихся символов.
  */
 const letters = (string, flag) => {
-    if (string === undefined) {
-        return 'Error';
+    if (typeof string != 'string') {
+        throw new TypeError('The first argument must be a string');
     }
 
     return string.split('').filter((char, index, string) => {
+        const firstIdxChar = string.indexOf(char);
+        const lastIdxChar = string.lastIndexOf(char);
         if (flag === undefined) {
-            return string.indexOf(char) === string.lastIndexOf(char);
-        } else {
-            return flag ? string.indexOf(char) === index : string.lastIndexOf(char) === index;
+            return firstIdxChar === lastIdxChar;
         }
+
+        return flag ? firstIdxChar === index : lastIdxChar === index;
     }).join('');
 };
