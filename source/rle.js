@@ -1,23 +1,31 @@
 'use strict';
 
+/**
+ * Функция, реализующая RLE-сжатие
+ * @param {string} string Входная строка
+ * @returns {string}
+ */
 const rle = string => {
-    if (!string) { //undefined, null или empty
+    if (typeof string !== 'string' || string.length === 0) {
         return string;
     }
-    let result = "";
-    let startIndex = 0;
-    for (let currentIndex = 1; currentIndex < string.length; currentIndex++) {
-        if (string[currentIndex] !== string[startIndex]) {
-            result += string[startIndex];
-            if (currentIndex - startIndex > 1) {
-                result += currentIndex - startIndex;
+    let length = 0;
+    let lastChar = string.charAt(0);
+    let resultString = lastChar;
+    for (const currentChar of string) {
+        if (currentChar !== lastChar) {
+            if (length > 1) {
+                resultString += length;
             }
-            startIndex = currentIndex;
+            length = 1;
+            lastChar = currentChar;
+            resultString += currentChar;
+        } else {
+            length++;
         }
     }
-    result += string[startIndex];
-    if (string.length - startIndex > 1) {
-        result += string.length - startIndex;
+    if (length > 1) {
+        resultString += length;
     }
-    return result;
+    return resultString;
 };
