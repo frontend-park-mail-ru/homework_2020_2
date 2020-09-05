@@ -31,5 +31,12 @@ QUnit.module('Тестируем функцию minmax', function () {
 
 	QUnit.test('minmax игнорирует обычный текст', function (assert) {
 		assert.deepEqual(minmax('1, -5.8 или 10, хотя 34 + -5.3 и 73'), [ -5.8, 73 ]);
+		assert.deepEqual(minmax('245 и -2200, затем 240, 678, а также не забудь 0 13'),[-2200, 678]);
+	});
+	QUnit.test('minmax проделывает задание, игнорируя лишний текст', function(assert){
+		assert.deepEqual(minmax('Напишите функцию minmax, которая находит минимальное и максимальное значения в строке: 200 35 0, может -7'), [-7, 200]);
+	});
+	QUnit.test("minmax работает правильно на пустой строке", function(assert){
+		assert.deepEqual(minmax('      '), [undefined, undefined]);
 	});
 });
