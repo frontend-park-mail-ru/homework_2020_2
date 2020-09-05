@@ -7,17 +7,21 @@
  * @param {string} string - входная строка.
  * @param {boolean|undefined} flag - флаг, который определяет поведение
  *        программы.
- *        Ниже перечислены различные вариации поведения программы:
- * @example flag = true - из строки удаляются все повторяющиеся
- *        символы исключая первый;
- * @example flag = false - из строки удаляются повторяющиеся
- *        символы исключая последний;
- * @example Если flag не передаётся, то из строки удаляются
- *        все повоторяющиеся символы.
+ *
  * @returns {string} новая строка без повторяющихся символов.
+ *
+ * @example
+ * // returns 'he world'
+ * letters('hello world', false);
+ * @example
+ * // returns 'helo wrd'
+ * letters('hello world', true)
+ * @example
+ * //returns 'пвет, м'
+ * letters('привет, мир');
  */
 const letters = (string, flag) => {
-    if (typeof string != 'string') {
+    if (typeof string !== 'string') {
         throw new TypeError('The first argument must be a string');
     }
 
