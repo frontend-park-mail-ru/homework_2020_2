@@ -61,7 +61,13 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('hello world', false), 'he world');
 	});
 
-	QUnit.test('Проверяет поведение программы при некорректной входной строке', function (assert) {
-		assert.strictEqual(letters(undefined, false), 'Error');
+	QUnit.test('Проверяет поведение программы при некорректных входных параметрах', function (assert) {
+		assert.throws(() => letters(undefined), new TypeError('The first argument must be a string'));
+		assert.throws(() => letters(1), new TypeError('The first argument must be a string'));
+		assert.throws(() => letters(false), new TypeError('The first argument must be a string'));
+		assert.throws(() => letters({}), new TypeError('The first argument must be a string'));
+		assert.throws(() => letters(new Map()), new TypeError('The first argument must be a string'));
+		assert.throws(() => letters(new Set(), false), new TypeError('The first argument must be a string'));
+		assert.throws(() => letters(new String(), true), new TypeError('The first argument must be a string'));
 	});
 });
