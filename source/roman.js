@@ -57,7 +57,7 @@ const convertToArabic = (inputText) =>
  */
 const roman = (input) => {
   if (
-    input === undefined ||
+    !input ||
     !/^[IiVvXxLlCcDdMm]+$|^[0-9]+$/.test(input.toString()) ||
     input >= 4000 ||
     input <= 0
@@ -65,7 +65,7 @@ const roman = (input) => {
     throw new Error('некорректное число');
   }
 
-  let inputString = input.toString().toUpperCase();
+  const inputString = input.toString().toUpperCase();
 
   return /^[IVXLCDM]+$/.test(inputString)
     ? convertToArabic(inputString)
