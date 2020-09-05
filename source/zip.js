@@ -1,85 +1,38 @@
 'use strict';
 
-
-function a(...aa) {
-    console.log("aa: ");
-
-    console.log(aa);
-}
-
-// const zip = (...objects) => {
-//     console.log("!!!!!!")
-//     // let aaa = {
-//     //     "123": 123, 
-//     //     "456": 456,
-//     // }
-//     // a(aaa, {"11": 11,});
-//     // console.log("=================")
-//     // let args = {"123": 123,}
-//     // console.log(args)
-//     // console.log("=================")
-
-
-//     let BigObject = {};
-    
-//     console.log("objects: ");
-//     console.log(objects);
-//     console.log("objects length " + objects.length);
-//     for (let i = 0; i < objects.length; i++) {
-//         let objects_entries = Object.entries(objects[i]);
-//         console.log("obj: " );
-//         console.log(objects[i])
-//         console.log("obj entries: ");
-//         console.log(objects_entries)
-//         if (objects_entries) {
-//             console.log(i + "th object items: " + objects_entries.length);
-//             for (let j = 0; j < objects_entries.length; j++) {
-                
-//                 if (!(objects_entries[j][0] in BigObject)) {
-//                     BigObject[objects_entries[j][0]] = objects_entries[j][1];
-//                 }
-//             }
-//         }
-//     }
-//     return BigObject;
-// };
-
-// const zip = (...objects) => {
-//     let BigObject = {};
-    
-//     for (let i = 0; i < objects.length; i++) {
-//         let objects_entries = Object.entries(objects[i]);
-//         if (objects_entries) {
-//             for (let j = 0; j < objects_entries.length; j++) {
-//                 if (!(objects_entries[j][0] in BigObject)) {
-//                     BigObject[objects_entries[j][0]] = objects_entries[j][1];
-//                 }
-//             }
-//         }
-//     }
-//     return BigObject;
-// };
-
+/**
+ * This is a zip function to combine all properties from all objects remaining first property among repeating properties.
+ *
+ * @param {object[]} objects - Array of objects
+ * @return {object} ObjectsProps - Object with properties of all objects
+ *
+ * @example
+ *
+ *     zip({age: '42'})
+ */
 
 
 const zip = (...objects) => {
-    let BigObject = {};
-    objects.forEach((item) => {
-        Object.entries(item).forEach((item) => {                
-            if (!(item[0] in BigObject)) {
-                BigObject[item[0]] = item[1];
-            }
-        });
+    let ObjectsProps = {};
+    objects.forEach((object_i) => {
+        if (!(object_i === null)) {
+            Object.entries(object_i).forEach((property) => {                
+                if (!(property[0] in ObjectsProps)) {
+                    ObjectsProps[property[0]] = property[1];
+                }
+            });
+        }
     });
-    return BigObject;
+    return ObjectsProps;
 };
 
 
+// возможно, оверхэд решение
 // const zip = (...objects) => {
 //     let BigObject = {};
-//     objects.reverse(); // in order to to leave the first prop among duplicate props
+//     objects.reverse(); // реверсируем массив, чтобы в объект было записано первое свойство из повторяющихся
 //     objects.forEach((item) => {
-//         Object.assign(BigObject, item); // combines properties of objects with rewriting prev versions of prop
+//         Object.assign(BigObject, item); // объединяет свойства объектов с перезаписью свойств
 //     });
 //     return BigObject;
 // };

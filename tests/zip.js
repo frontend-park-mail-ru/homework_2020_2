@@ -74,4 +74,33 @@ QUnit.module('Тестируем функцию zip', function () {
 		};
 		assert.deepEqual(zip({name: 'age'}, {value: 42}, {name: 'cost'}, {value: -6}), obj);
 	});
+
+	QUnit.test('Функция правильно работает с вложенными объектами', function (assert) {
+		assert.deepEqual(zip({answer: { age: "42" }}), {answer: { age: "42" }});
+		assert.deepEqual(zip({answer: { age: {number: "42"} }}, {answer: "42"}), {answer: { age: {number: "42"} }});
+
+		const obj = {
+			answer: {
+				 age: {
+					 tens: "40", 
+					 units: "2"
+					} 
+				}
+		};
+		assert.deepEqual(zip(obj, {answer: "42"}), obj);
+	});
+
+	QUnit.test('Функция правильно работает с объектами null', function (assert) {
+		assert.deepEqual(zip(null), {});
+		assert.deepEqual(zip(null, {}), {});
+		assert.deepEqual(zip(null, {}, {age: "42"}), {age: "42"});
+
+		
+	});
+
+	QUnit.test('Функция правильно работает со свойствами, значения которых null или undefined', function (assert) {
+		assert.deepEqual(zip({name: undefined, value: null}), {name: undefined, value: null});
+		assert.deepEqual(zip({name: undefined, value: "42"}, {name: 'age', value: null}), {name: undefined, value: "42"});
+		assert.deepEqual(zip({name: null, value: "42"}, {name: 'age', value: undefined}), {name: null, value: "42"});
+	});
 });
