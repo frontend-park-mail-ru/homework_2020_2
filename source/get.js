@@ -1,19 +1,6 @@
 'use strict';
 
-const get = function (object, property) {
-    const properties = property.split('.').filter(str => str);
-
-
-
-    let result = object;
-
-    for (let level of properties) {
-        if (!result) {
-            break;
-        }
-
-        result = (result.hasOwnProperty(level) ? result[level] : undefined);
-    }
-
-    return result;
+const get = (object, property) => {
+    return property.split('.').filter(str => str).reduce((result, key) =>
+        (result && result[key] ? result[key] : undefined), object);
 };
