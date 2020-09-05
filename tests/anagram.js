@@ -44,4 +44,17 @@ QUnit.module('Тестируем функцию anagram', function () {
 
 		assert.deepEqual(anagram(input), output);
 	});
+
+	QUnit.test('Проверка на уникальность слов', function (assert) {
+		const input = [
+			'кот', 'кот',
+			'акрон', 'кошка', 'норка'
+		];
+
+		const output = [
+			[ 'акрон', 'норка' ]
+		];
+
+		assert.deepEqual(anagram(input), output);
+	});
 });

@@ -6,6 +6,11 @@
 
 const MIN_SIZE = 2;
 
+const input = [
+    'кот', 'кот', 'КОТ',
+    'акрон', 'кошка', 'норка'
+];
+
 const anagram = words => {
     let map = words.reduce( (keys, word) => {
         let key = word.replace(/[^A-Za-zА-Яа-яЁё]/g, "").toLowerCase().split('').sort().join('');
@@ -13,10 +18,16 @@ const anagram = words => {
         if (!keys.hasOwnProperty(key)) {
             keys[key] = [];
         }
-        return keys[key].push(word);
+        if (!keys[key].includes(word)) {
+            keys[key].push(word);
+        }
+
+        return keys;
     }, {});
 
     return [...Object.values(map)].filter(anagramPairs => anagramPairs.length >= MIN_SIZE)
         .sort(anagramPairs => anagramPairs.sort())
         .sort();
 }
+
+console.log(anagram(input))
