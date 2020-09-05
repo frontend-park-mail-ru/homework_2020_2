@@ -19,7 +19,7 @@ const ROMAN_TO_ARABIC = {
  * @return {string} res - число(строка), в римской системе
  */
 const convertToRoman = (num) => {
-  let res = "";
+  let res = '';
   let numInp = num;
 
   for (let [key, value] of Object.entries(ROMAN_TO_ARABIC)) {
@@ -39,7 +39,7 @@ const convertToRoman = (num) => {
 const convertToArabic = (inputText) =>
   inputText
     .toUpperCase()
-    .split("")
+    .split('')
     .reduce((res, tempKey, count, arrOfNumber) => {
       const temp = ROMAN_TO_ARABIC[tempKey];
       let next;
@@ -56,25 +56,18 @@ const convertToArabic = (inputText) =>
  * @return Число, переведенное в нужную систему, или ошибка
  */
 const roman = (input) => {
-  try {
-    input = input.toString();
-
-    if (!/^[IiVvXxLlCcDdMm0-9]+$/.test(input)) {
-      throw new Error("некорректное число");
-    }
-
-    if (input >= 4000 || input <= 0) {
-      throw new Error("некорректное число");
-    }
-
-    const str = input.toString().toUpperCase();
-
-    if (/^[IVXLCDM]+$/.test(str)) {
-      return convertToArabic(input.toString().toUpperCase());
-    } else {
-      return convertToRoman(+input);
-    }
-  } catch (e) {
-    return e;
+  if (
+    input === undefined ||
+    !/^[IiVvXxLlCcDdMm]+$|^[0-9]+$/.test(input.toString()) ||
+    input >= 4000 ||
+    input <= 0
+  ) {
+    throw new Error('некорректное число');
   }
+
+  let inputString = input.toString().toUpperCase();
+
+  return /^[IVXLCDM]+$/.test(inputString)
+    ? convertToArabic(inputString)
+    : convertToRoman(input);
 };
