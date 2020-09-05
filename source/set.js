@@ -8,17 +8,17 @@
  * @returns {object} объект, с изменённым вложенным свойством 
  */
 const set = (object, path, value) => {
-    const properties = path.split('.').slice(1)
-    let curentObject = object
+    const properties = path.split('.').slice(1);
+    let curentObject = object;
     properties.forEach((property, index) => {
-        const isLast = index === properties.length - 1
+        const isLast = index === properties.length - 1;
         if (isLast) {
-            curentObject[property] = value
+            curentObject[property] = value;
         }
-        if (!curentObject.hasOwnProperty(property)) {
-            curentObject[property] = {}
-        }
-        curentObject = curentObject[property]
+        else if (!curentObject.hasOwnProperty(property)) {
+            curentObject[property] = {};
+        };
+        curentObject = curentObject[property];
     });
     return object
 }
