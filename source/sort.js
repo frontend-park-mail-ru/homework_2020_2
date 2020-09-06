@@ -19,8 +19,9 @@ const sort = text => {
 
     let arrayText = text.split(' ');
 
-    arrayText = arrayText.map((word) => word.toLowerCase().split('')
-                         .sort((a, b) => charcompare(a, b)).join(''));
+    arrayText = arrayText.map((word) => word.toLowerCase()
+                                                  .split('')
+                                                  .sort((a, b) => charcompare(a, b)).join(''));
 
     arrayText.sort((a, b) => charcompare(a, b))
 
