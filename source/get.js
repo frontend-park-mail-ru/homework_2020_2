@@ -8,23 +8,15 @@
  */
 const get = (object, key) => {
 	try {
-		key.split('.').reduce((previousValue, currentValue) => {
-			if (!currentValue || !object) {
-				return;
-			} else if (object[currentValue] === undefined) {
-				object = undefined;
-				return;
-			}
-
-			object = object[currentValue];
-		});
-
-		return object;
+		return key.split('.').filter(element => {
+			return element;
+		}).reduce((previousValue, currentValue) => {
+			if (!previousValue) return undefined;
+			return previousValue[currentValue];
+		}, object);
 	} catch (e) {
 		if (e instanceof TypeError) {
 			throw new Error('Некорректный тип входных данных');
-		} else {
-			throw e;
 		}
 	}
 };

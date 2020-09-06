@@ -76,7 +76,13 @@ QUnit.module('Тестируем функцию get', function () {
 	QUnit.test('get работает правильно с некоретными типами данных',
 	function (assert) {
 		assert.throws(function () {
-		get('hihello');
+			get('hihello');
+		}, new Error('Некорректный тип входных данных'));
+		assert.throws(function () {
+			get(0);
+		}, new Error('Некорректный тип входных данных'));
+		assert.throws(function () {
+			get([]);
 		}, new Error('Некорректный тип входных данных'));
 	});
 });
