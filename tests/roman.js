@@ -39,7 +39,12 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 
 	QUnit.test('roman правильно определяет некорректные случаи', function (assert) {
-		assert.strictEqual(roman(''), null);
-		assert.strictEqual(roman(0), null);
+		assert.throws(() => {roman(4000);}, Error);
+		assert.throws(() => {roman(-4000);}, Error);
+		assert.throws(() => {roman(0);}, Error);
+		assert.throws(() => {roman('');}, Error);
+		assert.throws(() => {roman('12aaa');}, Error);
+		assert.throws(() => {roman('aaa12');}, Error);
+		assert.throws(() => {roman('12XICM');}, Error);
 	});
 });
