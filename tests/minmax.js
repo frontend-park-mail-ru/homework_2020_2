@@ -12,6 +12,7 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('Infinity'), [ Infinity, Infinity ]);
 		assert.deepEqual(minmax('-Infinity'), [ -Infinity, -Infinity ]);
 		assert.deepEqual(minmax('42'), [ 42, 42 ]);
+		assert.deepEqual(minmax('-7'), [ -7, -7 ]);
 		assert.deepEqual(minmax('.0'), [ .0, .0 ]);
 		assert.deepEqual(minmax('1.1'), [ 1.1, 1.1 ]);
 		assert.deepEqual(minmax('.01'), [ .01, .01 ]);
@@ -25,11 +26,20 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('0 0 0 0'), [ 0, 0 ]);
 		assert.deepEqual(minmax('1 1 1 1'), [ 1, 1 ]);
 		assert.deepEqual(minmax('1 2 3 4'), [ 1, 4 ]);
+		assert.deepEqual(minmax('-1 2 -3 4'), [ -3, 4 ]);
 		assert.deepEqual(minmax('-Infinity -1 0 1 Infinity'), [ -Infinity, Infinity ]);
 		assert.deepEqual(minmax('-.01 0 .01'), [ -.01, .01 ]);
 	});
 
 	QUnit.test('minmax игнорирует обычный текст', function (assert) {
 		assert.deepEqual(minmax('1, -5.8 или 10, хотя 34 + -5.3 и 73'), [ -5.8, 73 ]);
+		assert.deepEqual(minmax('3 поросёнка'), [ 3, 3 ]);
+		assert.deepEqual(minmax('3 поросёнка и 7 козлят'), [ 3, 7 ]);
+	});
+
+	QUnit.test('minmax работает правильно с повторяющимися числами', function (assert) {
+		assert.deepEqual(minmax('-4 -1 -1 -4'), [ -4, -1 ]);
+		assert.deepEqual(minmax('7 7 2 7'), [ 2, 7 ]);
+		assert.deepEqual(minmax('-42 -43 -42 -45'), [ -45, -42 ]);
 	});
 });
