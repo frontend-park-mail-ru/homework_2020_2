@@ -25,7 +25,7 @@ QUnit.module('Тестируем функцию anagram', function () {
 		];
 
 		const output = [
-			[ 'кот', 'Ток', 'КТО' ]
+			[ 'КТО', 'Ток', 'кот' ]
 		];
 
 		assert.deepEqual(anagram(input), output);
