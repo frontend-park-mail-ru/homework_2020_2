@@ -10,27 +10,31 @@ const TRUNC = '|';
  * @param h - number
  */
 const tree = (h) => {
-    if (!isFinite(h)) {
-        return null;
+    try {
+        if (!isFinite(h)) {
+            throw new TypeError('Invalid type');
+        }
+        if (h < MINHEIGHT) {
+            return null;
+        }
+
+        h = Math.floor(h);
+        let res = '';
+
+        for (let i = 0; i < (h - 1); i++) {
+            const spaces = SEPARATOR.repeat(h - 2 - i);
+            const stars = STAR.repeat(1 + 2 * i);
+
+            res += `${spaces}${stars}${spaces}\n`;
+        }
+
+        const truncSpacesNumber = ((1 + 2 * (h - 2)) - 1) / 2;
+        const truncSpaces = SEPARATOR.repeat(truncSpacesNumber);
+        const treeTrunc = `${truncSpaces}${TRUNC}${truncSpaces}\n`;
+        res += treeTrunc;
+
+        return res;
+    } catch (e) {
+        return e;
     }
-    if (h < MINHEIGHT) {
-        return null;
-    }
-
-    h = Math.floor(h);
-    let res = '';
-
-    for (let i = 0; i < (h - 1); i++) {
-        const spaces = SEPARATOR.repeat(h - 2 -i);
-        const stars = STAR.repeat(1 + 2 * i);
-
-        res += `${spaces}${stars}${spaces}\n`;
-    }
-
-    const truncSpacesNumber = (( 1 + 2 * (h - 2)) - 1) / 2;
-    const truncSpaces = SEPARATOR.repeat(truncSpacesNumber);
-    const treeTrunc = `${truncSpaces}${TRUNC}${truncSpaces}\n`;
-    res += treeTrunc;
-
-    return res;
 };

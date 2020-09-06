@@ -55,14 +55,15 @@ QUnit.module('Тестируем функцию tree', function () {
 	});
 
 	QUnit.test('Неккоректный ввод', function (assert) {
-		assert.strictEqual(tree(''), null);
-		assert.strictEqual(tree({}), null);
-		assert.strictEqual(tree(Infinity), null);
-		assert.strictEqual(tree(true), null);
-		assert.strictEqual(tree('smth_strng'), null);
-		assert.strictEqual(tree('12%43'), null);
-		assert.strictEqual(tree(undefined), null);
-		assert.strictEqual(tree(null), null);
+		assert.throws(tree(), Error === 'Invalid type');
+		assert.throws(tree(''), Error === 'Invalid type');
+		assert.throws(tree({}), Error === 'Invalid type');
+		assert.throws(tree(Infinity), Error === 'messInvalid type');
+		assert.throws(tree(true), Error === 'messInvalid type');
+		assert.throws(tree('smth_strng'), Error === 'Invalid type');
+		assert.throws(tree('12%43'), Error === 'Invalid type');
+		assert.throws(tree(undefined), Error === 'Invalid type');
+		assert.throws(tree(null), Error === 'Invalid type');
 	});
 
 	QUnit.test('Ёлочка высотой 9', function (assert) {
