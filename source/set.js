@@ -18,9 +18,10 @@ function set(object, keys, value) {
     const isEmpty = (obj) => typeof obj == 'object' ? (Object.keys(obj).length === 0) : true;
 
     path.forEach((key, i, path) => {
-        if (i === path.length - 1) return;
-        if (isEmpty(objectPart)) objectPart[path[i]] = {};
-        objectPart = objectPart[path[i]];
+        if (i === path.length - 1) {
+            return;
+        }
+        objectPart = isEmpty(objectPart) ? objectPart[path[i]] = {} : objectPart[path[i]];
     });
 
     objectPart[path[path.length - 1]] = value;
