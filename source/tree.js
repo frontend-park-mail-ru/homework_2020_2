@@ -7,7 +7,7 @@
  * @returns {string|null} Returns a string with a tree. If height < 3 returns null.
  */
 const tree = (height) => {
-    height = Number(height);
+    height = parseInt(height);
 
     if (isNaN(height)) {
       throw new TypeError('Argument height is not a number.');
@@ -26,8 +26,8 @@ const tree = (height) => {
         tree.push(
             `${' '.repeat(padding)}${'*'.repeat(width)}${' '.repeat(padding)}`
         );
-        padding--;
-        width = width + 2;
+        padding += 1;
+        width += 2;
     }
     // tree trunk
     padding = Math.floor(width / 2 - 1);
@@ -36,4 +36,3 @@ const tree = (height) => {
     );
     return tree.join('\n') + '\n';
 }
-
