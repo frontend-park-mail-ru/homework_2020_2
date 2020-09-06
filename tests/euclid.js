@@ -39,18 +39,18 @@ QUnit.module('Тестируем функцию euclid', function () {
 		const singleInvalidArgument = [{}, null, undefined, 'some string', -1, 1.11];
 		const manyArgumentsWithInvalid = [[], [10, 20, 'some string', 30], [10, 20, -30, 40], [10, Infinity, 20]];
 		const expectedExceptionsForSingleArg = [
-			new InputArgFormatException(singleInvalidArgument[0]),
-			new InputArgFormatException(singleInvalidArgument[1]),
-			new InputArgFormatException(singleInvalidArgument[2]),
-			new InputArgFormatException(singleInvalidArgument[3]),
-			new InputArgFormatException(singleInvalidArgument[4]),
-			new InputArgFormatException(singleInvalidArgument[5]),
+			new inputArgFormatException(singleInvalidArgument[0]),
+			new inputArgFormatException(singleInvalidArgument[1]),
+			new inputArgFormatException(singleInvalidArgument[2]),
+			new inputArgFormatException(singleInvalidArgument[3]),
+			new inputArgFormatException(singleInvalidArgument[4]),
+			new inputArgFormatException(singleInvalidArgument[5]),
 		];
 		const expectedExceptionsForManyArgsWithInvalid = [
-			new InputArgFormatException(0, 'Empty sequence: length = '),
-			new InputArgFormatException('some string'),
-			new InputArgFormatException(-30),
-			new InputArgFormatException(Infinity),
+			new inputArgFormatException(0, 'Empty sequence: length = '),
+			new inputArgFormatException('some string'),
+			new inputArgFormatException(-30),
+			new inputArgFormatException(Infinity),
 		];
 
 		expectedExceptionsForSingleArg.forEach(function (except, i, expectedExceptionsForSingleArg) {

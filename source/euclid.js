@@ -5,11 +5,11 @@
 const isValidNumber = num => Number.isInteger(num) && num >= 0;
 
 /** @description exceptions generator
- *  @param err_value - object caused exception
- *  @param {string} err_msg - error message
+ *  @param errValue - object caused exception
+ *  @param {string} errMsg - error message
  **/
-function InputArgFormatException(err_value, err_msg = 'Invalid argument format: ') {
-    this.message = err_msg + err_value;
+function inputArgFormatException(errValue, errMsg = 'Invalid argument format: ') {
+    this.message = errMsg + errValue;
     this.toString = function () {
         return this.message;
     }
@@ -21,8 +21,9 @@ function InputArgFormatException(err_value, err_msg = 'Invalid argument format: 
  *  @return {number|Infinity} GCD for two arguments
  **/
 const infiniteTreatment = (a, b) => {
-    if (!a && !b)
+    if (!a && !b) {
         return Infinity;
+    }
     return a === 0 ? b : a;
 }
 
@@ -32,8 +33,9 @@ const infiniteTreatment = (a, b) => {
  *  @return {number|Infinity} GCD for two arguments
  **/
 const twoNumbersGcd = (a, b) => {
-    if (!a || !b)
+    if (!a || !b) {
         return infiniteTreatment(a, b);
+    }
     while (a && b) {
         a > b ? a %= b : b %= a;
     }
@@ -47,10 +49,13 @@ const twoNumbersGcd = (a, b) => {
 const inputChecker = (numbers) => {
     const length = numbers?.length;
 
-    if (!length)
-        throw new InputArgFormatException(length, 'Empty sequence: length = ');
+    if (!length) {
+        throw new inputArgFormatException(length, 'Empty sequence: length = ');
+    }
     numbers.forEach(elem => {
-        if (!isValidNumber(elem)) throw new InputArgFormatException(elem);
+        if (!isValidNumber(elem)) {
+            throw new inputArgFormatException(elem);
+        }
     });
 
     return length;
