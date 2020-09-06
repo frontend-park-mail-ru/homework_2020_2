@@ -42,14 +42,14 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([ 1 ], -5), [ 1 ]);
 	});
 
-	QUnit.test('Функция не работает с псевдомассивами', function (assert) {
-		var object = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, length: 5}
+	QUnit.test('Функция не работает с некорректными входными значениями', function (assert) {
+		assert.throws(() => inverse([ 1, 2, 3, 4, 5], 0.5), TypeError, 'offset должен быть целым числом')
+		assert.throws(() => inverse([ 1, 2, 3, 4, 5], "1"), TypeError, 'offset должен быть целым числом')
+		assert.throws(() => inverse([ 1, 2, 3, 4, 5], true), TypeError, 'offset должен быть целым числом')
 
-		try {
-			inverse(object)
-		} catch ( e ) {
-			assert.ok(e instanceof TypeError, "assert.throws не обрабатывает TypeError, приходится эмулировать его поведение")
-			assert.equal(e.message, "arr.slice is not a function", "с таким сообщением райзится исключение")
-		}
+		assert.throws(() => inverse({0: 1, 1: 2, 2: 3, 3: 4, 4: 5, length: 5}), TypeError, 'первый аргумент должен быть массивом')
+		assert.throws(() => inverse(arguments), TypeError, 'первый аргумент должен быть массивом')
+		assert.throws(() => inverse(undefined), TypeError, 'первый аргумент должен быть массивом')
+
 	});
 });
