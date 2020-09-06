@@ -62,6 +62,6 @@ QUnit.module('Тестируем функцию plain', function () {
 	QUnit.test('Работа с неверными типами данных', function (assert) {
 		assert.deepEqual(plain(1), []);
 		assert.deepEqual(plain("string maybe?"), []);
-		assert.deepEqual(plain( Nan ), []); 
+		assert.deepEqual(plain(NaN), []); 
 	});
 });
