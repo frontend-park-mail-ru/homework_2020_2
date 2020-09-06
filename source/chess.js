@@ -5,14 +5,9 @@
  * @param number
  * @return {Boolean} - result of checking
  */
-const isInteger = (number) => {
-    if (!isFinite(number) || number <= 1 || !Number.isInteger(+number)) {
-        return false;
-    }
-    return true;
+const sizeCheckForChess = (number) => {
+    return !isFinite(number) || number <= 1 || !Number.isInteger(+number)
 }
-
-
 
 /**
  * @function
@@ -21,15 +16,15 @@ const isInteger = (number) => {
  */
 const chess = (number) => {
     // проверка данных на вход
-    if (!isInteger(number)) {
+    if (sizeCheckForChess(number)) {
         return null;
     }
 
     let result;
     let firstLine, secondLine;
     let odd = number % 2;
-    firstLine = "* ".repeat(number / 2);
-    secondLine = " *".repeat(number / 2);
+    firstLine = '* '.repeat(number / 2);
+    secondLine = ' *'.repeat(number / 2);
     if (odd) {
         firstLine += firstLine[0];
         secondLine += secondLine[0];

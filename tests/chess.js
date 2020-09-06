@@ -73,6 +73,6 @@ QUnit.module('Тестируем функцию chess', function () {
 	});
 
 	QUnit.test('Введем бред в строке и посмотрим, что получится', function (assert) {
-		assert.strictEqual(chess("foo"), null);
+		assert.strictEqual(chess('foo'), null);
 	});
 });
