@@ -28,25 +28,11 @@ QUnit.module('Проверка работы функции filter', function () 
 	});
 
 	QUnit.test('filter экранирует невалидные html-теги', function(assert) {
-		const input = `<html>
-							<head>
-								<h1>Head</h1>
-							</head>
-							<body>
-								Body
-							</body>
-						</html>`;
+		const input = `<html> <head> <h1>Head</h1> </head> <body>Body</body> </html>`;
 
 		const output = filter(input, ['head', 'body' ]);
 
-		const expected = `&lt;html&gt;
-								<head>
-									&lt;h1&gt;Head&lt;/h1&gt;
-								</head>
-								<body>
-									Body
-								</body>
-						&lt;/html&gt;`;
+		const expected = `&lt;html&gt; <head> &lt;h1&gt;Head&lt;/h1&gt; </head> <body>Body</body> &lt;/html&gt;`;
 		
 		assert.strictEqual(output, expected);
 	});
