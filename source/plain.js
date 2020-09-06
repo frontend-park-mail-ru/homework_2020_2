@@ -14,9 +14,5 @@
  *
  *     plain([1, 'two', [3.0, NaN]])
  */
-function plain(arr) {
-    if (!Array.isArray(arr)) {
-        return [];
-    }
-    return arr.flat(Infinity);
-};
+
+const plain = arr => { return !Array.isArray(arr) ? [] : arr.flat(Infinity); };
