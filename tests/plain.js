@@ -38,9 +38,9 @@ QUnit.module('Тестируем функцию plain', function () {
 	});
 
 	QUnit.test('Работает при единичных неверных входных данных (не с массивом)', function (assert) {
-		assert.strictEqual(plain("testString"), null);
-		assert.strictEqual(plain(1), null);
-		assert.strictEqual(plain({}), null);
+        assert.strictEqual(plain("testString"), null);
+        assert.strictEqual(plain(1), null);
+        assert.strictEqual(plain({}), null);
         assert.strictEqual(plain(null), null);
         assert.strictEqual(plain(undefined), null);
         assert.strictEqual(plain(Infinity), null);
