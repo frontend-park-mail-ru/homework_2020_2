@@ -8,22 +8,20 @@
  * @returns {string} - the sorted string.
  */
 
-function sort(someString)
-{
+const sort = (someString) => {
     someString = someString.trim();
 
-    if (!someString)
+    if (!someString) {
         return someString;
+    }
 
     const collator = new Intl.Collator();
 
-    const wordsOfString = someString.split(/\s+/);
-
-    const sortWords = wordsOfString.map((word) => {
+    const sortWords = someString.split(/\s+/).map((word) => {
         word = word.toLowerCase().split('')
             .sort((a, b) => collator.compare(a, b)).join('');
         return word[0].toUpperCase() + word.slice(1);
-    })
+    });
 
     return sortWords.sort((a, b) => collator.compare(a, b)).join(' ');
 }
