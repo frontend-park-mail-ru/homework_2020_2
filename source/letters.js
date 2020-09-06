@@ -1,9 +1,12 @@
 'use strict';
 
-//Функция для получения мапы символов из строки
-const createMapOfSymbols = (arrayString) => {
+/** @description Функция создает мапу символов с количество вхождения каждого символа в строку.
+ * @param {Array} arrayLetters Массив символов.
+ * @return {Map}
+ */
+const createMapOfSymbols = (arrayLetters) => {
     const mapLetters = new Map();
-    arrayString.forEach(element => {
+    arrayLetters.forEach(element => {
         if (mapLetters.has(element) === false) {
             mapLetters.set(element, 1);
         } else {
@@ -41,17 +44,12 @@ const letters = (string, flag) => {
     const mapLetters = createMapOfSymbols(arrayString);
 
     let result = '';
-    let arraySymbols;
-    arraySymbols = Array.from(mapLetters.keys());
+    let arraySymbols = Array.from(mapLetters.keys());
     const reducer = (accumulator, currentChar) => accumulator + currentChar;
 
-    // Случай если флаг не был передан
     if (flag === undefined) {
-        for (let key of mapLetters.keys()) {
-            if (mapLetters.get(key) === 1) {
-                result += key;
-            }
-        }
+        arraySymbols = arraySymbols.filter(item => mapLetters.get(item) === 1);
+        result = arraySymbols.reduce(reducer, "");
         return result;
     }
 
