@@ -7,7 +7,7 @@
  * @returns {string|null} Returns a string with a tree. If height < 3 returns null.
  */
 const tree = (height) => {
-    let type = typeof height;
+    const type = typeof height;
     if (type !== 'string' && type !== 'number') {
         throw new TypeError('Argument height is not a number|string.');
     }
