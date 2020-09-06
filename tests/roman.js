@@ -37,4 +37,12 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('1990'), 'MCMXC');
 		assert.strictEqual(roman('2017'), 'MMXVII');
 	});
+
+	QUnit.test('roman правильно определяет, что на вход передано неверное значение', function (assert) {
+		assert.throws(() => roman(), Error("Введено неверное число"));
+		assert.throws(() => roman(""), Error("Введено неверное число"));
+		assert.throws(() => roman("a"), Error("Введено неверное число"));
+		assert.throws(() => roman(-1000), Error("Введено число меньше 1"));
+		assert.throws(() => roman(4000), Error("Введено число больше 3999"));
+	});
 });
