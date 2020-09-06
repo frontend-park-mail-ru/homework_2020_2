@@ -1,8 +1,8 @@
 'use strict';
 
 const format = function (array, columns) {
-	if (columns <= 0) {
-		return undefined;
+	if (columns <= 0 || !Array.isArray(array)) {
+		return null;
 	}
 
 	// Calculating max length of number in each column
