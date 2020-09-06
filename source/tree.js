@@ -11,7 +11,7 @@ const TRUNC = '|';
  */
 const tree = (h) => {
     try {
-        if (!isFinite(h)) {
+        if (!isFinite(h) || !(typeof h === 'string' || typeof h === 'number')) {
             throw new TypeError('Invalid type');
         }
         if (h < MINHEIGHT) {
