@@ -38,11 +38,11 @@ QUnit.module('Проверка работы функции filter', function () 
 	});
 
 	QUnit.test('Передан пустой массив', function(assert) {
-		const input = `<strong>Hello, <em>World!</em></strong> 1 + 2 < 4!'`;
+		const input = `<strong>Hello, <em>World!</em></strong> 1 + 2 < 4!`;
 
 		const output = filter(input, []);
 
-		const expected = `<strong>Hello, <em>World!</em></strong> 1 + 2 < 4!'`;
+		const expected = `&lt;strong&gt;Hello, &lt;em&gt;World!&lt;/em&gt;&lt;/strong&gt; 1 + 2 &lt; 4!`;
 		
 		assert.strictEqual(output, expected);		
 	});
