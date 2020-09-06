@@ -57,4 +57,38 @@ QUnit.module('Тестируем функцию anagram', function () {
 
 		assert.deepEqual(anagram(input), output);
 	});
+
+	QUnit.test('Проверка входных данных: на вход подается не массив', function (assert) {
+		const input = 'кот';
+		const output = null;
+
+		assert.deepEqual(anagram(input), output);
+	});
+
+	QUnit.test('Проверка входных данных: на вход подается пустой массив слов', function (assert) {
+		const input = [];
+		const output = null;
+
+		assert.deepEqual(anagram(input), output);
+	});
+
+	QUnit.test(`Проверка входных данных: массив состоит не только из слов/string
+					  или не содержит их вовсе`, function (assert) {
+		const testObject = {
+			name: 'Joe',
+			age: 42
+		};
+
+		const objectInput = [
+			testObject
+		];
+		const mixedInput = [
+			'кот', 42, 'ток', testObject
+		];
+
+		const output = null;
+
+		assert.deepEqual(anagram(objectInput), output);
+		assert.deepEqual(anagram(mixedInput), output);
+	});
 });

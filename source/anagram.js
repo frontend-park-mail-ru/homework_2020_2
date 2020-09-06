@@ -6,7 +6,22 @@
 
 const MIN_SIZE = 2;
 
+// Группирует слова на слова-анаграммы
+//
+// @param {array} words - Массив слов для группировки анаграмм
+// @return {array} Возвращает отсортированный массив из групп слов-анаграмм
+
 const anagram = (words) => {
+    if ( !Array.isArray(words) ) {
+        return null;
+    }
+    if ( words.length === 0) {
+        return null;
+    }
+    if ( !words.every( (word) => typeof word === 'string') ) {
+        return null;
+    }
+
     let map = words.reduce( (keys, word) => {
         let key = word.replace(/[^A-Za-zА-Яа-яЁё]/g, '').toLowerCase().split('').sort().join('');
 
