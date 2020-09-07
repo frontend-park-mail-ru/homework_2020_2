@@ -32,13 +32,6 @@ const deromanize = (number) => {
             res += ROMAN_ALPHABET[element];
     });
 
-    /*let res = number.toUpperCase().split('').reduce((result, current, index) => {
-        (DIGITS.indexOf(current) < DIGITS.indexOf(number.charAt(index + 1).toUpperCase())) ?
-            result -= ROMAN_ALPHABET[current] :
-            result += ROMAN_ALPHABET[current];
-        return result;
-    }, 0);*/
-
     return res;
 }
 
@@ -64,5 +57,4 @@ const romanize = (number) => {
     });
 
     return final_str;
-
 }
