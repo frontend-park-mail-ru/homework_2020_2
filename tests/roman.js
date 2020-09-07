@@ -39,12 +39,12 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 
 	QUnit.test('roman правильно определяет некорректные случаи', function (assert) {
-		assert.throws(() => {roman(4000);}, Error);
-		assert.throws(() => {roman(-4000);}, Error);
-		assert.throws(() => {roman(0);}, Error);
-		assert.throws(() => {roman('');}, Error);
-		assert.throws(() => {roman('12aaa');}, Error);
-		assert.throws(() => {roman('aaa12');}, Error);
-		assert.throws(() => {roman('12XICM');}, Error);
+		assert.throws(() => roman(4000), new Error('Перевод в римское число неосуществим'));
+		assert.throws(() => roman(-4000),new Error('Некорректный тип входных данных'));
+		assert.throws(() => roman(0),new Error('Перевод в римское число неосуществим'));
+		assert.throws(() => roman(''), new Error('Некорректный тип входных данных'));
+		assert.throws(() => roman('12aaa'), new Error('Некорректный тип входных данных'));
+		assert.throws(() => roman('aaa12'), new Error('Некорректный тип входных данных'));
+		assert.throws(() => roman('12XICM'), new Error('Некорректный тип входных данных'));
 	});
 });
