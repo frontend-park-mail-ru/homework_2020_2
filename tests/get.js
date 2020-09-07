@@ -51,13 +51,20 @@ QUnit.module('Тестируем функцию get', function () {
 
 
 
-	// QUnit.test('get работает правильно с невалидными данными', function (assert) {
-	// 	const object2 = {
-	// 		foo: {
-	// 			bar: 42
-	// 		}
-	// 	};
-	//
-	// 	assert.throws(get(object2, undefined), new Error('Некорректный тип входных данных'));
-	// });
+	QUnit.test('get работает правильно с невалидными данными', function (assert) {
+		const object2 = {
+			foo: {
+				bar: 42
+			}
+		};
+		const object1 = null;
+
+		assert.throws(function() {
+			get(object2, undefined);
+		}, new Error('Некорректный тип входных данных'));
+		assert.throws(function() {
+			get(undefined, undefined);
+		}, new Error('Некорректный тип входных данных'));
+		assert.strictEqual(get(object2, '.foobar'), undefined);
+	});
 });
