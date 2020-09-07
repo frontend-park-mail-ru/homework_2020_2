@@ -10,7 +10,10 @@
 
 function isValidObject(object) {
     return String(object) === "[object Object]";
+<<<<<<< HEAD
 }
+=======
+>>>>>>> abc75b77022d759513dc9cc24bd383abbc68b93e
 
 // const zip = (...objects) => {
 //     const objectsProps = objects.reduce((iProps, iObject) => {
