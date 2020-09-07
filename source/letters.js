@@ -44,16 +44,14 @@ const letters = (string, flag) => {
     const mapLetters = createMapOfSymbols(arrayString);
 
     let result = '';
-    let arraySymbols = Array.from(mapLetters.keys());
-    const reducer = (accumulator, currentChar) => accumulator + currentChar;
+    const arraySymbols = Array.from(mapLetters.keys());
 
     if (flag === undefined) {
-        arraySymbols = arraySymbols.filter(item => mapLetters.get(item) === 1);
-        result = arraySymbols.reduce(reducer, "");
+        result = arraySymbols.filter(item => mapLetters.get(item) === 1).join("");
         return result;
     }
 
-    result = arraySymbols.reduce(reducer);
+    result = arraySymbols.join("");
 
     if (!flag) { // Если был передан флаг false
         result = result.split('').reverse().join('');
