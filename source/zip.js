@@ -10,38 +10,35 @@
 
 function isValidObject(object) {
     return String(object) === "[object Object]";
-<<<<<<< HEAD
 }
-=======
->>>>>>> abc75b77022d759513dc9cc24bd383abbc68b93e
 
-// const zip = (...objects) => {
-//     const objectsProps = objects.reduce((iProps, iObject) => {
-//         if (isValidObject(iObject)) {
-//             Object.entries(iObject).forEach(([key, value]) => {
-//                 if (!iProps.hasOwnProperty(key)) {
-//                     iProps[key] = value;
-//                 } 
-//             });
-//         } else {
-//             throw new TypeError('Invalid type');
-//         }
-//         return iProps;
-//     }, {});
-//     return objectsProps;
-// };
-
-
-/*  возможно, оверхэд решение */
 const zip = (...objects) => {
-    const objectsProps = {};
-    objects.reverse(); // реверсируем массив, чтобы в объект было записано первое свойство из повторяющихся
-    objects.forEach((iObject) => {
+    const objectsProps = objects.reduce((iProps, iObject) => {
         if (isValidObject(iObject)) {
-            Object.assign(objectsProps, iObject); // объединяет свойства объектов с перезаписью свойств
+            Object.entries(iObject).forEach(([key, value]) => {
+                if (!iProps.hasOwnProperty(key)) {
+                    iProps[key] = value;
+                } 
+            });
         } else {
             throw new TypeError('Invalid type');
         }
-    });
+        return iProps;
+    }, {});
     return objectsProps;
 };
+
+
+/*  возможно, оверхэд решение */
+// const zip = (...objects) => {
+//     const objectsProps = {};
+//     objects.reverse(); // реверсируем массив, чтобы в объект было записано первое свойство из повторяющихся
+//     objects.forEach((iObject) => {
+//         if (isValidObject(iObject)) {
+//             Object.assign(objectsProps, iObject); // объединяет свойства объектов с перезаписью свойств
+//         } else {
+//             throw new TypeError('Invalid type');
+//         }
+//     });
+//     return objectsProps;
+// };
