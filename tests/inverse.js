@@ -44,7 +44,7 @@ QUnit.module('Тестируем функцию inverse', function () {
 
 	QUnit.test('Функция не работает с некорректными входными значениями', function (assert) {
 		assert.throws(() => inverse([ 1, 2, 3, 4, 5], 0.5), TypeError, 'offset должен быть целым числом')
-		assert.throws(() => inverse([ 1, 2, 3, 4, 5], "1"), TypeError, 'offset должен быть целым числом')
+		assert.throws(() => inverse([ 1, 2, 3, 4, 5], '1'), TypeError, 'offset должен быть целым числом')
 		assert.throws(() => inverse([ 1, 2, 3, 4, 5], true), TypeError, 'offset должен быть целым числом')
 
 		assert.throws(() => inverse({0: 1, 1: 2, 2: 3, 3: 4, 4: 5, length: 5}), TypeError, 'первый аргумент должен быть массивом')

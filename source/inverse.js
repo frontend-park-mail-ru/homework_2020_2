@@ -15,7 +15,6 @@
  *
  * @returns {Array} - массив результат
  */
-
 const inverse = (arr, offset = 0) => {
 
     if (!Array.isArray(arr) || !Number.isInteger(offset)) {
