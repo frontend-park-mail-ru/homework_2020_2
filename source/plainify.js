@@ -8,7 +8,7 @@
  * @returns {object}
  */
 const plain = (obj, str) => {
-    if (typeof obj != 'object' || obj == null){
+    if (!isObj(obj)){
         return {};
     }
 
@@ -23,6 +23,19 @@ const plain = (obj, str) => {
     }
 
     return map;
+}
+
+/**
+ * Check type.
+ * @function isObj
+ * @param {object} obj - object.
+ * @returns {boolean}
+ */
+const isObj = (obj) => {
+    if (typeof obj != 'object' || obj == null){
+        return false;
+    }
+    return true;
 }
 
 /**
