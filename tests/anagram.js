@@ -17,4 +17,35 @@ QUnit.module('Тестируем функцию anagram', function () {
 
 		assert.deepEqual(anagram(input), output);
 	});
+
+	QUnit.test('Пустой ввод', function (assert) {
+		const input = [];
+		const output = [];
+		assert.deepEqual(anagram(input), output);
+	});
+
+	QUnit.test('Три слова в группе', function (assert) {
+		const input = ['abc', 'acb', 'bac',
+						'wer', 'rwe', 'rew',];
+		const output = [
+			[
+				"abc",
+				"acb",
+				"bac"
+			],
+			[
+				"rew",
+				"rwe",
+				"wer"
+			]
+			];
+		assert.deepEqual(anagram(input), output);
+	});
+
+	QUnit.test('Нет анаграмм', function (assert) {
+		const input = ['abd', 'gcb', 'tac',
+			'wor', 'rie', 'ruw',];
+		const output = [];
+		assert.deepEqual(anagram(input), output);
+	});
 });
