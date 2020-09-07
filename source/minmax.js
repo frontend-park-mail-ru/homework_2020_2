@@ -1,5 +1,9 @@
 'use strict'
-
+/**
+ * Function returns massive of 2 elements, where first - min, second - max items from current string
+ * @param string - string or number
+ * @returns {(Array)}
+ */
 const minmax = (string) => {
     const massive = string.toString().split(/ |, /).filter((item) => !isNaN(parseFloat(item)));
     const Min = Math.min(...massive);
