@@ -1,17 +1,20 @@
 'use strict';
+
 /**
  * Проверяет размер шахматной доски на корректность
  * @param {Number} size - размер шахматной доски
  * @returns {boolean} результат проверки
  */
-const checkChessSize = size => (!Number.isInteger(+size) || size <= 1);
+const checkChessSize = (size) => {
+    return (!Number.isInteger(+size) || size <= 1);
+}
 
 /**
  * Рисует ASCII-шахматрую доску размером size*size символов из звёздочек
  * @param {number} size - размер шахматной доски
  * @returns {string, null} сформированная шахматная доска
  */
-function chess(size) {
+const chess = (size) => {
     if (checkChessSize(size)) {
         return null;
     }
