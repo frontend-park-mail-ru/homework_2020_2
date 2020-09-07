@@ -48,8 +48,8 @@ const romanize = (number) => {
 
     const ROMAN_ALPHABET = { M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1};
 
-    return Object.keys(ROMAN_ALPHABET).
-            reduce((result_string, current, index) => {
+    return Object.keys(ROMAN_ALPHABET)
+            .reduce((result_string, current, index) => {
                     const QUOTIENT = Math.floor(number / ROMAN_ALPHABET[current]);
 
                     number -= QUOTIENT * ROMAN_ALPHABET[current];
