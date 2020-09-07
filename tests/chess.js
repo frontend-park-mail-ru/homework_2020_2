@@ -42,11 +42,23 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess('-5'), null);
 	});
 
+	QUnit.test('Шахматной доски 3.5 на 3.5 не существует', function (assert) {
+		assert.strictEqual(chess(3.5), null);
+		assert.strictEqual(chess('3.5'), null);
+	});
+
+	QUnit.test('Шахматной доски -1.5 на -1.5 не существует', function (assert) {
+		assert.strictEqual(chess(-1.5), null);
+		assert.strictEqual(chess('-1.5'), null);
+	});
+
+
 	QUnit.test('Входной параметр не число', function (assert) {
 		assert.strictEqual(chess(true), null);
 		assert.strictEqual(chess('a'), null);
 		assert.strictEqual(chess(undefined), null);
 		assert.strictEqual(chess(null), null);
+		assert.strictEqual(chess(NaN), null);
 	});
 
 });
