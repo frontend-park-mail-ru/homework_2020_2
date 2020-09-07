@@ -21,17 +21,18 @@ const inverse = (arr, offset = 0) => {
         throw new TypeError('Invalid arguments')
     }
 
-    if (Math.abs(offset) < arr.length - 1) {
-        let reversedPart;
+    if (Math.abs(offset) >= arr.length - 1) {
+        return arr
+    }
 
-        if (offset >= 0) {
-            reversedPart = arr.slice(offset).reverse();
-            arr = [...arr.slice(0, offset), ...reversedPart];
+    let reversedPart;
+    if (offset >= 0) {
+        reversedPart = arr.slice(offset).reverse();
+        arr = [...arr.slice(0, offset), ...reversedPart];
 
-        } else {
-            reversedPart = arr.slice(0, offset).reverse();
-            arr = [...reversedPart, ...arr.slice(offset)];
-        }
+    } else {
+        reversedPart = arr.slice(0, offset).reverse();
+        arr = [...reversedPart, ...arr.slice(offset)];
     }
 
     return arr
