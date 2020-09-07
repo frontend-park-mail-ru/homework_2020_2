@@ -9,24 +9,19 @@
  */
 
 function isValidObject(object) {
-    return JSON.stringify(object).match(/\{.*\}/) && typeof object === 'object';
+    return String(object) === "[object Object]";
 }
 
 const zip = (...objects) => {
     const objectsProps = objects.reduce((iProps, iObject) => {
-        try {
-            if (isValidObject(iObject)) {
-                Object.entries(iObject).forEach(([key, value]) => {
-                    if (!iProps.hasOwnProperty(key)) {
-                        iProps[key] = value;
-                    } 
-                });
-            }
-        } catch(e) {
-            // if (e instanceof TypeError){
-            //     throw new TypeError('Invalid type');
-            // }
-            return e;
+        if (isValidObject(iObject)) {
+            Object.entries(iObject).forEach(([key, value]) => {
+                if (!iProps.hasOwnProperty(key)) {
+                    iProps[key] = value;
+                } 
+            });
+        } else {
+            throw new TypeError('Invalid type');
         }
         return iProps;
     }, {});
@@ -38,8 +33,12 @@ const zip = (...objects) => {
 // const zip = (...objects) => {
 //     const objectsProps = {};
 //     objects.reverse(); // реверсируем массив, чтобы в объект было записано первое свойство из повторяющихся
-//     objects.forEach((item) => {
-//         Object.assign(objectsProps, item); // объединяет свойства объектов с перезаписью свойств
+//     objects.forEach((iObject) => {
+//         if (isValidObject(iObject)) {
+//             Object.assign(objectsProps, iObject); // объединяет свойства объектов с перезаписью свойств
+//         } else {
+//             throw new TypeError('Invalid type');
+//         }
 //     });
 //     return objectsProps;
 // };

@@ -92,12 +92,6 @@ QUnit.module('Тестируем функцию zip', function () {
 		assert.deepEqual(zip({id: { age: {number: "42"} }}, {answer: "42"}), {id: { age: {number: "42"} }, answer: "42"});
 	});
 
-	QUnit.test('Функция правильно работает с объектами null', function (assert) {
-		assert.deepEqual(zip(null), {});
-		assert.deepEqual(zip(null, {}), {});
-		assert.deepEqual(zip(null, {}, {age: "42"}), {age: "42"});
-	});
-
 	QUnit.test('Функция правильно работает со свойствами, значения которых null или undefined', function (assert) {
 		assert.deepEqual(zip({name: undefined, value: null}), {name: undefined, value: null});
 		assert.deepEqual(zip({name: undefined, value: "42"}, {name: 'age', value: null}), {name: undefined, value: "42"});
@@ -105,8 +99,9 @@ QUnit.module('Тестируем функцию zip', function () {
 	});
 
 	QUnit.test('Некорректный ввод', function (assert) {
-		assert.throws(zip("age"), Error === 'Invalid type');
-		assert.throws(zip(123), Error === 'Invalid type');
-		assert.throws(zip(new Boolean()), Error === 'Invalid type');
+		assert.throws(() => zip("age"), TypeError,  'Invalid type');
+		assert.throws(() => zip(123), TypeError,  'Invalid type');
+		assert.throws(() => zip(new Boolean()), TypeError,  'Invalid type');
+		assert.throws(() => zip(null, {}, {age: "42"}), TypeError,  'Invalid type');
 	});
 });
