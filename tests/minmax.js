@@ -39,4 +39,8 @@ QUnit.module('Тестируем функцию minmax', function () {
 	QUnit.test("minmax работает правильно на пустой строке", function(assert){
 		assert.deepEqual(minmax('      '), [undefined, undefined]);
 	});
+	QUnit.test('minmax работает с числом, переданным вместо строки', function(assert){
+		assert.deepEqual(minmax(129), [129, 129]);
+		assert.deepEqual(minmax(846), [846, 846]);
+	});
 });

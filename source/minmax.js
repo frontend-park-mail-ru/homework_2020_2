@@ -1,9 +1,11 @@
 'use strict'
 
 const minmax = (string) => {
-    const massive = string.split(/\ |, /).filter((item) => !isNaN(parseFloat(item)));
+    const massive = string.toString().split(/ |, /).filter((item) => !isNaN(parseFloat(item)));
+    const Min = Math.min(...massive);
+    const Max = Math.max(...massive);
     const result = massive.filter((item) =>
-        item == Math.max(...massive) || item == Math.min(...massive)
-    ).length === 0 ? [undefined, undefined] : [Math.min(...massive), Math.max(...massive)];
+        item == Max || item == Min
+    ).length === 0 ? [undefined, undefined] : [Min, Max];
     return result;
 }
