@@ -5,7 +5,7 @@
  * @param number
  * @return {Boolean} - result of checking
  */
-const sizeCheckForChess = (number) => {
+const wrongSizeChess = (number) => {
     return !isFinite(number) || number <= 1 || !Number.isInteger(+number)
 }
 
@@ -16,7 +16,7 @@ const sizeCheckForChess = (number) => {
  */
 const chess = (number) => {
     // проверка данных на вход
-    if (sizeCheckForChess(number)) {
+    if (wrongSizeChess(number)) {
         return null;
     }
 
