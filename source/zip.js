@@ -8,10 +8,14 @@
  *     zip({age: '42'})
  */
 
+function isValidObject(object) {
+    return JSON.stringify(object).match(/\{.*\}/) && typeof object === 'object';
+}
+
 const zip = (...objects) => {
     const objectsProps = objects.reduce((iProps, iObject) => {
         try {
-            if (iObject !== null && iObject !== {}) { // TODO: отдельная функция проверки
+            if (isValidObject(iObject)) {
                 Object.entries(iObject).forEach(([key, value]) => {
                     if (!iProps.hasOwnProperty(key)) {
                         iProps[key] = value;
