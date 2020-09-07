@@ -26,8 +26,8 @@ const chess = (number) => {
     firstLine = '* '.repeat(number / 2);
     secondLine = ' *'.repeat(number / 2);
     if (odd) {
-        firstLine += firstLine[0];
-        secondLine += secondLine[0];
+        firstLine += firstLine.charAt(0);
+        secondLine += secondLine.charAt(0);
     }
     firstLine += '\n';
     secondLine += '\n';
