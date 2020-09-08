@@ -14,6 +14,7 @@ const GET_SYMBOLS_RE = /[<&"'>]/g;
 
 /**
  * Filters html code, leaving only allowed html tags.
+ * Returns filtered html code (string).
  * @param {string} input - html code
  * @param {string[]} tagsArray - allowed tags
  */
