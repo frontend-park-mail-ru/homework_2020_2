@@ -8,9 +8,9 @@ const SYMBOL_CODE = {
     '\'': '&#39;',
 };
 
-function filter(input, tagsArray) {
+let filter = (input, tagsArray) => {
     if (typeof input !== 'string') {
-        alert("Type of input should be string.");
+        throw ("Type of input should be string.");
         return null;
     }
 
@@ -22,4 +22,4 @@ function filter(input, tagsArray) {
         return match;
     }).replace(/<(?![^<]*>)/g, '&lt;');
     return input;
-}
+};
