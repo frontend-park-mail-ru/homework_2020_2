@@ -21,10 +21,9 @@ const chess = (number) => {
     }
 
     let result;
-    let firstLine, secondLine;
+    let firstLine = '* '.repeat(number / 2);
+    let secondLine = ' *'.repeat(number / 2);
     let odd = number % 2;
-    firstLine = '* '.repeat(number / 2);
-    secondLine = ' *'.repeat(number / 2);
     if (odd) {
         firstLine += firstLine.charAt(0);
         secondLine += secondLine.charAt(0);
