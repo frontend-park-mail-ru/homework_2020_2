@@ -15,7 +15,7 @@ const FIND_SYMBOLS_RE = /[<&"'>]/g;
 /**
  * Filters html code, leaving only allowed html tags.
  * @param {string} input - html code
- * @param {array of strings} tagsArray - allowed tags
+ * @param {string[]} tagsArray - allowed tags
  */
 const filter = (input, tagsArray) => {
     if (typeof input !== 'string') {
