@@ -1,7 +1,7 @@
 'use strict'
 
 let sort = (str) => {
-    if (!str) {
+    if (!str || typeof str !== 'string') {
         return ''
     }
 

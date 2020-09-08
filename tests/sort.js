@@ -31,6 +31,13 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('в б а в а'), 'А А Б В В');
 	});
 
+	QUnit.test('Функция правильно обрабатывает некорректные данные', function (assert) {
+		assert.strictEqual(sort(''), '');
+		assert.strictEqual(sort(Math.random()), '');
+		assert.strictEqual(sort(null), '');
+		assert.strictEqual(sort(undefined), '');
+	});
+
 	QUnit.test('Функция работает правильно', function (assert) {
 		assert.strictEqual(sort('мама мыла раму'), 'Аамм Алмы Амру');
 		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Ан Еиийккмоссч Еилтт');
