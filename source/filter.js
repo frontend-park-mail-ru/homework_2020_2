@@ -10,7 +10,7 @@ const SYMBOL_CODE = {
 
 let filter = (input, tagsArray) => {
     if (typeof input !== 'string') {
-        throw ("Type of input should be string.");
+        alert("Type of input should be string.");
         return null;
     }
 
