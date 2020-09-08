@@ -7,7 +7,7 @@
 const createMapOfSymbols = (arrayLetters) => {
     const mapLetters = new Map();
     arrayLetters.forEach(element => {
-        if (mapLetters.has(element) === false) {
+        if (!mapLetters.has(element)) {
             mapLetters.set(element, 1);
         } else {
             mapLetters.set(element, mapLetters.get(element) + 1);
@@ -26,13 +26,13 @@ const createMapOfSymbols = (arrayLetters) => {
 const letters = (string, flag) => {
 
     if (string === undefined) {
-        throw new TypeError("Первый аргумент не валиден");
+        throw new TypeError('Первый аргумент не валиден');
     }
-    if (typeof string !== "string") {
-        throw new TypeError("Первый аргумент должен быть строкой");
+    if (typeof string !== 'string') {
+        throw new TypeError('Первый аргумент должен быть строкой');
     }
-    if (typeof flag !== "boolean" && flag !== undefined) {
-        throw new TypeError("Второй аргумент должен иметь тип bool или не должен быть передан");
+    if (typeof flag !== 'boolean' && flag !== undefined) {
+        throw new TypeError('Второй аргумент должен иметь тип bool или не должен быть передан');
     }
 
     const arrayString = string.split('');
@@ -47,11 +47,11 @@ const letters = (string, flag) => {
     const arraySymbols = Array.from(mapLetters.keys());
 
     if (flag === undefined) {
-        result = arraySymbols.filter(item => mapLetters.get(item) === 1).join("");
+        result = arraySymbols.filter(item => mapLetters.get(item) === 1).join('');
         return result;
     }
 
-    result = arraySymbols.join("");
+    result = arraySymbols.join('');
 
     if (!flag) { // Если был передан флаг false
         result = result.split('').reverse().join('');
