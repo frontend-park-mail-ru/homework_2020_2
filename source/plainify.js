@@ -8,17 +8,16 @@
  * @returns {object}
  */
 const plain = (obj, str) => {
-    if (!isObj(obj)){
+    if (!isObj(obj)) {
         return {};
     }
 
     let map = {};
     for (const [key, val] of Object.entries(obj)) {
-        if (isObj(val)){
+        if (isObj(val)) {
             map = Object.assign(map, plain(val, str + key + '.'));
-        }
-        else{
-            map[str+key] = val;
+        } else {
+            map[str + key] = val;
         }
     }
 
@@ -37,11 +36,10 @@ const isObj = (obj) => {
 
 /**
  * Turns a nested object into an associative array
- * @function plainify 
+ * @function plainify
  * @param {object} obj - nasted object.
  * @returns {object}
  */
 const plainify = (obj) => {
     return plain(obj, '');
 }
-

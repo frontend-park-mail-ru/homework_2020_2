@@ -68,6 +68,7 @@ QUnit.module('Тестируем функцию plainify', function () {
 			'a.b.c': 2,
 		};
 
+		assert.deepEqual(plainify(nested1), plain1);
 		assert.deepEqual(plainify({}), {});
 		assert.deepEqual(plainify(343), {});
 		assert.deepEqual(plainify('km'), {});
