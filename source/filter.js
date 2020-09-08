@@ -28,5 +28,3 @@ let filter = (input, tagsArray) => {
             match.replace(FIND_SYMBOLS_RE, (match) => HTML_ENTITY_MAP[match]);
     });
 };
-
-w
