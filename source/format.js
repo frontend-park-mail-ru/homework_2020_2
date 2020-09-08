@@ -52,3 +52,4 @@ const format = (array, columns) => {
 
 	return table;
 }
+
