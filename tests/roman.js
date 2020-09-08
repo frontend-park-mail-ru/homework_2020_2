@@ -46,5 +46,7 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.throws(() => roman('12aaa'), new Error('Некорректный тип входных данных'));
 		assert.throws(() => roman('aaa12'), new Error('Некорректный тип входных данных'));
 		assert.throws(() => roman('12XICM'), new Error('Некорректный тип входных данных'));
+		assert.throws(() => roman(undefined), new Error('Некорректный тип входных данных'));
+		assert.throws(() => roman(null), new Error('Некорректный тип входных данных'));
 	});
 });
