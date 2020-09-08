@@ -74,11 +74,11 @@ QUnit.module('Проверка работы функции filter', function () 
 		
 		const tagsArray = [`strong`, `em`];
 
-		const output = filter(input, tagsArray);
-		
-		const expected = null;
-
-		assert.strictEqual(output, expected);
+		assert.expect(1);
+		assert.throws(
+			function () { filter(input, tagsArray); },
+			'Error thrown'
+		);
 	});
 
 });
