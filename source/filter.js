@@ -8,6 +8,11 @@ const SYMBOL_CODE = {
     '\'': '&#39;',
 };
 
+/**
+ * filters html code, leaving only allowed html tags.
+ * @param {string} input - html code
+ * @param {array of strings} tagsArray - allowed tags
+ */
 let filter = (input, tagsArray) => {
     if (typeof input !== 'string') {
         alert("Type of input should be string.");
