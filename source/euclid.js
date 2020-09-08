@@ -34,7 +34,7 @@ const twoNumbersGcd = (a, b) => {
     }
     while (a && b)
         a > b ? a %= b : b %= a;
-    return (a + b);
+    return a + b;
 }
 
 /** @description validate user input and throw exceptions by errors in input
@@ -57,7 +57,7 @@ const inputChecker = (numbers) => {
 }
 
 /** @description Finding GCD for any number of arguments
- *  @param {...number} numbers - sequence of numbers
+ *  @param {number} numbers - sequence of numbers
  *  @return {number} integer number - GCD of input sequence
  **/
 const euclid = (...numbers) => {

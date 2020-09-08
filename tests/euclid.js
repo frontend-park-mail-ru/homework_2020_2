@@ -57,7 +57,7 @@ QUnit.module('Тестируем функцию euclid', function () {
 			assert.throws(
 				() => euclid(singleInvalidArgument[i]),
 				except,
-				"Check for single invalid argument exception raising..."
+				'Check for single invalid argument exception raising...'
 			);
 		});
 
@@ -65,7 +65,7 @@ QUnit.module('Тестируем функцию euclid', function () {
 			assert.throws(
 				() => euclid(...manyArgumentsWithInvalid[i]),
 				except,
-				"Check for invalid argument exception raising in list..."
+				'Check for invalid argument exception raising in list...'
 			);
 		});
 	});
