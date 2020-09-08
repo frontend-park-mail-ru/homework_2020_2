@@ -1,6 +1,6 @@
 'use strict';
 
-const SYMBOL_CODE = {
+const HTML_ENTITY_MAP = {
     '<': '&lt;',
     '>': '&gt;',
     '&': '&amp;',
