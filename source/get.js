@@ -11,11 +11,12 @@
  * */
 
 const get = (object, path_to_prop) => {
-    if (!(object && typeof path_to_prop === 'string')) {
+    if (!(typeof object === 'object' && typeof path_to_prop === 'string')) {
         throw Error('Некорректный тип входных данных');
     }
+
     return path_to_prop.split('.')
         .filter(prop => prop)
         .reduce((accumulator, property) =>
-        accumulator ? accumulator[property] : undefined, object);
+            accumulator ? accumulator[property] : undefined, object);
 };

@@ -57,14 +57,12 @@ QUnit.module('Тестируем функцию get', function () {
 			}
 		};
 
-		assert.throws(function() {
-			get(object, undefined);
-		}, new Error('Некорректный тип входных данных'));
-		assert.throws(function() {
-			get(undefined, undefined);
-		}, new Error('Некорректный тип входных данных'));
-		assert.throws(function() {
-			get([1,2,3], ['.foobar', 'fwe.fwe', 'fwefwef.']);
-		}, new Error('Некорректный тип входных данных'));
+		assert.throws(() => get(object, undefined),
+			new Error('Некорректный тип входных данных'));
+		assert.throws(() => get(undefined, undefined),
+			new Error('Некорректный тип входных данных'));
+		assert.throws(() => get([1,2,3], ['.foobar', 'fwe.fwe', 'fwefwef.']),
+			new Error('Некорректный тип входных данных'));
+		assert.strictEqual(get([1,2,3], '.0.1.2'), undefined);
 	});
 });
