@@ -13,13 +13,13 @@ const GET_TAG_RE = /[<>/]/g;
 const FIND_SYMBOLS_RE = /[<&"'>]/g;
 
 /**
- * filters html code, leaving only allowed html tags.
+ * Filters html code, leaving only allowed html tags.
  * @param {string} input - html code
  * @param {array of strings} tagsArray - allowed tags
  */
 const filter = (input, tagsArray) => {
     if (typeof input !== 'string') {
-       throw new Error("Type of input should be string!");
+       throw new Error('Type of input should be string!');
     }
     
     return input.replace(TAGS_OR_SYMBOLS_RE, (match) => {
