@@ -8,17 +8,13 @@ const isValidNumber = num => Number.isInteger(num) && num >= 0;
  *  @param errValue - object caused exception
  *  @param {string} errMsg - error message
  **/
-function inputArgFormatException(errValue, errMsg = 'Invalid argument format: ') {
-    this.message = errMsg + errValue;
-    this.toString = function () {
-        return this.message;
-    }
-}
+const inputArgFormatException = (errValue, errMsg = 'Invalid argument format: ') =>
+    new Error('${errMsg} ${errValue}')
 
 /** @description for zero arguments make infinite treatment
  *  @param {number} a - first number for GCD
  *  @param {number} b - second number for GCD
- *  @return {number|Infinity} GCD for two arguments
+ *  @return {number} GCD for two arguments
  **/
 const infiniteTreatment = (a, b) => {
     if (!a && !b) {
@@ -30,31 +26,30 @@ const infiniteTreatment = (a, b) => {
 /** @description find GCD for two validated numbers
  *  @param {number} a - first number for GCD
  *  @param {number} b - second number for GCD
- *  @return {number|Infinity} GCD for two arguments
+ *  @return {number} GCD for two arguments
  **/
 const twoNumbersGcd = (a, b) => {
     if (!a || !b) {
         return infiniteTreatment(a, b);
     }
-    while (a && b) {
+    while (a && b)
         a > b ? a %= b : b %= a;
-    }
     return (a + b);
 }
 
 /** @description validate user input and throw exceptions by errors in input
- * @param {[]} numbers
+ * @param {number[]} numbers
  * @return {number} length of numbers list
  **/
 const inputChecker = (numbers) => {
     const length = numbers?.length;
 
     if (!length) {
-        throw new inputArgFormatException(length, 'Empty sequence: length = ');
+        throw inputArgFormatException(length, 'Empty sequence: length = ');
     }
     numbers.forEach(elem => {
         if (!isValidNumber(elem)) {
-            throw new inputArgFormatException(elem);
+            throw inputArgFormatException(elem);
         }
     });
 
@@ -62,7 +57,7 @@ const inputChecker = (numbers) => {
 }
 
 /** @description Finding GCD for any number of arguments
- *  @param {...} numbers - sequence of numbers
+ *  @param {...number} numbers - sequence of numbers
  *  @return {number} integer number - GCD of input sequence
  **/
 const euclid = (...numbers) => {

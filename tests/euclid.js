@@ -39,31 +39,31 @@ QUnit.module('Тестируем функцию euclid', function () {
 		const singleInvalidArgument = [{}, null, undefined, 'some string', -1, 1.11];
 		const manyArgumentsWithInvalid = [[], [10, 20, 'some string', 30], [10, 20, -30, 40], [10, Infinity, 20]];
 		const expectedExceptionsForSingleArg = [
-			new inputArgFormatException(singleInvalidArgument[0]),
-			new inputArgFormatException(singleInvalidArgument[1]),
-			new inputArgFormatException(singleInvalidArgument[2]),
-			new inputArgFormatException(singleInvalidArgument[3]),
-			new inputArgFormatException(singleInvalidArgument[4]),
-			new inputArgFormatException(singleInvalidArgument[5]),
+			inputArgFormatException(singleInvalidArgument[0]),
+			inputArgFormatException(singleInvalidArgument[1]),
+			inputArgFormatException(singleInvalidArgument[2]),
+			inputArgFormatException(singleInvalidArgument[3]),
+			inputArgFormatException(singleInvalidArgument[4]),
+			inputArgFormatException(singleInvalidArgument[5]),
 		];
 		const expectedExceptionsForManyArgsWithInvalid = [
-			new inputArgFormatException(0, 'Empty sequence: length = '),
-			new inputArgFormatException('some string'),
-			new inputArgFormatException(-30),
-			new inputArgFormatException(Infinity),
+			inputArgFormatException(0, 'Empty sequence: length = '),
+			inputArgFormatException('some string'),
+			inputArgFormatException(-30),
+			inputArgFormatException(Infinity),
 		];
 
-		expectedExceptionsForSingleArg.forEach(function (except, i, expectedExceptionsForSingleArg) {
+		expectedExceptionsForSingleArg.forEach((except, i, expectedExceptionsForSingleArg) => {
 			assert.throws(
-				() => { euclid(singleInvalidArgument[i]); },
+				() => euclid(singleInvalidArgument[i]),
 				except,
 				"Check for single invalid argument exception raising..."
 			);
 		});
 
-		expectedExceptionsForManyArgsWithInvalid.forEach(function (except, i, expectedExceptionsForManyArgsWithInvalid) {
+		expectedExceptionsForManyArgsWithInvalid.forEach((except, i, expectedExceptionsForManyArgsWithInvalid) => {
 			assert.throws(
-				() => { euclid(...manyArgumentsWithInvalid[i]); },
+				() => euclid(...manyArgumentsWithInvalid[i]),
 				except,
 				"Check for invalid argument exception raising in list..."
 			);
