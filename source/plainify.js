@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Plainify for objects.
+ * Turns a nested object into an associative array
  * @function plain
  * @param {object} obj - nasted object.
  * @param {string} str - string with the field name.
@@ -14,7 +14,7 @@ const plain = (obj, str) => {
 
     let map = {};
     for (const [key, val] of Object.entries(obj)) {
-        if (typeof val == 'object'){
+        if (isObj(val)){
             map = Object.assign(map, plain(val, str + key + '.'));
         }
         else{
@@ -26,20 +26,17 @@ const plain = (obj, str) => {
 }
 
 /**
- * Check type.
+ * Checks whether the variable is an object
  * @function isObj
- * @param {object} obj - object.
+ * @param {object} obj - checked variable
  * @returns {boolean}
  */
 const isObj = (obj) => {
-    if (typeof obj != 'object' || obj == null){
-        return false;
-    }
-    return true;
+    return typeof obj === 'object' && obj !== null;
 }
 
 /**
- * Plainify for objects.
+ * Turns a nested object into an associative array
  * @function plainify 
  * @param {object} obj - nasted object.
  * @returns {object}
