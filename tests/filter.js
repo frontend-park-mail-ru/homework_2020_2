@@ -48,7 +48,7 @@ QUnit.module('Проверка работы функции filter', function () 
 	});
 
 	QUnit.test('input пустой', function(assert) {
-		const input = ``;
+		const input = '';
 		
 		const tagsArray = [`strong`, `em`];
 
