@@ -11,7 +11,7 @@
 
 const get = (object, property) => {
     if (typeof object !== 'object' || typeof property !== 'string') {
-        throw Error('Incorrect type')
+        throw Error('Incorrect type');
     }
 
     return property.split('.').filter((str) => str).reduce((result, key) =>
