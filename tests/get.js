@@ -59,14 +59,6 @@ QUnit.module('Тестируем функцию get', function () {
         assert.strictEqual(get(object, '.foo.0'), undefined);
     });
 
-    QUnit.test('get адекватно работает с любыми типами', function (assert) {
-        const object = 5;
-
-        assert.strictEqual(get(object, '.foo'), undefined);
-        assert.strictEqual(get(object, '.'), 5);
-        assert.strictEqual(get(object, '.object.bar.object'), undefined);
-    });
-
     QUnit.test('get адекватно работает с методами', function (assert) {
         const object = {
             foo: 'bar',
@@ -86,5 +78,25 @@ QUnit.module('Тестируем функцию get', function () {
         assert.strictEqual(get(object, '.foo'), object.foo);
         assert.strictEqual(get(object, '.func'), object.func);
         assert.strictEqual(get(object, '.deep.func'), object.deep.func);
+    });
+
+    QUnit.test('get принимает только object в качестве первого аргумента', function (assert) {
+        let object = 5;
+
+        assert.throws(() => get(object, '.'), new Error('Incorrect type'));
+
+        object = 'string'
+
+        assert.throws(() => get(object, '.foo'), new Error('Incorrect type'));
+    });
+
+    QUnit.test('get принимает только string в качестве второго аргумента', function (assert) {
+        const object = {
+            foo: 'bar'
+        };
+
+        assert.throws(() => get(object, 5), new Error('Incorrect type'));
+        assert.throws(() => get(object, []), new Error('Incorrect type'));
+        assert.throws(() => get(object, {}), new Error('Incorrect type'));
     });
 });
