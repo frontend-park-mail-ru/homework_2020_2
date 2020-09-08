@@ -28,12 +28,10 @@ const inverse = (arr, offset = 0) => {
     let reversedPart;
     if (offset >= 0) {
         reversedPart = arr.slice(offset).reverse();
-        arr = [...arr.slice(0, offset), ...reversedPart];
+        return [...arr.slice(0, offset), ...reversedPart];
 
     } else {
         reversedPart = arr.slice(0, offset).reverse();
-        arr = [...reversedPart, ...arr.slice(offset)];
+        return [...reversedPart, ...arr.slice(offset)];
     }
-
-    return arr
 }
