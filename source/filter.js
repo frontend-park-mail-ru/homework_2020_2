@@ -19,11 +19,9 @@ let filter = (input, tagsArray) => {
         return null;
     }
 
-    input = input.replace(/<[^<>]+>|[&"']/g, (match) => {
+    return input.replace(/<[^<>]+>|[&"']/g, (match) => {
         const currentTag = match.replace(/[<>/]/g, '');
         return tagsArray.includes(currentTag) ? match : 
             match.replace(/<|[&"']|>/g, (match) => HTML_ENTITY_MAP[match]);
     }).replace(/<(?![^<]*>)/g, '&lt;');
-    return input;
 };
-
