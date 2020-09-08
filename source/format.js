@@ -1,22 +1,29 @@
 'use strict';
 
-const format = function (array, columns) {
-	if (columns <= 0 || !Array.isArray(array)) {
-		return null;
+/**
+ * @description Formats array of integers to columns
+ * @param {Array} array - The array of integers
+ * @param {Number} columns - Number of columns
+ * @returns {String}
+ */
+
+
+const format = (array, columns) => {
+	if (!Array.isArray(array) || columns <= 0 || columns === undefined) {
+    	throw Error('Некорректный тип входных данных');
 	}
 
 	// Calculating max length of number in each column
-	let colLength = [];
+	let colLength = new Array(columns);
+	colLength.fill(0, 0);
+
+	const filteredArray = array.filter(elem=> typeof(elem) != 'undefined');
 
 	for (let i = 0; i < columns; i++) {
 		let column = [];
 
-		for (let j = i; j < array.length; j += columns) {
-			if (typeof(array[j]) === 'undefined') {
-				column.push('');
-			} else {
-				column.push(String(array[j]));
-			}
+		for (let j = i; j < filteredArray.length; j += columns) {
+				column.push(String(filteredArray[j]));
 		}
 
 		colLength[i] = column.reduce(function(maxLength, current) {
@@ -28,25 +35,16 @@ const format = function (array, columns) {
 	}
 
 	// Creating formated array
-	const arraySize = array.length;
+	const arraySize = filteredArray.length;
 	let table = '';
-	let elem = '';
 
 	for (let i = 0; i < arraySize; i++) {
 		const colNum = i % columns;
-		if (typeof(array[i]) == 'undefined') {
-				elem = '';
-			} else {
-				elem = String(array[i]);
-			}
 
-		let spacesNum = colLength[colNum] - elem.length;
-
-		table += ' '.repeat(spacesNum);
 		if (colNum) {
 			table += ' ';
 		}
-		table += elem;
+		table += String(filteredArray[i]).padStart(colLength[colNum],' ');
 		if (i !== arraySize - 1 && colNum === columns - 1) {
 			table += '\n';
 		}
