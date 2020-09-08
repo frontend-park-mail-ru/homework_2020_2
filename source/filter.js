@@ -5,7 +5,7 @@ const HTML_ENTITY_MAP = {
     '>': '&gt;',
     '&': '&amp;',
     '"': '&quot;',
-    '\'': '&#39;',
+    "'": '&#39;',
 };
 
 /**
@@ -19,9 +19,10 @@ let filter = (input, tagsArray) => {
         return null;
     }
 
-    return input.replace(/<[^<>]+>|[&"']/g, (match) => {
+    return input.replace(/<[^<>]+>|[<&"'>]/g, (match) => {
         const currentTag = match.replace(/[<>/]/g, '');
         return tagsArray.includes(currentTag) ? match : 
-            match.replace(/<|[&"']|>/g, (match) => HTML_ENTITY_MAP[match]);
-    }).replace(/<(?![^<]*>)/g, '&lt;');
+            match.replace(/[<&"'>]/g, (match) => HTML_ENTITY_MAP[match]);
+    });
 };
+
