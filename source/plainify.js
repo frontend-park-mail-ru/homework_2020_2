@@ -12,16 +12,16 @@ const plain = (obj, str) => {
         return {};
     }
 
-    let map = {};
+    let plainified_obj = {};
     for (const [key, val] of Object.entries(obj)) {
         if (isObj(val)) {
-            map = Object.assign(map, plain(val, str + key + '.'));
+            plainified_obj = Object.assign(plainified_obj, plain(val, str + key + '.'));
         } else {
-            map[str + key] = val;
+            plainified_obj[str + key] = val;
         }
     }
 
-    return map;
+    return plainified_obj;
 }
 
 /**
