@@ -9,8 +9,8 @@
  * @return {string} text, Преобразованная строка.
  */
 const sort = text => {
-    if (typeof (text) !== "string") {
-        throw new SyntaxError("incorrect type entered");
+    if (typeof (text) !== 'string') {
+        throw new SyntaxError('incorrect type entered');
     }
 
     const collator = new Intl.Collator();
@@ -19,9 +19,11 @@ const sort = text => {
 
     let arrayText = text.split(' ');
 
-    arrayText = arrayText.map((word) => word.toLowerCase()
-                                                  .split('')
-                                                  .sort((a, b) => charcompare(a, b)).join(''));
+    arrayText = arrayText
+        .map((word) =>
+            word.toLowerCase()
+                .split('')
+                .sort((a, b) => charcompare(a, b)).join(''));
 
     arrayText.sort((a, b) => charcompare(a, b))
 

@@ -51,8 +51,8 @@ QUnit.module('Тестируем функцию sort', function () {
 	});
 
 	QUnit.test('Функция фиксирует некорректные данные', function (assert) {
-		assert.throws(() => sort(3), SyntaxError("incorrect type entered"));
-		assert.throws(() => sort([3,5,6]), SyntaxError("incorrect type entered"));
+		assert.throws(() => sort(3), SyntaxError('incorrect type entered'));
+		assert.throws(() => sort([3,5,6]), SyntaxError('incorrect type entered'));
 	});
 
 });
