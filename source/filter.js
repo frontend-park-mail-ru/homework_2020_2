@@ -19,7 +19,7 @@ const GET_SYMBOLS_RE = /[<&"'>]/g;
  */
 const filter = (input, tagsArray) => {
     if (typeof input !== 'string') {
-       throw new Error('Type of input should be string!');
+       throw new TypeError('Type of input should be string!');
     }
     
     return input.replace(GET_TAGS_OR_SYMBOLS_RE, (match) => {
