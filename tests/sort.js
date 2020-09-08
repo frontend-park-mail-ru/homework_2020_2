@@ -50,4 +50,12 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('Кинокомпания Warner Bros Pictures'), 'Аииккмнноопя Aenrrw Bors Ceiprstu');
 		assert.strictEqual(sort('Купить бумагу SvetoCopy CLASSIC'), 'Абгмуу Икптуь Accilss Ceoopstvy');
 	});
+
+	QUnit.test('Функция работает правильно c невалидными аргументами', function (assert) {
+		assert.throws(() => sort(5), new Error('Передан неверный тип данных'));
+		assert.throws(() => sort(null), new Error('Передан неверный тип данных'));
+		assert.throws(() => sort(['a', 'b']), new Error('Передан неверный тип данных'));
+		assert.throws(() => sort({}), new Error('Передан неверный тип данных'));
+		assert.throws(() => sort(undefined), new Error('Передан неверный тип данных'));
+	});
 });

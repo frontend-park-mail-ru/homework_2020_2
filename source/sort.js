@@ -9,15 +9,19 @@
  */
 
 const sort = (someString) => {
-    someString = someString.trim();
+    if (typeof someString !== 'string') {
+        throw new Error('Передан неверный тип данных');
+    }
 
-    if (!someString) {
-        return someString;
+    const stringForSort = someString.trim();
+
+    if (!stringForSort) {
+        return stringForSort;
     }
 
     const collator = new Intl.Collator();
 
-    const sortWords = someString.split(/\s+/).map((word) => {
+    const sortWords = stringForSort.split(/\s+/).map((word) => {
         word = word.toLowerCase().split('')
             .sort((a, b) => collator.compare(a, b)).join('');
         return word[0].toUpperCase() + word.slice(1);
