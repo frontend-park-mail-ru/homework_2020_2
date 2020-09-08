@@ -13,7 +13,6 @@ QUnit.module('Тестируем функцию get', function () {
 
 		assert.strictEqual(get(object, '.foo'), object.foo);
 		assert.strictEqual(get(object, '.deep.hested.field'), object.deep.hested.field);
-
 		assert.deepEqual(get(object, '.deep.hested'), object.deep.hested);
 		assert.deepEqual(get(object, '.deep'), object.deep);
 		assert.deepEqual(get(object, '.'), object);
