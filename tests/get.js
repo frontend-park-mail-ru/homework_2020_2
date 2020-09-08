@@ -48,8 +48,6 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.0.1.2'), undefined);
 	});
 
-
-
 	QUnit.test('get работает правильно с невалидными данными', function (assert) {
 		const object = {
 			foo: {

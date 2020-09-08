@@ -8,8 +8,7 @@
  * @param {object} object - The object we wanna explore
  * @param {string} path_to_prop - The path to the properties we wanna get
  * @returns {object}
- * */
-
+ */
 const get = (object, path_to_prop) => {
     if (!(typeof object === 'object' && typeof path_to_prop === 'string')) {
         throw Error('Некорректный тип входных данных');
