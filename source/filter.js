@@ -22,7 +22,7 @@ let filter = (input, tagsArray) => {
     input = input.replace(/<[^<>]+>|[&"']/g, (match) => {
         let currentTag = match.replace(/[<>/]/g, '');
         if (!tagsArray.includes(currentTag)) {
-            match = match.replace(/<|[&"']|>/g, (match) => SYMBOL_CODE[match]);
+            match = match.replace(/<|[&"']|>/g, (match) => HTML_ENTITY_MAP[match]);
         }
         return match;
     }).replace(/<(?![^<]*>)/g, '&lt;');
