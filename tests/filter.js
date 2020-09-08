@@ -74,7 +74,6 @@ QUnit.module('Проверка работы функции filter', function () 
 		
 		const tagsArray = [`strong`, `em`];
 
-		assert.expect(1);
 		assert.throws(
 			function () { filter(input, tagsArray); },
 			'Error thrown'
