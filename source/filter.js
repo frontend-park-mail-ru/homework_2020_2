@@ -19,8 +19,7 @@ const FIND_SYMBOLS_RE = /[<&"'>]/g;
  */
 let filter = (input, tagsArray) => {
     if (typeof input !== 'string') {
-        alert("Type of input should be string.");
-        return null;
+       throw new Error("Type of input should be string!");
     }
     
     return input.replace(TAGS_OR_SYMBOLS_RE, (match) => {
@@ -30,3 +29,4 @@ let filter = (input, tagsArray) => {
     });
 };
 
+w
