@@ -7,13 +7,10 @@
  * @example
  *     zip({age: '42'})
  */
-
-function isValidObject(object) {
-    return String(object) === "[object Object]";
-}
-
-const zip = (...objects) => {
-    const objectsProps = objects.reduce((iProps, iObject) => {
+const zip = (...objects) =>
+    objects.reduce((iProps, iObject) => {
+        let isValidObject = (object) =>
+            ((String(object)) === ('[object Object]'));
         if (isValidObject(iObject)) {
             Object.entries(iObject).forEach(([key, value]) => {
                 if (!iProps.hasOwnProperty(key)) {
@@ -25,20 +22,4 @@ const zip = (...objects) => {
         }
         return iProps;
     }, {});
-    return objectsProps;
-};
-
-
-/*  возможно, оверхэд решение */
-// const zip = (...objects) => {
-//     const objectsProps = {};
-//     objects.reverse(); // реверсируем массив, чтобы в объект было записано первое свойство из повторяющихся
-//     objects.forEach((iObject) => {
-//         if (isValidObject(iObject)) {
-//             Object.assign(objectsProps, iObject); // объединяет свойства объектов с перезаписью свойств
-//         } else {
-//             throw new TypeError('Invalid type');
-//         }
-//     });
-//     return objectsProps;
-// };
+    
