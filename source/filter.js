@@ -13,10 +13,10 @@ const GET_TAG_RE = /[<>/]/g;
 const GET_SYMBOLS_RE = /[<&"'>]/g;
 
 /**
- * Filters html code, leaving only allowed html tags.
- * Returns filtered html code (string).
+ * Filters html code, leaving only allowed html tags
  * @param {string} input - html code
  * @param {string[]} tagsArray - allowed tags
+ * @returns {string} Filtered html code
  */
 const filter = (input, tagsArray) => {
     if (typeof input !== 'string') {
