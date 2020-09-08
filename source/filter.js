@@ -17,7 +17,7 @@ const FIND_SYMBOLS_RE = /[<&"'>]/g;
  * @param {string} input - html code
  * @param {array of strings} tagsArray - allowed tags
  */
-let filter = (input, tagsArray) => {
+const filter = (input, tagsArray) => {
     if (typeof input !== 'string') {
        throw new Error("Type of input should be string!");
     }
