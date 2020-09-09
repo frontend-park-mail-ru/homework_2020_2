@@ -28,15 +28,12 @@ const format = (array, columns) => {
 	for (let i = 0; i < array.length; i++) {
 		const colNum = i % columns;
 
-		if (colNum) {
-			table += ' ';
-		}
-		table += String(array[i]).padStart(colLength[colNum],' ');
+		table += String(array[i]).padStart(colNum ? colLength[colNum] + 1 : colLength[colNum],' ');
 		if (i !== array.length - 1 && colNum === columns - 1) {
 			table += '\n';
 		}
 	}
-
+	
 	return table;
 }
 
