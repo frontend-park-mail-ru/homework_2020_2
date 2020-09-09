@@ -5,11 +5,13 @@
  * @returns {(Array)}
  */
 const minmax = (string) => {
-    const massive = string.toString().split(/ |, /).filter((item) => !isNaN(parseFloat(item)));
-    const Min = Math.min(...massive);
-    const Max = Math.max(...massive);
+    if (typeof (string) !== "string")
+        return [undefined, undefined];
+    const massive = string.split(/ |, /).filter((item) => !isNaN(parseFloat(item)));
+    const min = Math.min(...massive);
+    const max = Math.max(...massive);
     const result = massive.filter((item) =>
-        item == Max || item == Min
-    ).length === 0 ? [undefined, undefined] : [Min, Max];
+        item == max || item == min
+    ).length === 0 ? [undefined, undefined] : [min, max];
     return result;
 }
