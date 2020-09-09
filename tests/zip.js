@@ -79,9 +79,9 @@ QUnit.module('Тестируем функцию zip', function () {
 		assert.deepEqual(zip({answer: { age: 42 }}, {age: 42}), {answer: { age: 42 }, age: 42});
 
 		const obj = {
-			answer: {
-				 age: {tens: 40, units: 2} 
-				}
+		  answer: {
+			age: {tens: 40, units: 2} 
+		  }
 		};
 		assert.deepEqual(zip(obj, {answer: 42}), obj);
 
