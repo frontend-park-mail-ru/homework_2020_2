@@ -10,8 +10,6 @@ const minmax = (string) => {
     const massive = string.split(/ |, /).filter((item) => !isNaN(parseFloat(item)));
     const min = Math.min(...massive);
     const max = Math.max(...massive);
-    const result = massive.filter((item) =>
-        item == max || item == min
-    ).length === 0 ? [undefined, undefined] : [min, max];
+    const result = (massive.length === 0) ? [undefined, undefined] : [min, max];
     return result;
 }
