@@ -210,8 +210,8 @@ QUnit.module('Тестируем функцию format', function () {
 	QUnit.test('format работает правильно, если количество колонок равно 0', function (assert) {
 		const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000 ];
 
-		const expected = '';
+		const expected = SyntaxError('wrong parameter');
 
-		assert.strictEqual(format(input, 0), expected);
+		assert.throws(() => format(input, 0), expected);
 	});
 });
