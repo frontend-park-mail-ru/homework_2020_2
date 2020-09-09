@@ -7,21 +7,21 @@
  * @param {string} str - string with the field name.
  * @returns {object}
  */
-const plain = (obj, str) => {
+const plain = (obj, str = '') => {
     if (!isObj(obj)) {
         return {};
     }
 
-    let plainified_obj = {};
+    let plainifiedObj = {};
     for (const [key, val] of Object.entries(obj)) {
         if (isObj(val)) {
-            plainified_obj = Object.assign(plainified_obj, plain(val, str + key + '.'));
+            plainifiedObj = Object.assign(plainifiedObj, plain(val, str + key + '.'));
         } else {
-            plainified_obj[str + key] = val;
+            plainifiedObj[str + key] = val;
         }
     }
 
-    return plainified_obj;
+    return plainifiedObj;
 }
 
 /**
@@ -41,5 +41,5 @@ const isObj = (obj) => {
  * @returns {object}
  */
 const plainify = (obj) => {
-    return plain(obj, '');
+    return plain(obj);
 }
