@@ -12,16 +12,16 @@ const MIN_SIZE = 2;
 // @return {array} Возвращает отсортированный массив из групп слов-анаграмм
 
 const anagram = (words) => {
-    if (words.constructor !== Array) {
+    if (!Array.isArray(words)) {
         return null;
     }
-    if (words.length === 0) {
+    if (!words.length) {
         return [];
     }
 
-    let map = words.reduce((keys, word) => {
+    const map = words.reduce((keys, word) => {
         if (typeof word === 'string') {
-            let key = word.replace(/[^A-Za-zА-Яа-яЁё]/g, '').toLowerCase().split('').sort().join('');
+            const key = word.replace(/[^A-Za-zА-Яа-яЁё]/g, '').toLowerCase().split('').sort().join('');
 
             if (!(key in keys)) {
                 keys[key] = [];
