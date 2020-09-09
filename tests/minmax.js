@@ -3,7 +3,11 @@
 QUnit.module('Тестируем функцию minmax', function () {
 	QUnit.test('minmax работает правильно на строках без чисел', function (assert) {
 		assert.throws(() => minmax(''), new Error('Некорректный тип входных данных'));
+		assert.throws(() => minmax(""), new Error('Некорректный тип входных данных'));
+		assert.throws(() => minmax('Inf'), new Error('Отсутствуют числа во входных данных'));
+		assert.throws(() => minmax('Nan'), new Error('Отсутствуют числа во входных данных'));
 		assert.throws(() => minmax('мама мыла раму'), new Error('Отсутствуют числа во входных данных'));
+		assert.throws(() => minmax('undefined'), new Error('Отсутствуют числа во входных данных'));
 	});
 
 	QUnit.test('minmax правильно парсит отдельные числа', function (assert) {
@@ -30,6 +34,7 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('-1 2 -3 4'), [ -3, 4 ]);
 		assert.deepEqual(minmax('-Infinity -1 0 1 Infinity'), [ -Infinity, Infinity ]);
 		assert.deepEqual(minmax('-.01 0 .01'), [ -.01, .01 ]);
+		assert.deepEqual(minmax('7+qwerty7'), [ 7, 7 ]);
 	});
 
 	QUnit.test('minmax игнорирует обычный текст', function (assert) {
@@ -38,6 +43,7 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('3 поросёнка и 7 козлят'), [ 3, 7 ]);
 		assert.deepEqual(minmax('12,ffff 3 5*ggg'), [ 3, 12 ]);
 		assert.deepEqual(minmax('12+cats 9 5*dogs5'), [ 5, 12 ]);
+		assert.deepEqual(minmax('-6+sss 3q 5*ggg'), [ -6, 5 ]);
 	});
 
 	QUnit.test('minmax работает правильно с повторяющимися числами', function (assert) {

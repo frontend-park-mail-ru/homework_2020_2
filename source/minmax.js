@@ -1,18 +1,18 @@
 'use strict';
 
 /**
- * Finds min and max number in an input string and returns an array of 2 elements [min max].
+ * @description Finds min and max number in an input string and returns an array of 2 elements [min max].
  * Throws exceptions if there is no numbers or the input parameter is not a string.
- * @param numberString - is the input string.
+ * @param {string} numberString - is the input string.
+ * @returns {[number, number]} - is the result array.
  */
 
-let minmax = (numberString) => {
+const minmax = (numberString) => {
     if (!numberString || typeof numberString !== 'string') {
         throw Error('Некорректный тип входных данных');
     }
 
-    let re = / |,|\+|\*|\\|,|:|;|^/
-    // let re = /\D/
+    const re = /[\s|[,+*/\\:;]]*/
     const numbers = numberString.split(re).filter((number) => !isNaN(number));
 
     if (!numbers.length) {
