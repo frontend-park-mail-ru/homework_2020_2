@@ -3,9 +3,9 @@
 /**
  * Turns a nested object into an associative array
  * @function plain
- * @param {object} obj - nasted object.
+ * @param {Object} obj - nasted object.
  * @param {string} str - string with the field name.
- * @returns {object}
+ * @returns {Object}
  */
 const plain = (obj, str = '') => {
     if (!isObj(obj)) {
@@ -27,7 +27,7 @@ const plain = (obj, str = '') => {
 /**
  * Checks whether the variable is an object
  * @function isObj
- * @param {object} obj - checked variable
+ * @param {Object} obj - checked variable
  * @returns {boolean}
  */
 const isObj = (obj) => {
@@ -37,8 +37,8 @@ const isObj = (obj) => {
 /**
  * Turns a nested object into an associative array
  * @function plainify
- * @param {object} obj - nasted object.
- * @returns {object}
+ * @param {Object} obj - nasted object.
+ * @returns {Object}
  */
 const plainify = (obj) => {
     return plain(obj);
