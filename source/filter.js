@@ -1,7 +1,5 @@
 'use strict'
-
-// словарь с тем, что нужно будет экранировать
-
+ 
 const needReplace = new Map ([
     ['<', '&lt;'],
     ['>', '&gt;'],
@@ -9,24 +7,31 @@ const needReplace = new Map ([
     ['\'', '&#39;'],
     ['"', '&quot;']
 ]);
-
-let filter = (html, validTags) => {
-	// проверка типов входных данных
-    if  (typeof html !== 'string' || !Array.isArray(validTags)) {
-        return null;
+ 
+/**
+ * Escapes invalid html html tags.
+ * @param {string} html - String with html tags or symbols.
+ * @param {string[]} validTags - Tags allowed to use.
+ * @returns {string} Filtered string.
+ */
+ 
+const filter = (html, validTags) => {
+    if  (typeof html !== 'string') {
+        throw Error('First arg must be a string!')
     }
-
-    // ищем либо тег, либо символ
+ 
+    if (!Array.isArray(validTags)) {
+        throw Error('Second arg must be an Array')
+    }
+ 
+    if (validTags.some((element) => typeof element !== 'string')) {
+        throw Error('Must be only Array of strings')
+    }
+ 
     return html.replace(/<[^<>]*>|[&"'><]/g, (symbols) => {
-    	// очищаем значение тега от <>/
-        let tagValue = symbols.replace(/[<>/]/g, '');
-
-        // если не входит в список валидных, то проводим экранирование из словаря
-        // если входит, то не трогаем
+        const tagValue = symbols.replace(/[<>/]/g, '');
         if (!validTags.includes(tagValue)) {
-            return symbols.split('').map((char) => {
-                return needReplace.has(char) ? needReplace.get(char) : char;
-            }).join('');
+            return symbols.split('').map((char) => needReplace.get(char) || char).join('');
         }
         return symbols;
     });
