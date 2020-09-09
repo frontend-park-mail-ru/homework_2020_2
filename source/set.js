@@ -15,10 +15,11 @@ const set = (object, keys, value) => {
     const path = keys.split('.');
     path.shift();
 
-    const isEmpty = obj => typeof obj == 'object' ? Object.keys(obj).length === 0 : true;
+    const isEmpty = obj => typeof obj === 'object' ? Object.keys(obj).length === 0 : true;
 
+    const pathLength = path.length;
     path.forEach((key, i, path) => {
-        if (i === path.length - 1) {
+        if (i === pathLength - 1) {
             return;
         }
         objectPart = isEmpty(objectPart) ? objectPart[path[i]] = {} : objectPart[path[i]];
