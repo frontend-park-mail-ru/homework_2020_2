@@ -7,7 +7,7 @@
  * @param {string} str - string with the field name.
  * @returns {Object}
  */
-const plain = (obj, str = '') => {
+const plainify = (obj, str = '') => {
     if (!isObj(obj)) {
         return {};
     }
@@ -15,7 +15,7 @@ const plain = (obj, str = '') => {
     let plainifiedObj = {};
     for (const [key, val] of Object.entries(obj)) {
         if (isObj(val)) {
-            plainifiedObj = Object.assign(plainifiedObj, plain(val, str + key + '.'));
+            plainifiedObj = Object.assign(plainifiedObj, plainify(val, str + key + '.'));
         } else {
             plainifiedObj[str + key] = val;
         }
@@ -34,12 +34,3 @@ const isObj = (obj) => {
     return typeof obj === 'object' && obj !== null;
 }
 
-/**
- * Turns a nested object into an associative array
- * @function plainify
- * @param {Object} obj - nasted object.
- * @returns {Object}
- */
-const plainify = (obj) => {
-    return plain(obj);
-}
