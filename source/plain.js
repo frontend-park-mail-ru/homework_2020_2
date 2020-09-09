@@ -3,8 +3,8 @@
 * и создавать из них один общий массив. Массивы могут быть любой вложенности
 * */
 
-const plain = arrays => {
-    while (arrays.length !== arrays.filter(item => !Array.isArray(item)).length) {
+const plain = (arrays) => {
+    while (arrays.filter((item) => Array.isArray(item)).length) {
         arrays.forEach((item, index, array) => {
             if (Array.isArray(item)) {
                 array.splice(index, 1, ...item);
@@ -13,3 +13,4 @@ const plain = arrays => {
     }
     return arrays;
 }
+
