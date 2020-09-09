@@ -15,5 +15,5 @@ const inverse = (arr, to = 0) => {
 
     let arrNew = arr;
     return to >= 0 ? [...arrNew.splice(0, to), ...arrNew.reverse()] :
-        [...arrNew.slice(0, arrNew.length + to).reverse(), ...arrNew.splice(to, Math.abs(to))]
+        [...arrNew.splice(0, arrNew.length + to).reverse(), ...arrNew]
 }
