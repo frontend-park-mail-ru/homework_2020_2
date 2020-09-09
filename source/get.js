@@ -10,7 +10,7 @@
  */
 
 const get = (object, property) => {
-    if (typeof object !== 'object' || typeof property !== 'string') {
+    if (typeof object !== 'object' || object === null || typeof property !== 'string') {
         throw Error('Incorrect type');
     }
 

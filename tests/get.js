@@ -88,6 +88,7 @@ QUnit.module('Тестируем функцию get', function () {
         object = 'string'
 
         assert.throws(() => get(object, '.foo'), new Error('Incorrect type'));
+        assert.throws(() => get(null, '.foo'), new Error('Incorrect type'));
     });
 
     QUnit.test('get принимает только string в качестве второго аргумента', function (assert) {
