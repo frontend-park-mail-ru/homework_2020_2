@@ -9,10 +9,10 @@ QUnit.module('Тестируем функцию anagram', function () {
 		];
 
 		const output = [
-			[ 'барокко', 'коробка' ],
-			[ 'кот', 'ток' ],
-			[ 'липа', 'пила' ],
-			[ 'пост', 'стоп' ]
+			['барокко', 'коробка'],
+			['кот', 'ток'],
+			['липа', 'пила'],
+			['пост', 'стоп']
 		];
 
 		assert.deepEqual(anagram(input), output);
@@ -25,7 +25,7 @@ QUnit.module('Тестируем функцию anagram', function () {
 		];
 
 		const output = [
-			[ 'КТО', 'Ток', 'кот' ]
+			['КТО', 'Ток', 'кот']
 		];
 
 		assert.deepEqual(anagram(input), output);
@@ -38,8 +38,8 @@ QUnit.module('Тестируем функцию anagram', function () {
 		];
 
 		const output = [
-			[ 'Sт0п', 'п0Sт' ],
-			[ 'к???о т', 'то123к45' ]
+			['Sт0п', 'п0Sт'],
+			['к???о т', 'то123к45']
 		];
 
 		assert.deepEqual(anagram(input), output);
@@ -52,7 +52,7 @@ QUnit.module('Тестируем функцию anagram', function () {
 		];
 
 		const output = [
-			[ 'акрон', 'норка' ]
+			['акрон', 'норка']
 		];
 
 		assert.deepEqual(anagram(input), output);
@@ -87,7 +87,7 @@ QUnit.module('Тестируем функцию anagram', function () {
 		];
 
 		const mixedOutput = [
-			[ 'кот', 'ток' ]
+			['кот', 'ток']
 		];
 
 		assert.deepEqual(anagram(objectInput), []);
