@@ -3,9 +3,7 @@
 QUnit.module('Тестируем функцию minmax', function () {
 	QUnit.test('minmax работает правильно на строках без чисел', function (assert) {
 		assert.throws(() => minmax(''), new Error('Некорректный тип входных данных'));
-		assert.throws(() => minmax(""), new Error('Некорректный тип входных данных'));
-		assert.throws(() => minmax('Inf'), new Error('Отсутствуют числа во входных данных'));
-		assert.throws(() => minmax('Nan'), new Error('Отсутствуют числа во входных данных'));
+		assert.throws(() => minmax(NaN), new Error('Некорректный тип входных данных'));
 		assert.throws(() => minmax('мама мыла раму'), new Error('Отсутствуют числа во входных данных'));
 		assert.throws(() => minmax('undefined'), new Error('Отсутствуют числа во входных данных'));
 	});
