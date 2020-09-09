@@ -119,13 +119,11 @@ QUnit.module('Тестируем функцию zip', function () {
 	});
 
 	QUnit.test('Функция корректно работает без аргументов', function (assert) {
-
 		assert.deepEqual(zip(), {});
 		assert.throws(() => zip(undefined), new Error('Некорректный тип входных данных'));
 	});
 
 	QUnit.test('Функция работает с невалидными данными', function (assert) {
-
 		assert.throws(() => zip({a: 10}, 1, 'ggg', [1, 2, 3]), new Error('Некорректный тип входных данных'));
 		assert.throws(() => zip('hello', 123, 'world'), new Error('Некорректный тип входных данных'));
 	});

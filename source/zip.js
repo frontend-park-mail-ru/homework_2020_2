@@ -5,10 +5,10 @@
 *
 * @param  {objects} Объекты, которые необходимо 'склеить'
 * @result {object} Объект, содержащий все свойства переданных объектов
-* */
+*/
 const zip = (...objects) => {
     return objects.reduce((resultObject, currentObject) => {
-        if(typeof currentObject !== 'object') {
+        if (typeof currentObject !== 'object') {
             throw Error('Некорректный тип входных данных');
         }
 
@@ -17,6 +17,7 @@ const zip = (...objects) => {
                 resultObject[property] = currentObject[property];
             }
         }
+
         return resultObject;
     }, {});
 };
