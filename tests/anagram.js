@@ -67,7 +67,7 @@ QUnit.module('Тестируем функцию anagram', function () {
 
 	QUnit.test('Проверка входных данных: на вход подается пустой массив слов', function (assert) {
 		const input = [];
-		const output = null;
+		const output = [];
 
 		assert.deepEqual(anagram(input), output);
 	});
@@ -86,9 +86,11 @@ QUnit.module('Тестируем функцию anagram', function () {
 			'кот', 42, 'ток', testObject
 		];
 
-		const output = null;
+		const mixedOutput = [
+			[ 'кот', 'ток' ]
+		];
 
-		assert.deepEqual(anagram(objectInput), output);
-		assert.deepEqual(anagram(mixedInput), output);
+		assert.deepEqual(anagram(objectInput), []);
+		assert.deepEqual(anagram(mixedInput), mixedOutput);
 	});
 });
