@@ -10,9 +10,14 @@
  */
 
 const sort = (str) => {
+    if (/^\s+$/.test(str)) {
+        throw new SyntaxError(`fail syntax: "${str}"`)
+    }
+
     if (typeof str !== 'string') {
         throw new TypeError(`fail type: ${typeof str}`)
     }
+
     if (!str) {
         throw new SyntaxError(`fail syntax: "${str}"`)
     }

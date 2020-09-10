@@ -32,6 +32,8 @@ QUnit.module('Тестируем функцию sort', function () {
     });
 
     QUnit.test('Функция правильно обрабатывает некорректные данные', function (assert) {
+        assert.throws(() => sort('      '), SyntaxError(`fail syntax: "      "`));
+        assert.strictEqual(sort('   s    '), 'S');
         assert.throws(() => sort(''), SyntaxError(`fail syntax: ""`));
         assert.throws(() => sort(Math.random()), TypeError(`fail type: ${typeof Math.random()}`));
     });
