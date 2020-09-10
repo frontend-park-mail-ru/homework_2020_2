@@ -1,21 +1,27 @@
 'use strict';
 
-const anagram = function (words) {
-    var mapByCharList = new Map();
+/**
+ * Searches anagrams in array of words 
+ * @param {string[]} words array of words to search anagrams in
+ * @returns {string[][]} array of anagrams
+ */
+const anagram = (words) => {
+    let mapByCharList = {};
+
     words.forEach(word => {
-        var charList = word.split("").sort().join();
-        if (mapByCharList.has(charList)) {
-            mapByCharList.get(charList).push(word);
+        let charList = word.split('').sort().join();
+        if (charList in mapByCharList) {
+            mapByCharList[charList].push(word);
         } else {
-            var b = new Array();
-            b.push(word);
-            mapByCharList.set(charList, b);
+            let a = [word]
+            mapByCharList[charList] = a;
         }
     });
-    var output = new Array();
-    mapByCharList.forEach(element => {
-        if (element.length > 1)
-            output.push(element.sort());
+
+    let output = Object.values(mapByCharList).filter(element => {
+        return (element.length > 1) ?
+            element.sort() : null;
     });
+
     return output.sort();
-}
+};
