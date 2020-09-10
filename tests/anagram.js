@@ -42,10 +42,16 @@ QUnit.module('Тестируем функцию anagram', function () {
 		assert.deepEqual(anagram(input), output);
 	});
 
+	const input = ['abd', 'gcb', 'tac',
+		'wor', 'rie', 'ruw',];
 	QUnit.test('Нет анаграмм', function (assert) {
-		const input = ['abd', 'gcb', 'tac',
-			'wor', 'rie', 'ruw',];
 		const output = [];
 		assert.deepEqual(anagram(input), output);
 	});
+
+	QUnit.test('Если в функцию подается неправильные аргумен', function (assert) {
+		assert.throws(() => anagram(), Error('First argument is required'));
+		assert.throws(() => anagram(1), TypeError('First argument not array'));
+		assert.throws(() => anagram(["abcd", 3, "fhfr"]), TypeError('Array contains not only words'));
+	})
 });
