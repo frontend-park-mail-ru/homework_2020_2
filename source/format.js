@@ -8,47 +8,47 @@
  */
 const format = (inputArray, columns) => {
     if (!Array.isArray(inputArray) || !Number.isInteger(columns)) {
-        throw new TypeError('wrong type')
+        throw new TypeError('wrong type');
     }
 
     if (
         inputArray.length === 0 ||
         !inputArray.every((item) => typeof item === 'number')
     ) {
-        throw new TypeError('wrong type')
+        throw new TypeError('wrong type');
     }
 
     if (columns === 0) {
-        throw new SyntaxError('wrong parameter')
+        throw new SyntaxError('wrong parameter');
     }
 
-    const line = inputArray.slice(0)
+    const line = inputArray.slice(0);
 
-    const columnsSizes = Array(columns).fill(0)
+    const columnsSizes = Array(columns).fill(0);
     line.forEach((item, i) => {
-        const columnNumber = i % columns
+        const columnNumber = i % columns;
         const currentLen =
-            Boolean(item) || item === 0 ? item.toString().length : 0
+            Boolean(item) || item === 0 ? item.toString().length : 0;
         columnsSizes[columnNumber] = Math.max(
             columnsSizes[columnNumber],
             currentLen
-        )
+        );
     })
 
     let result = ''
     for (let i = 0; i < line.length; i++) {
-        const columnNumber = i % columns
+        const columnNumber = i % columns;
         result +=
             Boolean(line[i]) || line[i] === 0
                 ? line[i].toString().padStart(columnsSizes[columnNumber])
-                : ' '.repeat(columnsSizes[columnNumber])
+                : ' '.repeat(columnsSizes[columnNumber]);
 
         if (columns === columnNumber + 1 && i !== line.length - 1) {
-            result += '\n'
+            result += '\n';
         } else if (i !== line.length - 1) {
-            result += ' '
+            result += ' ';
         }
     }
 
-    return result
+    return result;
 }
