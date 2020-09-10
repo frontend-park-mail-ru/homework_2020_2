@@ -13,7 +13,7 @@ const inverse = (arr, to = 0) => {
         return arr;
     }
 
-    let arrNew = arr;
+    const arrNew = arr;
     return to >= 0 ? [...arrNew.splice(0, to), ...arrNew.reverse()] :
         [...arrNew.splice(0, arrNew.length + to).reverse(), ...arrNew]
 }
