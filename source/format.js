@@ -29,11 +29,9 @@ const format = (array, columns) => {
 		const colNum = i % columns;
 
 		table += String(array[i]).padStart(colNum ? colLength[colNum] + 1 : colLength[colNum],' ');
-		if (i !== array.length - 1 && colNum === columns - 1) {
-			table += '\n';
-		}
+		table += (i !== array.length - 1 && colNum === columns - 1) ? '\n' : '';
 	}
-	
+
 	return table;
 }
 
