@@ -15,22 +15,25 @@ const MATH_NUMBERS_REGEXP = /[0-9]+/;
  * @throws {SyntaxError} - Math expression contains unsupported signs or incorrect
  */
 const solve = (expression, variable) => {
-    if(typeof(expression) !== 'string' ||  typeof(variable) !== 'number'){
+    if (typeof (expression) !== 'string' || typeof (variable) !== 'number') {
         throw new TypeError(WRONG_FUNCTION_PARAMS);
     }
 
-    if(!expression.match(MATH_MARKING_REGEXP)){
+    if (!expression.match(MATH_MARKING_REGEXP)) {
         throw new SyntaxError(INVALID_MATH_EXPRESSION);
     }
 
     expression = expression.replaceAll('x', variable);
     expression = expression.replaceAll(' ', '');
     const postfixExression = infixToPostfix(expression);
-    if(postfixExression === null){
+
+    if (postfixExression === null) {
         throw new SyntaxError(INVALID_MATH_EXPRESSION);
     }
+
     const resultValue = calculatePostfixExpression(postfixExression);
-    if(resultValue === null){
+
+    if (resultValue === null) {
         throw new SyntaxError(INVALID_MATH_EXPRESSION);
     }
 
@@ -44,14 +47,15 @@ const solve = (expression, variable) => {
  * @returns {String|null} postfixExpression - evaluated postfix Math expression
  */
 const infixToPostfix = (expression) => {
-    if(typeof expression != 'string'){
+    if (typeof expression != 'string') {
         return null;
     }
+
     let postfixExpression = [];
     let operandsStack = [];
 
     const operatorTypePrecedence = (operator) => {
-        switch(operator){
+        switch (operator) {
             case '*':
                 return 2;
             case '+':
@@ -62,36 +66,34 @@ const infixToPostfix = (expression) => {
         }
     }
 
-    for(let i = 0; i < expression.length; i++){
-        const c = expression[i];
+    for (let i = 0; i < expression.length; i++) {
+        const symbol = expression[i];
 
-        if(operatorTypePrecedence(c) > 0) {
+        if (operatorTypePrecedence(symbol) > 0) {
             while (operandsStack.length && operatorTypePrecedence(operandsStack[operandsStack.length - 1]) > 0) {
-                const operator = operandsStack.pop();
-                postfixExpression.push(operator);
+                postfixExpression.push(operandsStack.pop());
             }
 
-            operandsStack.push(c);
-        } else if(c === '('){
-            operandsStack.push(c);
-        } else if(c === ')'){
+            operandsStack.push(symbol);
+        } else if (symbol === '(') {
+            operandsStack.push(symbol);
+        } else if (symbol === ')') {
             let operand = operandsStack.pop();
 
-            while(operand !== '('){
+            while (operand !== '(') {
                 postfixExpression.push(operand);
                 operand = operandsStack.pop();
             }
-        }else if(c.match(MATH_NUMBERS_REGEXP)){
-            postfixExpression.push(c);
+        } else if (symbol.match(MATH_NUMBERS_REGEXP)) {
+            postfixExpression.push(symbol);
         }
     }
 
-    while(operandsStack.length){
-        const operand = operandsStack.pop()
-        postfixExpression.push(operand);
+    while (operandsStack.length) {
+        postfixExpression.push(operandsStack.pop());
     }
 
-    return (postfixExpression.length > 0? postfixExpression : null );
+    return (postfixExpression.length > 0 ? postfixExpression : null);
 }
 
 
@@ -101,35 +103,36 @@ const infixToPostfix = (expression) => {
  * @returns {null|number} - evaluated postfix Math expression
  */
 const calculatePostfixExpression = (expression) => {
-    const operatorsResults = (operator,a,b) => {
-        switch(operator){
+    const operatorsResults = (operator, b, a) => {
+        switch (operator) {
             case '*':
-                return +a*(+b);
+                return +a * (+b);
             case '+':
-                return +a+(+b);
+                return +a + (+b);
             case '-':
-                return +a-(+b);
+                return +a - (+b);
             default:
                 return null;
         }
     }
-    const resultStack = expression.reduce((result,current) => {
-        if(parseInt(current)){
+
+    const resultStack = expression.reduce((result, current) => {
+        if (!isNaN(Number(current))) {
             result.push(current);
             return result;
         }
-        if(result.length < 2){
+
+        if (result.length < 2) {
             return null;
         }
 
-        const [b,a] = [result.pop(),result.pop()];
-        result.push('' + operatorsResults(current,a,b));
+        result.push('' + operatorsResults(current, result.pop(), result.pop()));
         return result;
-    },[])
+    }, [])
 
-    if(resultStack.length !== 1){
+    if (resultStack.length !== 1) {
         return null;
     }
 
-    return parseInt(resultStack.pop())
+    return Number(resultStack.pop())
 }
