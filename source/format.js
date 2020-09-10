@@ -8,13 +8,13 @@
  */
 
 const format = (array, columns) => {
-	if (!Array.isArray(array) || columns <= 0 || typeof(columns) !== 'number') {
+	if (!Array.isArray(array) || columns <= 0 || typeof columns !== 'number') {
 		throw Error('Некорректный тип входных данных');
 	}
 
 	// Calculating max length of number in each column
-	let colLength = new Array(columns).fill(0);
-	array = array.filter(elem => typeof(elem) === 'number');
+	const colLength = new Array(columns).fill(0);
+	array = array.filter(elem => typeof elem === 'number');
 
 	for (let i = 0; i < array.length; i++) {
 		const colNum = i % columns;
