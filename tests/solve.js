@@ -24,8 +24,5 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.throws(() => solve(1,1), new TypeError(WRONG_FUNCTION_PARAMS));
 		assert.throws(() => solve("asd","asd"), new TypeError(WRONG_FUNCTION_PARAMS));
 		assert.throws(() => solve(1,"asd"), new TypeError(WRONG_FUNCTION_PARAMS));
-	})
-
-
-
+	});
 });

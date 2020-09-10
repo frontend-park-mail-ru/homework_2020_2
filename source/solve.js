@@ -23,8 +23,7 @@ const solve = (expression, variable) => {
         throw new SyntaxError(INVALID_MATH_EXPRESSION);
     }
 
-    expression = expression.replaceAll('x', variable);
-    expression = expression.replaceAll(' ', '');
+    expression = expression.replaceAll('x', variable).replaceAll(' ', '');
     const postfixExression = infixToPostfix(expression);
 
     if (postfixExression === null) {
@@ -47,24 +46,18 @@ const solve = (expression, variable) => {
  * @returns {String|null} postfixExpression - evaluated postfix Math expression
  */
 const infixToPostfix = (expression) => {
-    if (typeof expression != 'string') {
+    if (typeof expression !== 'string') {
         return null;
     }
 
     let postfixExpression = [];
     let operandsStack = [];
 
-    const operatorTypePrecedence = (operator) => {
-        switch (operator) {
-            case '*':
-                return 2;
-            case '+':
-            case '-':
-                return 1;
-            default:
-                return 0;
-        }
-    }
+    const operatorTypePrecedence = (operator) => ({
+        '*': 2,
+        '+': 1,
+        '-': 1
+    }[operator] || 0);
 
     for (let i = 0; i < expression.length; i++) {
         const symbol = expression[i];
@@ -75,17 +68,23 @@ const infixToPostfix = (expression) => {
             }
 
             operandsStack.push(symbol);
-        } else if (symbol === '(') {
-            operandsStack.push(symbol);
-        } else if (symbol === ')') {
-            let operand = operandsStack.pop();
+        }
+        switch (symbol) {
+            case '(':
+                operandsStack.push(symbol);
+                break;
+            case ')':
+                let operand = operandsStack.pop();
 
-            while (operand !== '(') {
-                postfixExpression.push(operand);
-                operand = operandsStack.pop();
-            }
-        } else if (symbol.match(MATH_NUMBERS_REGEXP)) {
-            postfixExpression.push(symbol);
+                while (operand !== '(') {
+                    postfixExpression.push(operand);
+                    operand = operandsStack.pop();
+                }
+                break;
+            default:
+                if (symbol.match(MATH_NUMBERS_REGEXP)) {
+                    postfixExpression.push(symbol);
+                }
         }
     }
 
@@ -103,18 +102,11 @@ const infixToPostfix = (expression) => {
  * @returns {null|number} - evaluated postfix Math expression
  */
 const calculatePostfixExpression = (expression) => {
-    const operatorsResults = (operator, b, a) => {
-        switch (operator) {
-            case '*':
-                return +a * (+b);
-            case '+':
-                return +a + (+b);
-            case '-':
-                return +a - (+b);
-            default:
-                return null;
-        }
-    }
+    const operatorsResults = (operator, b, a) => ({
+        '+': (b, a) => +a + (+b),
+        '*': (b, a) => +a * (+b),
+        '-': (b, a) => +a - (+b)
+    }[operator](b, a) || null);
 
     const resultStack = expression.reduce((result, current) => {
         if (!isNaN(Number(current))) {
@@ -126,13 +118,13 @@ const calculatePostfixExpression = (expression) => {
             return null;
         }
 
-        result.push('' + operatorsResults(current, result.pop(), result.pop()));
+        result.push(operatorsResults(current, result.pop(), result.pop()));
         return result;
-    }, [])
+    }, []);
 
     if (resultStack.length !== 1) {
         return null;
     }
 
-    return Number(resultStack.pop())
+    return Number(resultStack.pop());
 }
