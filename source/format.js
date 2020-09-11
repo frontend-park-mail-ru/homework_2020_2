@@ -12,13 +12,13 @@ const format = (inputArray, columns) => {
     }
 
     if (
-        inputArray.length === 0 ||
+        !inputArray.length ||
         !inputArray.every((item) => typeof item === 'number')
     ) {
         throw new TypeError('wrong type');
     }
 
-    if (columns === 0) {
+    if (!columns) {
         throw new SyntaxError('wrong parameter');
     }
 
@@ -27,8 +27,7 @@ const format = (inputArray, columns) => {
     const columnsSizes = Array(columns).fill(0);
     line.forEach((item, i) => {
         const columnNumber = i % columns;
-        const currentLen =
-            Boolean(item) || item === 0 ? item.toString().length : 0;
+        const currentLen = item.toString().length;
         columnsSizes[columnNumber] = Math.max(
             columnsSizes[columnNumber],
             currentLen
