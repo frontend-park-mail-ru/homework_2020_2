@@ -15,11 +15,11 @@ const MATH_NUMBERS_REGEXP = /[0-9]+/;
  * @throws {SyntaxError} - Math expression contains unsupported signs or incorrect
  */
 const solve = (expression, variable) => {
-    if (typeof (expression) !== 'string' || typeof (variable) !== 'number') {
+    if (typeof expression !== 'string' || typeof variable !== 'number') {
         throw new TypeError(WRONG_FUNCTION_PARAMS);
     }
 
-    if (!expression.match(MATH_MARKING_REGEXP)) {
+    if (!MATH_MARKING_REGEXP.test(expression)) {
         throw new SyntaxError(INVALID_MATH_EXPRESSION);
     }
 
@@ -59,9 +59,7 @@ const infixToPostfix = (expression) => {
         '-': 1
     }[operator] || 0);
 
-    for (let i = 0; i < expression.length; i++) {
-        const symbol = expression[i];
-
+    expression.split('').forEach((symbol) => {
         if (operatorTypePrecedence(symbol) > 0) {
             while (operandsStack.length && operatorTypePrecedence(operandsStack[operandsStack.length - 1]) > 0) {
                 postfixExpression.push(operandsStack.pop());
@@ -69,6 +67,7 @@ const infixToPostfix = (expression) => {
 
             operandsStack.push(symbol);
         }
+
         switch (symbol) {
             case '(':
                 operandsStack.push(symbol);
@@ -82,11 +81,11 @@ const infixToPostfix = (expression) => {
                 }
                 break;
             default:
-                if (symbol.match(MATH_NUMBERS_REGEXP)) {
+                if (MATH_NUMBERS_REGEXP.test(symbol)) {
                     postfixExpression.push(symbol);
                 }
         }
-    }
+    });
 
     while (operandsStack.length) {
         postfixExpression.push(operandsStack.pop());
