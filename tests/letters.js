@@ -53,4 +53,16 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('от топота копыт', false), 'а копыт');
 		assert.strictEqual(letters('hello world', false), 'he world');
 	});
+
+	QUnit.test('Неверные входные параметры', function (assert) {
+		assert.throws(() => letters(123, true), new TypeError('Первый аргумент не яв-ся string!'));
+		assert.throws(() => letters(123), new TypeError('Первый аргумент не яв-ся string!'));
+		assert.throws(() => letters(123, 123), new TypeError('Первый аргумент не яв-ся string!'));
+
+		assert.throws(() => letters(new Array(), false), new TypeError('Первый аргумент не яв-ся string!'));
+		assert.throws(() => letters(new Map()), new TypeError('Первый аргумент не яв-ся string!'));
+
+		assert.throws(() => letters('new Array()', 123), new TypeError('Второй аргумент не яв-ся boolean|undefined!'));
+		assert.throws(() => letters('new Array()', '123'), new TypeError('Второй аргумент не яв-ся boolean|undefined!'));
+	});
 });

@@ -1,17 +1,42 @@
 'use strict';
 
-const letters = function (str, key) {
-    if (key == undefined) {
-        return str.split('').filter(function(val, i, str) {
-            return str.lastIndexOf(val) === str.indexOf(val);
-	}).join("");
+/**
+ * Редактирует строку убирая повторяющияся символы в зависимости от key-второго переданного аргумента.
+ *
+ * @author Arkadiyche
+ * 
+ * @param {string} str - строка переданная на вход.
+ * @param {boolean | undefined} key - ключ определяющий каким образом будет отредактирована строка.
+ * 
+ * @return {string} отредактированная строка.
+ * 
+ * @example
+ * // return 'ылру';
+ * letters('мама мыла раму')
+ * @example
+ * // return 'ма ылру';
+ * letters('мама мыла раму', true)
+ * @example
+ * // return 'ыл раму';
+ * letters('мама мыла раму', false)
+ */
+
+const letters = (str, key) => {
+    if (typeof str != 'string') {
+        throw new TypeError('Первый аргумент не яв-ся string!');
     }
-    if (key == true) {
-        return Array.from(new Set(str)).join("");
+    if (typeof key != 'boolean' & typeof key != 'undefined') {
+        throw new TypeError('Второй аргумент не яв-ся boolean|undefined!');
     }
-    if (key == false) {
-        return Array.from(new Set(str.split("").reverse().join(""))).reverse().join("");
-    }
-    return str;
+    return str.split('').filter((val, index, str) =>{
+        switch (key) {
+            case true:
+                return str.indexOf(val) === index;
+            case false:
+                return str.lastIndexOf(val) === index;
+            case undefined:
+                return str.lastIndexOf(val) === str.indexOf(val);
+        }
+    }).join('');
 };
 
