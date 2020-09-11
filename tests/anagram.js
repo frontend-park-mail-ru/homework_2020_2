@@ -50,8 +50,8 @@ QUnit.module('Тестируем функцию anagram', function () {
 	});
 
 	QUnit.test('Если в функцию подается неправильные аргумен', function (assert) {
-		assert.throws(() => anagram(), Error('First argument is required'));
-		assert.throws(() => anagram(1), TypeError('First argument not array'));
+		assert.throws(() => anagram(), Error('Argument is required'));
+		assert.throws(() => anagram(1), TypeError('Argument not array'));
 		assert.throws(() => anagram(["abcd", 3, "fhfr"]), TypeError('Array contains not only words'));
 	})
 });

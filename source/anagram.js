@@ -7,20 +7,21 @@
  * @returns {string[][]}
  */
 const anagram = words => {
-    if (words === undefined) {
-        throw new Error('First argument is required');
+    if (!words) {
+        throw new Error('Argument is required');
     }
 
     if (!Array.isArray(words)) {
-        throw new TypeError('First argument not array');
+        throw new TypeError('Argument not array');
+    }
+
+    if (words.some(word => typeof word !== 'string')) {
+        throw new TypeError('Array contains not only words');
     }
 
     const map = new Map();
 
     words.forEach((word) => {
-        if (typeof word !== "string") {
-            throw new TypeError('Array contains not only words');
-        }
         const sorted = word.trim()
             .toLowerCase()
             .split("")
