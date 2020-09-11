@@ -1,8 +1,6 @@
 'use strict';
 
 const rle = str => {
-    // if (str.length == 0)
-    //     return '';
     if (str.match(/[^A-Za-z]/)) {
         throw Error('Некорректный тип входных данных');
     }
@@ -13,15 +11,10 @@ const rle = str => {
     for (const now of str) {
         if (now != prev) {
             res += prev;
-            while (count > 9) {
-                res += "9";
-                res += prev;
-                count -= 9;
-            }
             if (count > 1) {
                 res += count;
+                count = 1;
             }
-            count = 1;
             prev = now;
         } else {
             ++count;
@@ -32,11 +25,6 @@ const rle = str => {
         res += prev;
     }
 
-    while (count > 9) {
-        res += "9";
-        res += prev;
-        count -= 9;
-    }
     if (count > 1) {
         res += count;
     }
