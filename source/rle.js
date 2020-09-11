@@ -1,25 +1,44 @@
 'use strict';
 
 const rle = str => {
-    if (str.length == 0)
-        return '';
-
-    let res = str[0];
-    let prev = str[0];
-    let count = 1;
-    
-    for (let i = 1; i < str.length; ++i) {
-        if (str[i] != prev) {
-            if (count != 1)
-                res += count;
-
-            count = 1;
-            prev = str[i];
-            res += prev;
-        } else 
-            ++count;
+    // if (str.length == 0)
+    //     return '';
+    if (str.match(/[^A-Za-z]/)) {
+        throw Error('Некорректный тип входных данных');
     }
-    if (count != 1)
+
+    let res = '';
+    let prev = str[0];
+    let count = 0;
+    for (const now of str) {
+        if (now != prev) {
+            res += prev;
+            while (count > 9) {
+                res += "9";
+                res += prev;
+                count -= 9;
+            }
+            if (count > 1) {
+                res += count;
+            }
+            count = 1;
+            prev = now;
+        } else {
+            ++count;
+        }
+    }
+
+    if (count >= 1) {
+        res += prev;
+    }
+
+    while (count > 9) {
+        res += "9";
+        res += prev;
+        count -= 9;
+    }
+    if (count > 1) {
         res += count;
+    }
     return res;
 }
