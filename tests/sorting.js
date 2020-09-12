@@ -120,4 +120,106 @@ QUnit.module('Тестируем функцию sorting', function () {
 
 		assert.deepEqual(actual, expected);
 	});
+
+	QUnit.test('sorting сортирует лексикографически', function (assert) {
+		const initial = [
+			{prop1: 3, id: '1', word: 'c'},
+			{prop1: 3, id: '2', word: 'b'},
+			{prop1: 1, id: '1', word: 'a'},
+			{prop1: 1, id: '2', word: 'g'},
+			{prop1: 4, id: '1', word: 'e'},
+			{prop1: 4, id: '2', word: 'f'},
+			{prop1: 2, id: '1', word: 'd'},
+			{prop1: 2, id: '2', word: 'h'}
+		];
+		const actual = sorting(initial, [ 'id', 'prop1', 'word' ]);
+
+		const expected = [
+			{prop1: 1, id: '1', word: 'a'},
+			{prop1: 2, id: '1', word: 'd'},
+			{prop1: 3, id: '1', word: 'c'},
+			{prop1: 4, id: '1', word: 'e'},
+			{prop1: 1, id: '2', word: 'g'},
+			{prop1: 2, id: '2', word: 'h'},
+			{prop1: 3, id: '2', word: 'b'},
+			{prop1: 4, id: '2', word: 'f'}
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting отлично сортирует лексикографически', function (assert) {
+		const initial = [
+			{prop1: 3, id: '1', word: 'acb'},
+			{prop1: 3, id: '2', word: 'abc'},
+			{prop1: 1, id: '1', word: 'bad'},
+			{prop1: 1, id: '2', word: 'bac'},
+			{prop1: 1, id: '2', word: 'eadb'},
+			{prop1: 1, id: '2', word: 'eada'},
+
+		];
+		const actual = sorting(initial, [ 'word' ]);
+
+		const expected = [
+			{prop1: 3, id: '2', word: 'abc'},
+			{prop1: 3, id: '1', word: 'acb'},
+			{prop1: 1, id: '2', word: 'bac'},
+			{prop1: 1, id: '1', word: 'bad'},
+			{prop1: 1, id: '2', word: 'eada'},
+			{prop1: 1, id: '2', word: 'eadb'},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting очень хорошо сортирует символы', function (assert) {
+		const initial = [
+			{prop1: 3, id: '1', word: 'b'},
+			{prop1: 3, id: '2', word: 'd'},
+			{prop1: 1, id: '1', word: 'a'},
+			{prop1: 1, id: '2', word: 'c'},
+			{prop1: 1, id: '2', word: 'f'},
+			{prop1: 1, id: '2', word: 'e'},
+
+		];
+		const actual = sorting(initial, [ 'word' ]);
+
+		const expected = [
+			{prop1: 1, id: '1', word: 'a'},
+			{prop1: 3, id: '1', word: 'b'},
+			{prop1: 1, id: '2', word: 'c'},
+			{prop1: 3, id: '2', word: 'd'},
+			{prop1: 1, id: '2', word: 'e'},
+			{prop1: 1, id: '2', word: 'f'},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting на примере фамилий и имен', function (assert) {
+		const initial = [
+			{prop1: 'Иванов Борис'},
+			{prop1: 'Иванов Алексей'},
+			{prop1: 'Аркадьев Тимур'},
+			{prop1: 'Петросян Влад'},
+			{prop1: 'Петросян Александр'},
+			{prop1: 'Шелухин Андрей'}
+		];
+		const actual = sorting(initial, [ 'prop1' ]);
+
+		const expected = [
+			{prop1: 'Аркадьев Тимур'},
+			{prop1: 'Иванов Алексей'},
+			{prop1: 'Иванов Борис'},
+			{prop1: 'Петросян Александр'},
+			{prop1: 'Петросян Влад'},
+			{prop1: 'Шелухин Андрей'}
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
 });
+
+
+

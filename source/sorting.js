@@ -1,28 +1,93 @@
 'use strict';
 
-const sorting = function (numbers, keys) {
-    if (!Array.isArray(numbers)) {
+/**
+ * Редактирует строку убирая повторяющияся символы в зависимости от key-второго переданного аргумента.
+ *
+ * @author Erik Nabiev
+ *
+ * @param {object[]}  objects - массив plain-объектов.
+ * @param {string[]} keys - массив имен свойств.
+ *
+ * @return {object[]} осортированный массив plain-объектов.
+ *
+ * @example
+ * // return [
+    {prop1: '1000'},
+    {prop1: '200'},
+    {prop1: '30'},
+    {prop1: '4'}
+    ];
+ * sorting( [
+    {prop1: '30'},
+    {prop1: '1000'},
+    {prop1: '4'},
+    {prop1: '200'}
+ ])
+ * @example
+ * // return [
+     {prop1: 1, id: 1},
+     {prop1: 1, id: 2},
+     {prop1: 2, id: 1},
+     {prop1: 2, id: 2},
+     {prop1: 3, id: 1},
+     {prop1: 3, id: 2},
+     {prop1: 4, id: 1},
+     {prop1: 4, id: 2}
+ ];
+ * sorting([
+     {prop1: 3, id: 1},
+     {prop1: 3, id: 2},
+     {prop1: 1, id: 1},
+     {prop1: 1, id: 2},
+     {prop1: 4, id: 1},
+     {prop1: 4, id: 2},
+     {prop1: 2, id: 1},
+     {prop1: 2, id: 2}
+ ])
+ * @example
+ * // return [
+     {prop1: 1, id: '1'},
+     {prop1: 2, id: '1'},
+     {prop1: 3, id: '1'},
+     {prop1: 4, id: '1'},
+     {prop1: 1, id: '2'},
+     {prop1: 2, id: '2'},
+     {prop1: 3, id: '2'},
+     {prop1: 4, id: '2'}
+ ];
+ * letters([
+     {prop1: 3, id: '1'},
+     {prop1: 3, id: '2'},
+     {prop1: 1, id: '1'},
+     {prop1: 1, id: '2'},
+     {prop1: 4, id: '1'},
+     {prop1: 4, id: '2'},
+     {prop1: 2, id: '1'},
+     {prop1: 2, id: '2'}
+ ])
+ */
+
+const sorting =  (objects, keys) => {
+    if (!Array.isArray(objects)) {
         return [];
     }
     if (!Array.isArray(keys)) {
-        return numbers;
+        return objects;
     }
     keys.reverse().forEach(element => {
-        if (typeof numbers[0][element] === "number") {
-            numbers.sort(function (a, b) {
+        if (Number.isNaN(objects[0][element])) {
+            objects.sort( (a, b) => {
                 return a[element] - b[element];
             })
         } else {
-            numbers.sort(function (a, b) {
-                if (a[element].length > b[element].length) {
+            objects.sort((a,b) => {
+                if (a[element] > b[element]) {
+                    return 1;
+                } else {
                     return -1;
                 }
-                if (a[element].length < b[element].length) {
-                    return 1;
-                }
-                return a[element] - b[element];
             });
         }
     })
-    return numbers;
+    return objects;
 };
