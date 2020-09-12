@@ -20,31 +20,25 @@ const rle = str => {
         throw Error('Некорректный тип входных данных');
     }
 
-    let regexObj = /[0-9]/;
-    if (regexObj.test(str)) {
+    if (/[0-9]/.test(str)) {
         throw Error('Недопустимые символы в строке');
     }
 
-    let result = (str.split('')).reduce(function (sum, now) {
-        if (now === sum.prev) {
-            sum.count = sum.count + 1;
-            return sum;
+    let result = (str.split('')).reduce((accumulator, currentValue, index, array) => {
+        if (index < array.length - 1 && currentValue == array[index + 1]) {
+            ++accumulator.count;
+            return accumulator;
         }
-        sum.res += sum.prev;
-        if (sum.count > 1) {
-            sum.res += sum.count;
-            sum.count = 1;
+
+        accumulator.res += currentValue;
+
+        if (accumulator.count > 1) {
+            accumulator.res += accumulator.count;
+            accumulator.count = 1;
         }
-        sum.prev = now;
-        return sum;
-    }, {'count': 0, 'prev': str[0], 'res': ''});
 
-    if (result.count >= 1) {
-        result.res += result.prev;
-    }
+        return accumulator;
+    }, {'count': 1, 'res': ''});
 
-    if (result.count > 1) {
-        result.res += result.count;
-    }
     return result.res;
 }
