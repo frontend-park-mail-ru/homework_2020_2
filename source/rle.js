@@ -28,7 +28,7 @@ const rle = str => {
     }
 
     return str.split('').reduce((accumulator, currentValue, index, array) => {
-        if (currentValue == array[index + 1]) {
+        if (currentValue === array[index + 1]) {
             ++accumulator.count;
             return accumulator;
         }
