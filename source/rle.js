@@ -2,14 +2,17 @@
 
 /**
  * Функция, реализует RLE-сжатие
+ *
  * @param {string} str Входная последовательность
  * @returns {string}
  *
  * @throws {Error('Некорректный тип входных данных')}
  * @throws {Error('Недопустимые символы в строке')}
+ *
  * @example
  * // returns 'A3B'
  * rle('AAAB');
+ *
  * @example
  * // returns 'A10'
  * rle('AAAAAAAAAA');
@@ -24,8 +27,8 @@ const rle = str => {
         throw Error('Недопустимые символы в строке');
     }
 
-    let result = (str.split('')).reduce((accumulator, currentValue, index, array) => {
-        if (index < array.length - 1 && currentValue == array[index + 1]) {
+    return str.split('').reduce((accumulator, currentValue, index, array) => {
+        if (currentValue == array[index + 1]) {
             ++accumulator.count;
             return accumulator;
         }
@@ -38,7 +41,5 @@ const rle = str => {
         }
 
         return accumulator;
-    }, {'count': 1, 'res': ''});
-
-    return result.res;
+    }, {'count': 1, 'res': ''}).res;
 }

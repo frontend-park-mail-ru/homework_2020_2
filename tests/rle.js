@@ -19,7 +19,7 @@ QUnit.module('Тестируем функцию rle', function () {
 		assert.strictEqual(rle('a'), 'a');
 	});
 
-	QUnit.test('rle работает на всем кроме цифр', function (assert) {
+	QUnit.test('rle работает правильно с недопустимыми символами в строке', function (assert) {
 		assert.throws(() => rle('6h'), new Error('Недопустимые символы в строке'));
 		assert.throws(() => rle('444445first'), new Error('Недопустимые символы в строке'));
 	});
