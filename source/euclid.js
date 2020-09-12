@@ -8,10 +8,11 @@
  */
 const euclid_for_two_arguments = (a, b) => {
     while (a !== 0 && b !== 0) {
-        if (a > b)
+        if (a > b) {
             a = a % b;
-        else
+        } else {
             b = b % a;
+        }
     }
     return Math.max(a, b);
 }
@@ -22,17 +23,19 @@ const euclid_for_two_arguments = (a, b) => {
  * @returns {number}
  */
 const euclid = (...arg) => {
-    if (arg.length == 0)
+    if (!arg.length) {
         throw new RangeError('На вход был подан пустой массив');
-    arg.forEach(element => {
-        if (!Number.isFinite(element)) throw new TypeError('Некорректные аргументы');
-    })
+    }
+    if (arg.some(element => !Number.isInteger(element))) {
+        throw new TypeError('Некорректные аргументы');
+    }
 
-    if (arg.length < 2)
+    if (arg.length === 1) {
         return arg[0];
+    }
     let res = 0;
     arg.forEach((element) => {
-        res = euclid_for_two_arguments(res, element)
+        res = euclid_for_two_arguments(res, element);
     })
     return res;
 }

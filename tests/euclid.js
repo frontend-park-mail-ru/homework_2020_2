@@ -20,7 +20,7 @@ QUnit.module('Тестируем функцию euclid', function () {
             'TypeError str');
         assert.throws(() => euclid(1, 2, 'str'),
             TypeError('Некорректные аргументы'),
-            'TypeError 1, 2, \"str\"');
+            'TypeError 1, 2, \'str\'');
     });
 
     QUnit.test('Функция должна правильно находить НОД двух натуральных чисел', function (assert) {
