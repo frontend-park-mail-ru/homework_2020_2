@@ -24,9 +24,9 @@ const anagram = words => {
     words.forEach((word) => {
         const sorted = word.trim()
             .toLowerCase()
-            .split("")
+            .split('')
             .sort()
-            .join("");
+            .join('');
         if (map.has(sorted)) {
             map.get(sorted).push(word);
         } else {
