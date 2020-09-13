@@ -16,17 +16,16 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('1 + (-x * 2) - -2 * 2', 3), -1);
 	});
 	QUnit.test('solve корректно обрабатывает '
-			   'некорректный синтаксис выражения', function (assert) {
+			+ 'некорректный синтаксис выражения', function (assert) {
 		assert.throws(() => solve('x + 1.5', 1), SyntaxError);
 		assert.throws(() => solve('x x + 1', 1), SyntaxError);
 		assert.throws(() => solve('xx + 1', 1), SyntaxError);
 		assert.throws(() => solve('(x + ((1)', 1), SyntaxError);
 		assert.throws(() => solve('()', 1), SyntaxError);
-		assert.throws(() => solve('x + 1', 1.5), TypeError);
 		assert.throws(() => solve('1 + 2 + y', 0), SyntaxError);
 	});
 	QUnit.test('solve корректно обрабатывает '
-			   'некорректное значение аргумента выражения', function (assert) {
+			+ 'некорректное значение аргумента выражения', function (assert) {
 		assert.throws(() => solve(0, 0), TypeError);
 		assert.throws(() => solve('x', ''), TypeError);
 		assert.throws(() => solve('x + 1', 1.5), TypeError);
