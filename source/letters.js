@@ -22,12 +22,14 @@
  */
 
 const letters = (str, key) => {
-    if (typeof str != 'string') {
-        throw new TypeError('Первый аргумент не яв-ся string!');
+    if (typeof str !== 'string') {
+        throw new TypeError('Первый аргумент не является string!');
     }
-    if (typeof key != 'boolean' & typeof key != 'undefined') {
-        throw new TypeError('Второй аргумент не яв-ся boolean|undefined!');
+
+    if (typeof key !== 'boolean' && typeof key !== 'undefined') {
+        throw new TypeError('Второй аргумент не является boolean|undefined!');
     }
+
     return str.split('').filter((val, index, str) =>{
         switch (key) {
             case true:

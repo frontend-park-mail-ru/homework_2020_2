@@ -55,14 +55,14 @@ QUnit.module('Тестируем функцию letters', function () {
 	});
 
 	QUnit.test('Неверные входные параметры', function (assert) {
-		assert.throws(() => letters(123, true), new TypeError('Первый аргумент не яв-ся string!'));
-		assert.throws(() => letters(123), new TypeError('Первый аргумент не яв-ся string!'));
-		assert.throws(() => letters(123, 123), new TypeError('Первый аргумент не яв-ся string!'));
+		assert.throws(() => letters(123, true), new TypeError('Первый аргумент не является string!'));
+		assert.throws(() => letters(123), new TypeError('Первый аргумент не является string!'));
+		assert.throws(() => letters(123, 123), new TypeError('Первый аргумент не является string!'));
 
-		assert.throws(() => letters(new Array(), false), new TypeError('Первый аргумент не яв-ся string!'));
-		assert.throws(() => letters(new Map()), new TypeError('Первый аргумент не яв-ся string!'));
+		assert.throws(() => letters(new Array(), false), new TypeError('Первый аргумент не является string!'));
+		assert.throws(() => letters(new Map()), new TypeError('Первый аргумент не является string!'));
 
-		assert.throws(() => letters('new Array()', 123), new TypeError('Второй аргумент не яв-ся boolean|undefined!'));
-		assert.throws(() => letters('new Array()', '123'), new TypeError('Второй аргумент не яв-ся boolean|undefined!'));
+		assert.throws(() => letters('new Array()', 123), new TypeError('Второй аргумент не является boolean|undefined!'));
+		assert.throws(() => letters('new Array()', '123'), new TypeError('Второй аргумент не является boolean|undefined!'));
 	});
 });
