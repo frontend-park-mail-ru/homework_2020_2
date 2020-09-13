@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Находим НОД двух чисел a и b
  *
@@ -6,7 +6,7 @@
  * @param {number} b - второе число
  * @returns {number}
  */
-const euclid_for_two_arguments = (a, b) => {
+const euclidForTwoArgument = (a, b) => {
     while (a !== 0 && b !== 0) {
         if (a > b) {
             a = a % b;
@@ -24,10 +24,10 @@ const euclid_for_two_arguments = (a, b) => {
  */
 const euclid = (...arg) => {
     if (!arg.length) {
-        throw new RangeError('На вход был подан пустой массив');
+        throw new RangeError("На вход был подан пустой массив");
     }
     if (arg.some(element => !Number.isInteger(element))) {
-        throw new TypeError('Некорректные аргументы');
+        throw new TypeError("Некорректные аргументы");
     }
 
     if (arg.length === 1) {
@@ -35,7 +35,7 @@ const euclid = (...arg) => {
     }
     let res = 0;
     arg.forEach((element) => {
-        res = euclid_for_two_arguments(res, element);
+        res = euclidForTwoArgument(res, element);
     })
     return res;
 }
