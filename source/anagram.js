@@ -6,22 +6,17 @@
  * @returns {string[][]} array of anagrams
  */
 const anagram = (words) => {
-    let mapByCharList = {};
-
-    words.forEach(word => {
-        let charList = word.split('').sort().join();
-        if (charList in mapByCharList) {
-            mapByCharList[charList].push(word);
+    let mapByCharList = words.reduce((map, word) => {
+        let charList = word.toLowerCase().split('').sort().join();
+        if (charList in map) {
+            map[charList].push(word);
         } else {
-            let a = [word]
-            mapByCharList[charList] = a;
+            map[charList] = [word];
         }
-    });
+        return map;
+    }, {});
 
-    let output = Object.values(mapByCharList).filter(element => {
-        return (element.length > 1) ?
-            element.sort() : null;
-    });
-
-    return output.sort();
+    return Object.values(mapByCharList).filter(element => {
+        return (element.length > 1) ? element.sort() : null;
+    }).sort();
 };
