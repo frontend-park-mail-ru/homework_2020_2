@@ -75,14 +75,14 @@ const sorting =  (objects, keys) => {
         return objects;
     }
     keys.reverse().forEach(element => {
-        if (Number.isNaN(objects[0][element])) {
-            objects.sort( (a, b) => {
-                return a[element] - b[element];
-            })
+        if ( objects.every(oneOf => Number.isNaN(oneOf[element]))) {
+            objects.sort( (a, b) => a[element] - b[element])
         } else {
             objects.sort((a,b) => {
                 if (a[element] > b[element]) {
                     return 1;
+                } else if ( a[element] == b[element] ){
+                    return 0;
                 } else {
                     return -1;
                 }

@@ -219,6 +219,34 @@ QUnit.module('Тестируем функцию sorting', function () {
 		assert.deepEqual(actual, expected);
 	});
 
+	QUnit.test('sorting реализует устойчивую сортировку строк', function (assert) {
+		const initial = [
+			{prop1: 3, id: 'b'},
+			{prop1: 3, id: 'a'},
+			{prop1: 1, id: 'c'},
+			{prop1: 1, id: 'a'},
+			{prop1: 4, id: 'c'},
+			{prop1: 4, id: 'b'},
+			{prop1: 2, id: 'b'},
+			{prop1: 2, id: 'a'}
+		];
+		const actual = sorting(initial, [ 'id' ]);
+
+		const expected = [
+			{prop1: 3, id: 'a'},
+			{prop1: 1, id: 'a'},
+			{prop1: 2, id: 'a'},
+			{prop1: 3, id: 'b'},
+			{prop1: 4, id: 'b'},
+			{prop1: 2, id: 'b'},
+			{prop1: 1, id: 'c'},
+			{prop1: 4, id: 'c'}
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+
 });
 
 
