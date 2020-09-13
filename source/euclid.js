@@ -33,10 +33,6 @@ const euclid = (...arg) => {
     if (arg.length === 1) {
         return arg[0];
     }
-    let res = 0;
-    arg.forEach((element) => {
-        res = euclidForTwoArgument(res, element);
-    })
-    return res;
+    return arg.reduce((prevGcd, element)=>(euclidForTwoArgument(prevGcd, element)));
 }
 
