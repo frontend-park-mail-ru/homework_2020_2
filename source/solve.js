@@ -1,5 +1,16 @@
 'use strict';
 
+/**
+ * Solves math expression with one argument
+ * Expression argument must be named 'x'
+ * Allowed operations: addition, subtraction, multiplication
+ * Only integer numbers are allowed
+ * @param {string} expression Math expression
+ * @param {number} arg Argument value
+ * @return {number} Expression result
+ * @throws {TypeError} Invalid argument type
+ * @throws {SyntaxError} Invalid expression syntax
+ */
 const solve = (eq, x) => {
 	if (!/^[-+*x0-9() ]+$/.test(eq) || 
 			/(\*|\+|-){2,}/.test(eq) ||
