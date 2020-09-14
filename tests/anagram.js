@@ -19,11 +19,19 @@ QUnit.module('Тестируем функцию anagram', function () {
 	});
 
 	QUnit.test('Проверка реакции на передачу некорректного аргумента', function (assert) {
-		assert.deepEqual(anagram(0), []);
+		assert.throws(function () { anagram(0); }, new TypeError(`Expected 'Array', received number`), 'TypeError');
 	});
 
 	QUnit.test('Проверка реакции на передачу массива, состоящего не из строк', function (assert) {
-		assert.deepEqual(anagram([0, 0, 0, 0, 0]), []);
+		assert.throws(function () { anagram([0, 0, 0, 0, 0]); }, new TypeError(`Expected Array elements type of 'string', received element of another type`), 'TypeError');
+	});
+
+	QUnit.test('Проверка реакции на передачу массива, частично состоящего не из строк', function (assert) {
+		assert.throws(function () { anagram(['abc', 'def', 'ghi', 'j', 0]); }, new TypeError(`Expected Array elements type of 'string', received element of another type`), 'TypeError');
+	});
+
+	QUnit.test('Проверка реакции на передачу пустого массива', function (assert) {
+		assert.deepEqual(anagram([]), []);
 	});
 
 	QUnit.test('Проверка регистронезависимого поведения', function (assert) {
