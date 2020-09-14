@@ -10,7 +10,7 @@ const anagram = (words) => {
         throw new TypeError(`Expected 'Array', received ${typeof (words)}`);
     }
 
-    const isNotString = (word) => typeof (word) !== 'string';
+    const isNotString = (word) => typeof(word) !== 'string';
     if (words.some(isNotString)) {
         throw new TypeError(`Expected Array elements type of 'string', received element of another type`);
     }
