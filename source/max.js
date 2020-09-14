@@ -26,15 +26,14 @@ const rle = originData => {
     let compressedData = '';
 
     if (typeof originData !== 'string') {
-        throw('NOT STRING!');
+        throw new Error('NOT STRING!');
     }
 
-    const reg = new RegExp('#[0-9]+#');
-    if (reg.test(originData)) {
-        throw ('UNEXPECTED SYMBOL!');
+    if (/[0-9]+/.test(originData)) {
+        throw new Error('UNEXPECTED SYMBOL!');
     }
 
-    let counter = 1, prevSymbol = originData.charAt(0);
+    let counter = 1, prevSymbol = originData[0];
     for (let i = 1; i < originData.length; i++) {
         if (originData[i] === prevSymbol) {
             counter++;
@@ -44,6 +43,6 @@ const rle = originData => {
             prevSymbol = originData[i];
         }
     }
-    compressedData = addToCompressed(compressedData, prevSymbol, counter)
-    return compressedData;
+
+    return addToCompressed(compressedData, prevSymbol, counter);
 }
