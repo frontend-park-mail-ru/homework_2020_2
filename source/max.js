@@ -23,8 +23,6 @@ const addToCompressed = (compressed, symbol, counter) => {
  * @returns {string|*} result of compressing
  */
 const rle = originData => {
-    let compressedData = '';
-
     if (typeof originData !== 'string') {
         throw new Error('NOT STRING!');
     }
@@ -33,7 +31,8 @@ const rle = originData => {
         throw new Error('UNEXPECTED SYMBOL!');
     }
 
-    let counter = 1, prevSymbol = originData[0];
+    let counter = 1, prevSymbol = originData[0], compressedData = '';
+
     for (let i = 1; i < originData.length; i++) {
         if (originData[i] === prevSymbol) {
             counter++;
