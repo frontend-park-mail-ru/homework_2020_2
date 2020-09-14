@@ -85,7 +85,7 @@ const sorting =  (objects, keys) => {
             objects.sort((a,b) => {
                 if (a[element] > b[element]) {
                     return 1;
-                } else if ( a[element] == b[element] ){
+                } else if ( a[element] === b[element] ){
                     return 0;
                 } else {
                     return -1;
