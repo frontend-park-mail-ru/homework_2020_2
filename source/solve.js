@@ -24,10 +24,7 @@ const solve = (expression, arg) => {
     }
     if (expression.split('(').length !== expression.split(')').length) {
 		throw new SyntaxError('Invalid braces placement');
-    }
-	let res = new Function('x', `return ${expression}`)(arg)
-	if (typeof res !== 'number' || !Number.isInteger(res)) {
-		throw new SyntaxError('Invalid expression');
-	}
-	return res;
+    }   
+	return Function('x', `if (Number.isInteger(${expression})) return ${expression};`
+	              + `else throw new SyntaxError('Invalid expression');`)(arg)
 }
