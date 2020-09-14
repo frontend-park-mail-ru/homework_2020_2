@@ -9,12 +9,26 @@ QUnit.module('Тестируем функцию anagram', function () {
 		];
 
 		const output = [
-			[ 'барокко', 'коробка' ],
-			[ 'кот', 'ток' ],
-			[ 'липа', 'пила' ],
-			[ 'пост', 'стоп' ]
+			['барокко', 'коробка'],
+			['кот', 'ток'],
+			['липа', 'пила'],
+			['пост', 'стоп']
 		];
 
 		assert.deepEqual(anagram(input), output);
+	});
+
+	QUnit.test('Проверка реакции на передачу некорректного аргумента', function (assert) {
+		assert.deepEqual(anagram(0), []);
+	});
+
+	QUnit.test('Проверка реакции на передачу массива, состоящего не из строк', function (assert) {
+		assert.deepEqual(anagram([0, 0, 0, 0, 0]), []);
+	});
+
+	QUnit.test('Проверка регистронезависимого поведения', function (assert) {
+		const input = ['abc', 'abC', 'aBc', 'aBC', 'Abc', 'AbC', 'ABc', 'ABC'];
+
+		assert.deepEqual(anagram(input), [input.sort()]);
 	});
 });
