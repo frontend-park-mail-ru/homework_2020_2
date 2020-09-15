@@ -23,25 +23,26 @@ QUnit.module('Тестируем функцию anagram', function() {
     });
 
     QUnit.test('Функция работает правильно с некорректными аргументами', function(assert) {
-        const testData = [0, undefined, 'hello', { a: 1, b: 2 }];
+        assert.throws(() => { anagram(0); }, new TypeError(
+            `Expected 'Array', received ${typeof 0}`));
+        assert.throws(() => { anagram(undefined); }, new TypeError(
+            `Expected 'Array', received ${typeof undefined}`));
+        assert.throws(() => { anagram('hello'); }, new TypeError(
+            `Expected 'Array', received ${typeof 'hello'}`));
+        assert.throws(() => { anagram({ a: 1, b: 2 }); }, new TypeError(
+            `Expected 'Array', received ${typeof { a: 1, b: 2 }}`));
 
-        testData.forEach((element) => {
-            assert.throws(() => { anagram(element); }, new TypeError(
-                `Expected 'Array', received ${typeof (element)}`));
-        });
     });
 
     QUnit.test('Функция работает правильно с массивом, состоящим не из строк', function(assert) {
-        const testData = [
-            [0, 0, 0, 0, 0],
-            ['abc', 'def', 'ghi', 'j', 0],
-            [undefined, 0, null]
-        ];
-
-        testData.forEach((element) => {
-            assert.throws(() => { anagram(element); }, new TypeError(
-                `Expected Array elements type of 'string', received element of another type`
-            ));
-        });
+        assert.throws(() => { anagram([0, 0, 0, 0, 0]); }, new TypeError(
+            `Expected Array elements type of 'string', received element of another type`
+        ));
+        assert.throws(() => { anagram(['abc', 'def', 'ghi', 'j', 0]); }, new TypeError(
+            `Expected Array elements type of 'string', received element of another type`
+        ));
+        assert.throws(() => { anagram([undefined, 0, null]); }, new TypeError(
+            `Expected Array elements type of 'string', received element of another type`
+        ));
     });
 });
