@@ -1,6 +1,6 @@
 'use strict';
 
-const roman_arabic = {
+const ROMAN_ARABIC = {
     "M":1000,
     "CM":900,
     "D":500,
@@ -22,7 +22,7 @@ function romanToArabic(roman) {
     let prev = 0;
 
     for (let i = 0; i < roman.length; i++) {
-        let current = roman_arabic[roman.charAt(i)];
+        let current = ROMAN_ARABIC[roman.charAt(i)];
         if (current > prev) {
             arabic -= 2 * value;
         }
@@ -48,14 +48,14 @@ function arabicToRoman(arabic) {
         throw new Error("Введено число больше 3999");
     }
 
-    for(let key in roman_arabic){
-        let quotient = Math.floor(arabic / roman_arabic[key]);
+    for(let key in ROMAN_ARABIC){
+        let quotient = Math.floor(arabic / ROMAN_ARABIC[key]);
         if (quotient >= 0) {
             for (let i = 0; i < quotient; i++){
                 roman += key;
             }
         }
-        arabic %= roman_arabic[key];
+        arabic %= ROMAN_ARABIC[key];
     }
 
     return roman;
