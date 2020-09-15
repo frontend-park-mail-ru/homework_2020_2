@@ -16,61 +16,58 @@ const ROMAN_ARABIC = {
     "I":1
 };
 
-function romanToArabic(roman) {
+/** @description Перевод числа из римского формата в арабский
+ * @param {string} roman - арабское число, которое необходимо перевести
+ * @return {number} arabic - число в арабской системе счисления
+ */
+const romanToArabic = (roman) => {
     let arabic = 0;
     let value = 0;
     let prev = 0;
 
-    for (let i = 0; i < roman.length; i++) {
-        let current = ROMAN_ARABIC[roman.charAt(i)];
-        if (current > prev) {
-            arabic -= 2 * value;
-        }
-        if (current != prev) {
-            value = 0;
-        }
-        value += current;
-        arabic += current;
-        prev = current;
-    }
+    roman.split('')
+        .forEach(char => {
+            let current = ROMAN_ARABIC[char];
+            if (current > prev) {
+                arabic -= 2 * value;
+            }
+
+            if (current != prev) {
+                value = 0;
+            }
+
+            value += current;
+            arabic += current;
+            prev = current;
+        })
 
     return arabic;
 }
 
-function arabicToRoman(arabic) {
-    let roman = "";
+/** @description Перевод числа из арабского формата в римский
+ * @param {number} arabic - римское число, которое необходимо перевести
+ * @return {string} число в римской системе счисления
+ */
+const arabicToRoman = (arabic) => {
+    return Object.keys(ROMAN_ARABIC)
+        .reduce((result, key, idx) => {
+            let quotient = Math.floor(arabic / ROMAN_ARABIC[key]);
+            arabic %= ROMAN_ARABIC[key];
 
-    if (arabic < 1) {
-        throw new Error("Введено число меньше 1");
-    }
-
-    if (arabic > 3999) {
-        throw new Error("Введено число больше 3999");
-    }
-
-    for(let key in ROMAN_ARABIC){
-        let quotient = Math.floor(arabic / ROMAN_ARABIC[key]);
-        if (quotient >= 0) {
-            for (let i = 0; i < quotient; i++){
-                roman += key;
-            }
-        }
-        arabic %= ROMAN_ARABIC[key];
-    }
-
-    return roman;
+            return result + key.repeat(quotient);
+        }, '')
 }
 
-function isInt(value) {
-    return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
-}
-
+/** @description Выбор функции в зависимости от введенного значения
+ * @param {string|number} input -  число, которое необходимо перевести
+ * @return {number|string} число, переведенное в необходимую систему счисления, в зависимости от ввода
+ */
 function roman(input) {
-    if (!input || input == null) {
-        throw new Error("Введено неверное число");
+    if (!input || !/^[0-9]+$|^[IiVvXxLlCcDdMm]+$/.test(input.toString())) {
+        throw new Error('Введено неверное число');
     }
 
-    if (isInt(input)) {
+    if (input > 0 && input <= 3999) {
         return arabicToRoman(input)
     }
 
