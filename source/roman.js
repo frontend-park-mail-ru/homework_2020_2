@@ -27,7 +27,7 @@ const romanToArabic = (roman) => {
 
     roman.split('')
         .forEach(char => {
-            let current = ROMAN_ARABIC[char];
+            const current = ROMAN_ARABIC[char];
             if (current > prev) {
                 arabic -= 2 * value;
             }
@@ -51,7 +51,7 @@ const romanToArabic = (roman) => {
 const arabicToRoman = (arabic) => {
     return Object.keys(ROMAN_ARABIC)
         .reduce((result, key, idx) => {
-            let quotient = Math.floor(arabic / ROMAN_ARABIC[key]);
+            const quotient = Math.floor(arabic / ROMAN_ARABIC[key]);
             arabic %= ROMAN_ARABIC[key];
 
             return result + key.repeat(quotient);
@@ -71,10 +71,10 @@ function roman(input) {
         return arabicToRoman(input)
     }
 
-    input = input.toString().toUpperCase();
+    const inputStr = input.toString().toUpperCase();
 
-    if (/^[IVXLCDM]+$/.test(input)) {
-        return romanToArabic(input)
+    if (/^[IVXLCDM]+$/.test(inputStr)) {
+        return romanToArabic(inputStr)
     }
 
     throw new Error("Введено неверное число");
