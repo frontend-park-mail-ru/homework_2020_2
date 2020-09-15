@@ -42,7 +42,9 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.throws(() => roman(), Error("Введено неверное число"));
 		assert.throws(() => roman(""), Error("Введено неверное число"));
 		assert.throws(() => roman("a"), Error("Введено неверное число"));
-		assert.throws(() => roman(-1000), Error("Введено число меньше 1"));
-		assert.throws(() => roman(4000), Error("Введено число больше 3999"));
+		assert.throws(() => roman(-1000), Error("Введено неверное число"));
+		assert.throws(() => roman(4000), Error("Введено неверное число"));
+		assert.throws(() => roman(0), Error("Введено неверное число"));
+		assert.throws(() => roman(5.3), Error("Введено неверное число"));
 	});
 });
