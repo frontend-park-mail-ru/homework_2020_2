@@ -49,10 +49,11 @@ const romanToArabic = (roman) => {
  * @return {string} число в римской системе счисления
  */
 const arabicToRoman = (arabic) => {
+    let inputNumber = arabic;
     return Object.keys(ROMAN_ARABIC)
         .reduce((result, key, idx) => {
-            const quotient = Math.floor(arabic / ROMAN_ARABIC[key]);
-            arabic %= ROMAN_ARABIC[key];
+            const quotient = Math.floor(inputNumber / ROMAN_ARABIC[key]);
+            inputNumber %= ROMAN_ARABIC[key];
 
             return result + key.repeat(quotient);
         }, '')
