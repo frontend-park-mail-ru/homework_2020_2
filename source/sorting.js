@@ -20,13 +20,13 @@ const sorting = (inputArr, keys) => {
     }
     keys.forEach(key => {
         const type = typeof inputArr[0][key];
-        if (!inputArr.every(obj => typeof obj[key] === type) && (type === "string" || type === "number")) {
+        if (!inputArr.every(obj => typeof obj[key] === type) && (type === 'string' || type === 'number')) {
             throw new Error('Comparing elements should be the same type objects - strings or numbers');
         }
     })
     keys.reverse().forEach(element => {
         inputArr.sort((a, b) => {
-            if ((typeof a[element]) === "string") {
+            if ((typeof a[element]) === 'string') {
                 return a[element].localeCompare(b[element]);
             } else {
                 return a[element] - b[element];
