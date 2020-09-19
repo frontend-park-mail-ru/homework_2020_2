@@ -147,14 +147,14 @@ QUnit.module('Тестируем функцию sorting', function () {
  
     QUnit.test('sorting корректно работает с невалидными аргументами', function (assert) {
  
-        assert.throws(function(){sorting(42, 42);}, Error('Args should be arrays'), "Переданы не массивы");
+        assert.throws(function(){sorting(42, 42);}, Error('Args should be arrays'),  'Переданы не массивы');
         const initial = [
             {prop1: 10},
             {prop1: 'abc'},
             {prop1: 4},
             {prop1: 200}
         ];
-        assert.throws(function(){sorting(initial, ["prop1"]);}, Error('Comparing elements should be the same type objects - strings or numbers'),
-        "Значение не строка и не число");
+        assert.throws(function(){sorting(initial, ['prop1']);}, Error('Comparing elements should be the same type objects - strings or numbers'),
+        'Значение не строка и не число');
     });
 });
